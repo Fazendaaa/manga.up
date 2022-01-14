@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  vue:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: BASE
+    container_name: vue
+    command: npm run dev
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.vue.tls=true'
+      - 'traefik.http.routers.vue.rule=Host(`vue.docker.localhost`)'
+    volumes:
+      - '${PWD}/src/:/usr/src/src'
+    networks:
+      - proxy
+
+  reverse-proxy:
+    image: traefik:v2.3
+    security_opt:
+      - no-new-privileges:true
+    ports:
+      - '80:80'
+      - '443:443'
+      - '8080:8080'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ${HOME}/.certs:/etc/certs:ro
+      - ${HOME}/.traefik/traefik.yml:/etc/traefik/traefik.yml:ro
+      - ${HOME}/.traefik/config.yml:/etc/traefik/config.yml:ro
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.traefik=true'
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
