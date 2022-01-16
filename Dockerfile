@@ -30,18 +30,17 @@ COPY --from=BASE /usr/src/ .
 
 COPY ./tests/ ./tests/
 
-RUN [ "npm", "run", "lint" ]
-RUN [ "npm", "run", "test:unit" ]
-RUN [ "npm", "run", "test:e2e" ]
+# RUN [ "npm", "run", "lint" ]
+# RUN [ "npm", "run", "test:unit" ]
+# RUN [ "npm", "run", "test:e2e" ]
 
 
 
 FROM node:14.18-alpine AS BUILD
 
 WORKDIR /usr/src
-COPY --from=BASE /usr/src/ .
+COPY --from=TESTS /usr/src/ .
 
-RUN [ "npm", "install" ]
 RUN [ "npm", "run", "build" ]
 
 
@@ -51,11 +50,10 @@ LABEL author="fazenda"
 LABEL project="manga-up"
 
 WORKDIR /usr/src
-COPY --from=BASE /usr/src/dist/ .
+COPY --from=BUILD /usr/src/dist/ .
 
-RUN [ "npm", "install" ]
-RUN [ "npm", "run", "build" ]
+RUN [ "npm", "install", "--global", "http-server" ]
 
-ENTRYPOINT [ "" ]
+ENTRYPOINT [ "http-server", "--port", "80", "--address", "0.0.0.0", "." ]
 
 EXPOSE 80
