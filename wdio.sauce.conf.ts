@@ -1,6 +1,6 @@
-import { config } from "./wdio.shared.conf.ts";
+import { config } from './wdio.shared.conf.ts'
 
-const BUILD_ID = Math.ceil(Date.now() / 1000);
+const BUILD_ID = Math.ceil(Date.now() / 1000)
 
 exports.config = {
   /**
@@ -12,36 +12,30 @@ exports.config = {
    */
   user: process.env.SAUCE_USERNAME,
   key: process.env.SAUCE_ACCESS_KEY,
-  region: "us",
-  headless: process.argv.includes("--headless"),
+  region: 'us',
+  headless: process.argv.includes('--headless'),
 
   services: [
-    [
-      "sauce",
-      {
-        sauceConnect: true,
-        tunnelIdentifier: "Vue.js Integration tests",
-      },
-    ],
+    ['sauce', {
+      sauceConnect: true,
+      tunnelIdentifier: 'Vue.js Integration tests'
+    }]
   ],
 
   maxInstances: 10,
-  capabilities: [
-    {
-      browserName: "firefox",
-      browserVersion: "latest",
-      platformName: "Windows 10",
-      "sauce:options": {
-        build: `Build ${BUILD_ID}`,
-      },
-    },
-    {
-      browserName: "chrome",
-      browserVersion: "latest",
-      platformName: "Windows 10",
-      "sauce:options": {
-        build: `Build ${BUILD_ID}`,
-      },
-    },
-  ],
-};
+  capabilities: [{
+    browserName: 'firefox',
+    browserVersion: 'latest',
+    platformName: 'Windows 10',
+    'sauce:options': {
+      build: `Build ${BUILD_ID}`
+    }
+  }, {
+    browserName: 'chrome',
+    browserVersion: 'latest',
+    platformName: 'Windows 10',
+    'sauce:options': {
+      build: `Build ${BUILD_ID}`
+    }
+  }]
+}
