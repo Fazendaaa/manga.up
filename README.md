@@ -13,3 +13,4 @@ Since TypeScript cannot handle type information for `.vue` imports, they are shi
 ## References
 
 - [Building a Vue3 Typescript Environment with Vite](https://miyauchi.dev/posts/vite-vue3-typescript/)
+- [How to implement darkmode with a Vue.js component ](https://dev.to/tqbit/create-your-own-dark-mode-toggle-component-with-vue-js-1284)

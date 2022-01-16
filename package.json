@@ -9,7 +9,8 @@
     "lint:markup": "vue-tsc --noEmit"
   },
   "dependencies": {
-    "vue": "^3.2.25"
+    "vue": "^3.2.25",
+    "vue-flux": "^6.4.0"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.9.1",
