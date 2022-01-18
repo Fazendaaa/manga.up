@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
       target: BASE
     container_name: vue
-    command: npm run dev
+    command: npm run serve
     labels:
       - 'traefik.enable=true'
       - 'traefik.http.routers.vue.tls=true'

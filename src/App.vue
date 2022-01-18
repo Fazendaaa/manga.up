@@ -1,22 +1,20 @@
-<script setup lang="ts">
-  // This starter template is using Vue 3 <script setup> SFCs
-  // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-  import Search from '@/components/Search.vue'
-  import ToggleDarkMode from '@/components/ToggleDarkMode.vue'
-  import Reader from './components/Reader.vue'
-</script>
-
 <template>
-  <div class="container-center">
-    <img alt="Vue logo" src="/pwa-512x512.png" />
-    <h1>manga.up</h1>
-    <Search />
-    <ToggleDarkMode />
-    <Reader />
+  <div id="nav" class="container-center">
+    <router-link to="/">Home</router-link> |
+    <router-link to="/about">About</router-link>
+    <router-view />
+    <toggle-dark-mode />
   </div>
 </template>
 
-<style>
+<script>
+  import ToggleDarkMode from '@/components/ToggleDarkMode.vue'
+  export default {
+    components: { ToggleDarkMode },
+  }
+</script>
+
+<style lang="scss">
   #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -25,21 +23,25 @@
     color: #2c3e50;
   }
 
+  #nav {
+    padding: 30px;
+
+    a {
+      font-weight: bold;
+      color: #2c3e50;
+
+      &.router-link-exact-active {
+        color: #42b983;
+      }
+    }
+  }
+
   html,
   body {
     padding: 0;
     margin: 0;
   }
-
-  .container-center {
-    background-color: var(--background-color-primary);
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
+  /* Define styles for the default root window element */
   :root {
     --background-color-primary: #ebebeb;
     --background-color-secondary: #fafafa;
@@ -47,11 +49,22 @@
     --text-primary-color: #222;
     --element-size: 4rem;
   }
-
+  /* Define styles for the root window with dark - mode preference */
   :root.dark-theme {
     --background-color-primary: #1e1e1e;
     --background-color-secondary: #2d2d30;
     --accent-color: #3f3f3f;
     --text-primary-color: #ddd;
+  }
+  p {
+    color: var(--text-primary-color);
+  }
+  .container-center {
+    background-color: var(--background-color-primary);
+    height: 100vh;
+    width: 100vw;
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: center; */
   }
 </style>

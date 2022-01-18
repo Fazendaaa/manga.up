@@ -1,44 +1,47 @@
-<script setup lang="ts">
-  import { ref } from 'vue'
+<script lang="ts">
+  import { defineComponent } from 'vue'
 
-  const userTheme = ref('dark-theme')
+  export default defineComponent({
+    name: 'ToggleDarkMode',
+    mounted() {
+      const initUserTheme = this.getMediaPreference()
+      this.setTheme(initUserTheme)
+    },
 
-  const setTheme = (theme: string) => {
-    localStorage.setItem('user-theme', theme)
-    userTheme.value = theme
-    document.documentElement.className = theme
-  }
+    data() {
+      return {
+        userTheme: 'light-theme',
+      }
+    },
 
-  const toggleTheme = () => {
-    const activeTheme = localStorage.getItem('user-theme')
-    if (activeTheme === 'light-theme') {
-      setTheme('dark-theme')
-    } else {
-      setTheme('light-theme')
-    }
-  }
+    methods: {
+      toggleTheme() {
+        const activeTheme = localStorage.getItem('user-theme')
+        if (activeTheme === 'light-theme') {
+          this.setTheme('dark-theme')
+        } else {
+          this.setTheme('light-theme')
+        }
+      },
 
-  const getMediaPreference = () => {
-    const hasDarkPreference = window.matchMedia(
-      '(prefers-color-scheme: dark)'
-    ).matches
-    if (hasDarkPreference) {
-      return 'dark-theme'
-    } else {
-      return 'light-theme'
-    }
-  }
+      setTheme(theme: string) {
+        localStorage.setItem('user-theme', theme)
+        this.userTheme = theme
+        document.documentElement.className = theme
+      },
 
-  const mounted = () => {
-    const initUserTheme = getMediaPreference()
-    setTheme(initUserTheme)
-  }
-
-  const data = () => {
-    return {
-      userTheme: 'dark-theme',
-    }
-  }
+      getMediaPreference() {
+        const hasDarkPreference = window.matchMedia(
+          '(prefers-color-scheme: dark)'
+        ).matches
+        if (hasDarkPreference) {
+          return 'dark-theme'
+        } else {
+          return 'light-theme'
+        }
+      },
+    },
+  })
 </script>
 
 <template>
@@ -60,8 +63,7 @@
   </div>
 </template>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped lang="scss">
   .switch-checkbox {
     display: none;
   }

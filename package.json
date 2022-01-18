@@ -1,45 +1,61 @@
 {
   "name": "manga.up",
-  "version": "0.0.0",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "dev": "vite --port 80 --host 0.0.0.0",
-    "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview",
-    "lint:script": "eslint --ext .ts,vue --ignore-path .gitignore .",
-    "lint:markup": "vue-tsc --noEmit"
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "test:unit": "vue-cli-service test:unit",
+    "test:e2e": "vue-cli-service test:e2e",
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "vue": "^3.2.25",
-    "vue-flux": "^6.4.0"
+    "core-js": "^3.6.5",
+    "register-service-worker": "^1.7.1",
+    "vue": "^3.0.0",
+    "vue-router": "^4.0.0-0",
+    "vuex": "^4.0.0-0"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.9.1",
-    "@typescript-eslint/parser": "^5.9.1",
-    "@vitejs/plugin-vue": "^2.0.0",
-    "@vue/eslint-config-prettier": "^7.0.0",
-    "@vue/eslint-config-typescript": "^10.0.0",
-    "eslint": "^8.6.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-vue": "^8.3.0",
-    "husky": "^7.0.4",
-    "lint-staged": "^12.1.7",
-    "prettier": "^2.5.1",
-    "stylelint": "^14.2.0",
-    "stylelint-config-recommended": "^6.0.0",
-    "stylelint-config-standard": "^24.0.0",
-    "typescript": "^4.4.4",
-    "vite": "^2.7.2",
-    "vite-plugin-pwa": "^0.11.13",
-    "vue-tsc": "^0.29.8"
+    "@types/jest": "^24.0.19",
+    "@types/mocha": "^8.0.1",
+    "@typescript-eslint/eslint-plugin": "^4.18.0",
+    "@typescript-eslint/parser": "^4.18.0",
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-e2e-webdriverio": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-pwa": "~4.5.0",
+    "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-plugin-typescript": "~4.5.0",
+    "@vue/cli-plugin-unit-jest": "~4.5.0",
+    "@vue/cli-plugin-vuex": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/compiler-sfc": "^3.0.0",
+    "@vue/eslint-config-prettier": "^6.0.0",
+    "@vue/eslint-config-typescript": "^7.0.0",
+    "@vue/test-utils": "^2.0.0-0",
+    "chromedriver": "^84.0.1",
+    "eslint": "^6.7.2",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-vue": "^7.0.0",
+    "geckodriver": "^1.20.0",
+    "lint-staged": "^9.5.0",
+    "node-sass": "^4.12.0",
+    "prettier": "^2.2.1",
+    "sass-loader": "^8.0.2",
+    "ts-node": "^8.10.2",
+    "typescript": "~4.1.5",
+    "vue-jest": "^5.0.0-0",
+    "wdio-chromedriver-service": "^6.0.3",
+    "wdio-geckodriver-service": "^1.1.0"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+  "gitHooks": {
+    "pre-commit": "lint-staged"
   },
   "lint-staged": {
-    "*.{ts,vue}": "eslint --fix",
-    "*.{css,scss,vue}": "stylelint --fix",
-    "*": "prettier -w -u"
+    "*.{js,jsx,vue,ts,tsx}": [
+      "vue-cli-service lint",
+      "git add"
+    ]
   }
 }
