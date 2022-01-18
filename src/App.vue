@@ -1,7 +1,8 @@
 <template>
   <div id="nav" class="container-center">
     <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link to="/about">About</router-link> |
+    <router-link to="/reader">Reader</router-link>
     <router-view />
     <toggle-dark-mode />
   </div>

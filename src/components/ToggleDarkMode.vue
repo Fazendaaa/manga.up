@@ -1,3 +1,22 @@
+<template>
+  <div>
+    <input
+      @change="toggleTheme"
+      id="checkbox"
+      type="checkbox"
+      class="switch-checkbox"
+    />
+    <label for="checkbox" class="switch-label">
+      <span>🌙</span>
+      <span>☀️</span>
+      <div
+        class="switch-toggle"
+        :class="{ 'switch-toggle-checked': userTheme === 'dark-theme' }"
+      ></div>
+    </label>
+  </div>
+</template>
+
 <script lang="ts">
   import { defineComponent } from 'vue'
 
@@ -43,25 +62,6 @@
     },
   })
 </script>
-
-<template>
-  <div>
-    <input
-      @change="toggleTheme"
-      id="checkbox"
-      type="checkbox"
-      class="switch-checkbox"
-    />
-    <label for="checkbox" class="switch-label">
-      <span>🌙</span>
-      <span>☀️</span>
-      <div
-        class="switch-toggle"
-        :class="{ 'switch-toggle-checked': userTheme === 'dark-theme' }"
-      ></div>
-    </label>
-  </div>
-</template>
 
 <style scoped lang="scss">
   .switch-checkbox {
