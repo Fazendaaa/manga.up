@@ -1,17 +1,13 @@
-<template>
-  <div class="home">
-    <h1>Homepage</h1>
-  </div>
-</template>
-
+<template></template>
 <script lang="ts">
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "HelloWorld",
+  name: "FavoritesComponent",
 
   data() {
     return {};
   },
 });
 </script>
+<style lang="stylus"></style>

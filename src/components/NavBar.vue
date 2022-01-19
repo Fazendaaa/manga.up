@@ -1,27 +1,27 @@
 <template>
   <v-bottom-navigation grow :value="value" color="primary">
-    <v-btn>
+    <v-btn router href="/">
+      <span>Home</span>
+
+      <v-icon>mdi-home-outline</v-icon>
+    </v-btn>
+
+    <v-btn router href="/search">
       <span>Search</span>
 
       <v-icon>mdi-card-search</v-icon>
     </v-btn>
 
-    <v-btn>
+    <v-btn router href="/favorites">
       <span>Favorites</span>
 
       <v-icon>mdi-heart</v-icon>
     </v-btn>
 
-    <v-btn>
-      <span>About</span>
+    <v-btn router href="/settings">
+      <span>Settings</span>
 
-      <v-icon>mdi-information-outline</v-icon>
-    </v-btn>
-
-    <v-btn @click="this.$store.commit('toggleTheme')">
-      <span> toggle theme </span>
-
-      <v-icon right>mdi-theme-light-dark</v-icon>
+      <v-icon>mdi-cog-outline</v-icon>
     </v-btn>
   </v-bottom-navigation>
 </template>
