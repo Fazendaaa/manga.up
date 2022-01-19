@@ -1,17 +1,17 @@
 <template>
-  <div class="home">
-    <HelloWorld />
+  <div class>
+    <Reader />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import HelloWorld from "@/components/HelloWorld.vue";
+import Reader from "@/components/Reader.vue";
 
 export default defineComponent({
-  name: "HomeView",
+  name: "ReaderView",
   components: {
-    HelloWorld,
+    Reader,
   },
 });
 </script>
