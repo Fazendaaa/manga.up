@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- component -->
     <viewer :images="images" :options="options">
       <img v-for="src in images" :key="src" :src="src" />
     </viewer>
