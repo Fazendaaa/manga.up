@@ -45,6 +45,7 @@ dev:
   --tag ${REGISTRY_OWNER}/manga-up:${PROJECT_TAG}  \
   --load .
 	@docker run --rm -it \
+	--volume $(shell pwd):/usr/src \
 	--network=host \
   ${REGISTRY_OWNER}/manga-up:${PROJECT_TAG} \
 	npm run serve
