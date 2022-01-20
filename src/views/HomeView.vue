@@ -1,17 +1,23 @@
 <template>
   <div class="home">
-    <HelloWorld />
+    <About />
+    <Recommended />
+    <Help />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import HelloWorld from "@/components/HelloWorld.vue";
+import About from "@/components/About.vue";
+import Recommended from "@/components/Recommended.vue";
+import Help from "@/components/Help.vue";
 
 export default defineComponent({
   name: "HomeView",
   components: {
-    HelloWorld,
+    About,
+    Recommended,
+    Help,
   },
 });
 </script>
