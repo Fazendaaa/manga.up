@@ -42,6 +42,10 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## References
 
+### Images
+
+- [Cover Browser](https://www.coverbrowser.com/)
+
 ### Tutorials
 
 - [Vuetify Tutorial](https://www.youtube.com/playlist?list=PL4cUxeGkcC9g0MQZfHwKcuB0Yswgb3gA5)
