@@ -19,6 +19,18 @@ const routes: Array<RouteRecordRaw> = [
     component: () =>
       import(/* webpackChunkName: "settings" */ "../views/SettingsView.vue"),
   },
+  {
+    path: "/search",
+    name: "Search",
+    component: () =>
+      import(/* webpackChunkName: "search" */ "../views/SearchView.vue"),
+  },
+  {
+    path: "/favorites",
+    name: "Favorites",
+    component: () =>
+      import(/* webpackChunkName: "favorites" */ "../views/FavoritesView.vue"),
+  },
 ];
 
 const router = createRouter({

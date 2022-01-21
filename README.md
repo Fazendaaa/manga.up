@@ -42,9 +42,18 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## References
 
+### BlogPosts
+
+- [Best manga reader apps for iPhone and iPad in 2021](https://www.igeeksblog.com/best-manga-reader-apps-for-iphone-ipad/)
+
 ### Images
 
 - [Cover Browser](https://www.coverbrowser.com/)
+
+### Inspirations
+
+- [Leafplayer](https://github.com/paulschwoerer/leafplayer)
+- [Vue Storefront](https://github.com/vuestorefront/vue-storefront)
 
 ### Tutorials
 
