@@ -16,7 +16,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "HeaderComponent",
+  name: "HeadlineComponent",
 
   data() {
     return {};
