@@ -9,7 +9,7 @@
 
   <!-- LOWER -->
   <v-bottom-navigation
-    class="hidden-md-and-up"
+    class="hidden-lg-and-up"
     grow
     :value="value"
     color="primary"
