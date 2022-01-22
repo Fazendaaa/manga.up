@@ -6,7 +6,14 @@ import vuetify from "./plugins/vuetify";
 import { loadFonts } from "./plugins/webfontloader";
 import "viewerjs/dist/viewer.css";
 import VueViewer from "v-viewer";
+import i18n from "./i18n";
 
 loadFonts();
 
-createApp(App).use(router).use(store).use(vuetify).use(VueViewer).mount("#app");
+createApp(App)
+  .use(i18n)
+  .use(router)
+  .use(store)
+  .use(vuetify)
+  .use(VueViewer)
+  .mount("#app");

@@ -38,17 +38,33 @@ publish:
   --tag ${REGISTRY_OWNER}/manga-up:${PROJECT_TAG}  \
   --push .
 
-dev:
+local:
 	@docker buildx build \
   --platform linux/amd64 \
   --target BASE \
   --tag ${REGISTRY_OWNER}/manga-up:${PROJECT_TAG}  \
   --load .
+
+dev: local
 	@docker run --rm -it \
 	--volume $(shell pwd):/usr/src \
 	--network=host \
   ${REGISTRY_OWNER}/manga-up:${PROJECT_TAG} \
 	npm run serve
+
+shell: local
+	@docker run --rm -it \
+	--volume $(shell pwd):/usr/src \
+	--network=host \
+  ${REGISTRY_OWNER}/manga-up:${PROJECT_TAG} \
+	/bin/sh
+
+update: local
+	@docker run --rm -it \
+	--volume $(shell pwd):/usr/src \
+	--network=host \
+  ${REGISTRY_OWNER}/manga-up:${PROJECT_TAG} \
+	npm update
 
 prod:
 	@docker-compose up --build --remove-orphans

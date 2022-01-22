@@ -40,6 +40,12 @@ npm run lint
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
+## TODO
+
+- Fix cards
+- Fix style
+- Fix i18n support
+
 ## References
 
 ### BlogPosts
