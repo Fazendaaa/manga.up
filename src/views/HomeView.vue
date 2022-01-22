@@ -1,7 +1,10 @@
 <template>
   <div class="home">
     <About />
+    <p>Trending</p>
+    <p>Latest</p>
     <Recommended />
+    <p>Sources Store</p>
     <Help />
   </div>
 </template>
