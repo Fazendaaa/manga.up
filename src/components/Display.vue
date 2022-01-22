@@ -45,26 +45,26 @@
           sm6
           md4
           lg3
-          v-for="recommended in recommendations"
-          :key="recommended.title"
+          v-for="subject in subjects"
+          :key="subject.title"
         >
           <v-card
             flat
-            class="text-xs-center ma-3 `pa-3 manga ${recommended.status}`"
+            class="text-xs-center ma-3 `pa-3 manga ${subject.status}`"
           >
             <v-responsive class="pt-4">
               <v-avatar size="180" class="grey lighten-2">
-                <img :src="recommended.cover" />
+                <img :src="subject.cover" />
               </v-avatar>
             </v-responsive>
             <v-card-text>
-              <div class="subheading">{{ recommended.title }}</div>
-              <div class="grey--text">{{ recommended.chapters }}</div>
+              <div class="subheading">{{ subject.title }}</div>
+              <div class="grey--text">{{ subject.chapters }}</div>
               <div class="center">
                 <v-chip
                   small
-                  :class="`${recommended.status} white--text my-2 caption`"
-                  >{{ recommended.status }}</v-chip
+                  :class="`${subject.status} white--text my-2 caption`"
+                  >{{ subject.status }}</v-chip
                 >
               </div>
             </v-card-text>
@@ -88,7 +88,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
-interface Recommended {
+interface Subject {
   title: string;
   chapters: string;
   score: string;
@@ -97,59 +97,28 @@ interface Recommended {
 }
 
 export default defineComponent({
-  name: "RecommendedComponent",
+  name: "DisplayComponent",
 
   props: {
     header: String,
+    // https://forum.vuejs.org/t/vue-typescript-problem-with-component-props-array-type-declaration/29478/15
+    subjects_prop: {
+      type: Array as () => Array<Subject>,
+      required: true,
+      default: () => [],
+    },
   },
 
   data() {
     return {
-      recommendations: [
-        {
-          title: "Bleach",
-          chapters: "400",
-          score: "7",
-          status: "ongoing",
-          cover: "https://www.coverbrowser.com/image/tv-series/1187-1.jpg",
-        },
-        {
-          title: "Berserk",
-          chapters: "357",
-          score: "9.5",
-          status: "complete",
-          cover: "https://www.coverbrowser.com/image/berserk/1-1.jpg",
-        },
-        {
-          title: "One Piece",
-          chapters: "1010",
-          score: "9",
-          status: "overdue",
-          cover: "https://www.coverbrowser.com/image/one-piece/1-1.jpg",
-        },
-        {
-          title: "Naruto",
-          chapters: "700",
-          score: "5",
-          status: "Finished",
-          cover:
-            "https://www.coverbrowser.com/image/bestselling-comics-2007/670-1.jpg",
-        },
-        {
-          title: "HunterXHunter",
-          chapters: "200",
-          score: "8.5",
-          status: "Overdue",
-          cover:
-            "https://www.coverbrowser.com/image/bestselling-comics-2006/1610-1.jpg",
-        },
-      ],
+      // https://stackoverflow.com/a/63688940/7092954
+      subjects: this.subjects_prop,
     };
   },
   methods: {
     sortBy(prop: string) {
-      this.recommendations.sort((a: Recommended, b: Recommended) =>
-        a[prop as keyof Recommended] < b[prop as keyof Recommended] ? -1 : 1
+      this.subjects.sort((a: Subject, b: Subject) =>
+        a[prop as keyof Subject] < b[prop as keyof Subject] ? -1 : 1
       );
     },
   },

@@ -55,6 +55,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ### Images
 
 - [Cover Browser](https://www.coverbrowser.com/)
+- [Manga Covers](https://mangacovers.com/)
 
 ### Inspirations
 
