@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard">
-    <h1 class="subheading grey--text">Recommended</h1>
+    <h1 class="subheading grey--text">{{ header }}</h1>
 
     <v-container class="my-5">
       <v-layout row justify-start class="mb-3">
@@ -73,6 +73,10 @@
                 <v-icon small left>mdi-book-open-variant</v-icon>
                 <span class="">Read</span>
               </v-btn>
+              <v-btn flat color="grey">
+                <v-icon small left>mdi-bookmark-plus-outline</v-icon>
+                <span class="">Add to Readlist</span>
+              </v-btn>
             </v-card-actions>
           </v-card>
         </v-flex>
@@ -94,6 +98,10 @@ interface Recommended {
 
 export default defineComponent({
   name: "RecommendedComponent",
+
+  props: {
+    header: String,
+  },
 
   data() {
     return {
