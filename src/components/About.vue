@@ -1,6 +1,9 @@
 <template>
   <div>
     <h1 class="subheading grey--text">About</h1>
+    <h2 class="subheading grey--text">
+      The <strong>OFFLINE</strong> webapp manga reader experience
+    </h2>
     <v-container class="my-5">
       <p>
         Manga.up is a project meant to help anyone that wants to read manga
