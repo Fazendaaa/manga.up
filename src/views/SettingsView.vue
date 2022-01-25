@@ -2,6 +2,7 @@
   <div>
     <User />
     <Login />
+    <br />
     <Settings />
   </div>
 </template>

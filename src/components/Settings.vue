@@ -1,12 +1,15 @@
 <template>
-  <v-btn>
+  <v-btn @click="toggle = !toggle">
     <span>Settings options</span>
+    <v-icon>mdi-cog-outline</v-icon>
   </v-btn>
-  <ul>
-    <li v-for="option in settings" :key="option.title">
-      {{ option.title }}
-    </li>
-  </ul>
+  <div v-show="toggle">
+    <ul>
+      <li v-for="option in settings" :key="option.title">
+        {{ option.title }}
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script lang="ts">
@@ -16,6 +19,7 @@ export default defineComponent({
   name: "SettingsComponent",
   data() {
     return {
+      toggle: false,
       settings: [
         { title: "download user content" },
         { title: "notifications" },
