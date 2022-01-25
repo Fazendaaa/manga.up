@@ -16,6 +16,13 @@
         during commuting time, before getting to bed or even taking a dump, you
         will always have a away to read everything where you left.
       </p>
+      <p>
+        You can see it as a podcast player, where it looks for content in the
+        server hosted by the podcast creator itself and you choose the player
+        from your liking. Just like that, <strong>manga.up</strong> is a
+        "player" where the content is not stored in itself but fetched from
+        another source.
+      </p>
     </v-container>
   </div>
 </template>

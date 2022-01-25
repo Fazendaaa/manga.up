@@ -4,5 +4,5 @@
   },
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "cSpell.words": ["Vite", "vitejs", "Vuetify"]
+  "cSpell.words": ["msal", "Vite", "vitejs", "Vuetify"]
 }

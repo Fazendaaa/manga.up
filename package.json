@@ -11,10 +11,14 @@
     "i18n:report": "vue-cli-service i18n:report --src \"./src/**/*.?(js|vue)\" --locales \"./src/locales/**/*.json\""
   },
   "dependencies": {
+    "@azure/core-http": "^2.2.3",
+    "@azure/msal-browser": "^2.21.0",
+    "@azure/storage-blob": "^12.8.0",
     "@mdi/font": "5.9.55",
     "core-js": "^3.8.3",
     "register-service-worker": "^1.7.2",
     "roboto-fontface": "*",
+    "tiny-emitter": "^2.1.0",
     "v-viewer": "^3.0.10",
     "vue": "^3.2.13",
     "vue-i18n": "^9.1.0",

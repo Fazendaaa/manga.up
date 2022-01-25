@@ -65,3 +65,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ### Tutorials
 
 - [Vuetify Tutorial](https://www.youtube.com/playlist?list=PL4cUxeGkcC9g0MQZfHwKcuB0Yswgb3gA5)
+- [Vue.js User Authentication and the new Azure SDKs](https://devblogs.microsoft.com/azure-sdk/vue-js-user-authentication/): note in Azure's Overview: `Application (client) ID` == `clientId` property in `store.ts` and `authority` trailing URL ID is `Directory (tenant) ID`

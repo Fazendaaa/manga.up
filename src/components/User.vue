@@ -5,6 +5,10 @@
         src="https://raw.githubusercontent.com/Fazendaaa/manga.up/feature/vue3Vuetify/public/img/icons/logo.svg"
       />
     </v-avatar>
+    <br />
+    <v-btn>
+      <span>User</span>
+    </v-btn>
     <p>Linked accounts:</p>
     <ul>
       <li v-for="service in services" :key="service.name">
