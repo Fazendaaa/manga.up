@@ -13,6 +13,7 @@
     <v-icon>mdi-microsoft</v-icon>
   </v-btn>
   <div v-if="account">{{ account.name }}</div>
+  <br />
 </template>
 
 <script lang="ts">

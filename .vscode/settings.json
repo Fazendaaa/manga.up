@@ -4,5 +4,13 @@
   },
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "cSpell.words": ["msal", "Vite", "vitejs", "Vuetify"]
+  "cSpell.words": [
+    "Anilist",
+    "gapi",
+    "msal",
+    "signin",
+    "Vite",
+    "vitejs",
+    "Vuetify"
+  ]
 }
