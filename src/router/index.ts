@@ -31,6 +31,12 @@ const routes: Array<RouteRecordRaw> = [
     component: () =>
       import(/* webpackChunkName: "favorites" */ "../views/FavoritesView.vue"),
   },
+  {
+    path: "/firewall",
+    name: "Firewall",
+    component: () =>
+      import(/* webpackChunkName: "firewall" */ "../views/FirewallView.vue"),
+  },
 ];
 
 const router = createRouter({
