@@ -6,6 +6,8 @@ RUN [ "apk", "add", "--no-cache", \
   "python3" \
 ]
 
+RUN [ "npm", "install", "--global", "@vue/cli" ]
+
 WORKDIR /usr/src/
 
 COPY ./public ./public/
