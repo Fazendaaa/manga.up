@@ -5,8 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      target: BASE
-    command: npm run serve
+      target: SERVER
     container_name: vue
     labels:
       - "traefik.enable=true"
