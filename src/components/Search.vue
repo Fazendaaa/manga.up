@@ -1,38 +1,48 @@
-<script setup lang="ts">
-  import { ref } from 'vue'
-
-  const query = ref('')
-
-  const reset = (evt) => {
-    query.value = '' // clears the query
-  }
-</script>
-
 <template>
-  <div>
-    <h2>Search mangas:</h2>
-    <input type="text" placeholder="Filter Search" v-model="query" />
-    <p>
-      {{ query }}
-    </p>
-    <button @click="reset">Reset</button>
-  </div>
+  <!-- https://vuetifyjs.com/en/components/autocompletes/ -->
+  <v-card>
+    <v-card-title class="text-h5 font-weight-regular blue-grey white--text">
+      Search for something interesting to read
+    </v-card-title>
+    <v-card-text>
+      <v-subheader class="pa-0">
+        Just release your imagination, find something interesting here
+      </v-subheader>
+      <v-autocomplete
+        v-model="model"
+        :label="`Search here`"
+        persistent-hint
+        prepend-icon="mdi-magnify"
+      >
+        <template v-slot:append-outer>
+          <v-slide-x-reverse-transition mode="out-in">
+            <v-icon
+              :key="`icon-${isEditing}`"
+              :color="isEditing ? 'success' : 'info'"
+              @click="isEditing = !isEditing"
+              v-text="
+                isEditing ? 'mdi-check-outline' : 'mdi-circle-edit-outline'
+              "
+            ></v-icon>
+          </v-slide-x-reverse-transition>
+        </template>
+      </v-autocomplete>
+    </v-card-text>
+  </v-card>
 </template>
 
-<style scoped>
-  a {
-    color: #42b983;
-  }
+<script lang="ts">
+import { defineComponent } from "vue";
 
-  label {
-    margin: 0 0.5em;
-    font-weight: bold;
-  }
+export default defineComponent({
+  name: "SearchComponent",
+  data() {
+    return {
+      isEditing: false,
+      model: null,
+    };
+  },
+});
+</script>
 
-  code {
-    background-color: #eee;
-    padding: 2px 4px;
-    border-radius: 4px;
-    color: #304455;
-  }
-</style>
+<style lang="scss"></style>

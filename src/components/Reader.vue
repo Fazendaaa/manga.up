@@ -1,63 +1,59 @@
+<template>
+  <div>
+    <viewer :images="images" :options="options">
+      <img v-for="src in images" :key="src" :src="src" />
+    </viewer>
+  </div>
+</template>
+
 <script lang="ts">
-  import {
-    VueFlux,
-    FluxCaption,
-    FluxControls,
-    FluxIndex,
-    FluxPagination,
-    FluxPreloader,
-  } from 'vue-flux'
-  import { ref } from 'vue'
+import { defineComponent } from "vue";
 
-  const vfOptions = () => {
+export default defineComponent({
+  name: "ReaderRender",
+  data() {
     return {
-      autoplay: true,
-    }
-  }
-
-  const vfImages = () => [
-    'https://cdn.pixabay.com/photo/2021/08/02/18/11/covid-6517476_960_720.jpg',
-    'https://cdn.pixabay.com/photo/2017/10/04/09/56/laboratory-2815641_960_720.jpg',
-    'blob:https://mangadex.org/79566cbe-c9b7-4752-80c2-f70a043566fb',
-  ]
-
-  const vfTransitions = () => ['fade', 'cube', 'book', 'wave']
-
-  const vfCaptions = () => [
-    'Caption for image 1',
-    'Caption for image 2',
-    'Caption for image 3',
-  ]
+      // https://github.com/fengyuanchen/viewerjs#options
+      options: {
+        backdrop: true,
+        navbar: 4,
+        title: false,
+        transition: false,
+        toolbar: {
+          zoomIn: true,
+          prev: true,
+          play: true,
+          next: true,
+          oneToOne: true,
+          zoomOut: true,
+          reset: false,
+          rotateLeft: false,
+          rotateRight: false,
+          flipHorizontal: false,
+          flipVertical: false,
+        },
+      },
+      // https://imgur.com/a/MbCYD
+      images: [
+        "https://i.imgur.com/uNhQ5jv.png",
+        "https://i.imgur.com/lmvtwb5.png",
+        "https://i.imgur.com/jUKbxbW.png",
+      ],
+    };
+  },
+  methods: {
+    show() {
+      this.$viewerApi({
+        images: this.images,
+      });
+    },
+  },
+});
 </script>
 
-<template>
-  <vue-flux
-    :options="vfOptions"
-    :images="vfImages"
-    :transitions="vfTransitions"
-    :captions="vfCaptions"
-    ref="slider"
-  >
-    <template v-slot:preloader>
-      <flux-preloader />
-    </template>
-
-    <template v-slot:caption>
-      <flux-caption />
-    </template>
-
-    <template v-slot:controls>
-      <flux-controls />
-    </template>
-
-    <template v-slot:pagination>
-      <flux-pagination />
-    </template>
-
-    <template v-slot:index>
-      <flux-index />
-    </template>
-  </vue-flux>
-
-  <button @click="$refs.slider.show('next')">NEXT</button>
-</template>
+<style scoped lang="scss">
+img {
+  max-width: 10%;
+  height: 10%;
+}
+</style>

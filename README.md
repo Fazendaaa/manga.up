@@ -1,16 +1,70 @@
-# Vue 3 + Typescript + Vite
+# manga.up
 
-This template should help get you started developing with Vue 3 and Typescript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## Project setup
 
-## Recommended IDE Setup
+```
+npm install
+```
 
-- [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
+### Compiles and hot-reloads for development
 
-## Type Support For `.vue` Imports in TS
+```
+npm run serve
+```
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's `.vue` type support plugin by running `Volar: Switch TS Plugin on/off` from VSCode command palette.
+### Compiles and minifies for production
+
+```
+npm run build
+```
+
+### Run your unit tests
+
+```
+npm run test:unit
+```
+
+### Run your end-to-end tests
+
+```
+npm run test:e2e
+```
+
+### Lints and fixes files
+
+```
+npm run lint
+```
+
+### Customize configuration
+
+See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## TODO
+
+- Fix cards
+- Fix style
+- Fix i18n support
 
 ## References
 
-- [Building a Vue3 Typescript Environment with Vite](https://miyauchi.dev/posts/vite-vue3-typescript/)
-- [How to implement darkmode with a Vue.js component ](https://dev.to/tqbit/create-your-own-dark-mode-toggle-component-with-vue-js-1284)
+### BlogPosts
+
+- [Best manga reader apps for iPhone and iPad in 2021](https://www.igeeksblog.com/best-manga-reader-apps-for-iphone-ipad/)
+
+### Images
+
+- [Cover Browser](https://www.coverbrowser.com/)
+- [Manga Covers](https://mangacovers.com/)
+
+### Inspirations
+
+- [Leafplayer](https://github.com/paulschwoerer/leafplayer)
+- [Vue Storefront](https://github.com/vuestorefront/vue-storefront)
+
+### Tutorials
+
+- [Vuetify Tutorial](https://www.youtube.com/playlist?list=PL4cUxeGkcC9g0MQZfHwKcuB0Yswgb3gA5)
+- [Vue.js User Authentication and the new Azure SDKs](https://devblogs.microsoft.com/azure-sdk/vue-js-user-authentication/): note in Azure's Overview: `Application (client) ID` == `clientId` property in `store.ts` and `authority` trailing URL ID is `Directory (tenant) ID`
+- [Let’s write a Vue.js 3 Plugin with TypeScript from scratch – Part 1](https://q-now.de/2021/10/lets-write-a-vue-js-3-plugin-with-typescript-from-scratch-part-1/)
+- [How To Navigate Between Views with Vue Router](https://www.digitalocean.com/community/tutorials/how-to-navigate-between-views-with-vue-router)
