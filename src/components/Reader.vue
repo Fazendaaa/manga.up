@@ -18,6 +18,7 @@ export default defineComponent({
         backdrop: true,
         navbar: 4,
         title: false,
+        transition: false,
         toolbar: {
           zoomIn: true,
           prev: true,

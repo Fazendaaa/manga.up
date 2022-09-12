@@ -69,11 +69,15 @@
               </div>
             </v-card-text>
             <v-card-actions>
-              <v-btn flat color="grey">
+              <v-btn flat color="grey" v-on:click="goToInfo(subject.title)">
                 <v-icon small left>mdi-book-open-variant</v-icon>
                 <span class="">Read</span>
               </v-btn>
-              <v-btn flat color="grey">
+              <v-btn
+                flat
+                color="grey"
+                v-on:click="addToReadlist(subject.title)"
+              >
                 <v-icon small left>mdi-bookmark-plus-outline</v-icon>
                 <span class="">Add to Readlist</span>
               </v-btn>
@@ -120,6 +124,12 @@ export default defineComponent({
       this.subjects.sort((a: Subject, b: Subject) =>
         a[prop as keyof Subject] < b[prop as keyof Subject] ? -1 : 1
       );
+    },
+    goToInfo(title: string) {
+      alert(title);
+    },
+    addToReadlist(title: string) {
+      alert(title);
     },
   },
 });
