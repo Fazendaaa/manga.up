@@ -69,9 +69,17 @@
               </div>
             </v-card-text>
             <v-card-actions>
-              <v-btn flat color="grey" v-on:click="goToInfo(subject.title)">
+              <v-btn flat color="grey">
                 <v-icon small left>mdi-book-open-variant</v-icon>
-                <span class="">Read</span>
+                <router-link
+                  to="{ name: 'Info', params: { id: subject.title } }"
+                  custom
+                  v-slot="{ navigate }"
+                >
+                  <span @click="navigate" @keypress.enter="navigate" role="link"
+                    >Read</span
+                  >
+                </router-link>
               </v-btn>
               <v-btn
                 flat
@@ -124,9 +132,6 @@ export default defineComponent({
       this.subjects.sort((a: Subject, b: Subject) =>
         a[prop as keyof Subject] < b[prop as keyof Subject] ? -1 : 1
       );
-    },
-    goToInfo(title: string) {
-      alert(title);
     },
     addToReadlist(title: string) {
       alert(title);

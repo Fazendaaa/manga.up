@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import HomeView from "@/views/HomeView.vue";
-import PageNotFound from "@/views/PageNotFoundView.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -11,7 +10,8 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/:catchAll(.*)*",
     name: "PageNotFound",
-    component: PageNotFound,
+    component: () =>
+      import(/* webpackChunkName: "reader" */ "../views/PageNotFoundView.vue"),
   },
   {
     path: "/reader",
@@ -44,7 +44,7 @@ const routes: Array<RouteRecordRaw> = [
       import(/* webpackChunkName: "firewall" */ "../views/FirewallView.vue"),
   },
   {
-    path: "/info",
+    path: "/info/:id",
     name: "Info",
     component: () =>
       import(/* webpackChunkName: "info" */ "../views/InfoView.vue"),
