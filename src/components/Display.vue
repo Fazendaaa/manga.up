@@ -69,17 +69,14 @@
               </div>
             </v-card-text>
             <v-card-actions>
-              <v-btn flat color="grey">
+              <v-btn
+                flat
+                color="grey"
+                :to="{ name: 'Info', params: { id: subject.title } }"
+                custom
+              >
                 <v-icon small left>mdi-book-open-variant</v-icon>
-                <router-link
-                  to="{ name: 'Info', params: { id: subject.title } }"
-                  custom
-                  v-slot="{ navigate }"
-                >
-                  <span @click="navigate" @keypress.enter="navigate" role="link"
-                    >Read</span
-                  >
-                </router-link>
+                <span>Read</span>
               </v-btn>
               <v-btn
                 flat
