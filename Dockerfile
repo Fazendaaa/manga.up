@@ -1,4 +1,27 @@
-FROM node:14.18-alpine AS BASE
+FROM node:18.9.0-alpine3.15 AS BASE
+
+RUN [ "npm", "install", "--global", "@vue/cli" ]
+
+WORKDIR /usr/src/
+
+COPY package* .
+
+RUN [ "npm", "install" ]
+
+COPY ./public ./public/
+COPY *.js ./
+COPY *.json ./
+COPY .browserslistrc ./
+COPY .eslintrc.js ./
+COPY ./src/ ./src/
+
+EXPOSE 80
+
+
+
+FROM node:18.9.0-alpine3.15 AS TESTS
+
+WORKDIR /usr/src
 
 RUN [ "apk", "add", "--no-cache", \
   "g++", \
@@ -6,27 +29,7 @@ RUN [ "apk", "add", "--no-cache", \
   "python3" \
 ]
 
-RUN [ "npm", "install", "--global", "@vue/cli" ]
 
-WORKDIR /usr/src/
-
-COPY ./public ./public/
-COPY *.js ./
-COPY *.json ./
-COPY .browserslistrc ./
-COPY .eslintrc.js ./
-
-RUN [ "npm", "install" ]
-
-COPY ./src/ ./src/
-
-EXPOSE 80
-
-
-
-FROM node:14.18-alpine AS TESTS
-
-WORKDIR /usr/src
 COPY --from=BASE /usr/src/ .
 
 COPY ./tests/ ./tests/
@@ -37,7 +40,7 @@ COPY ./tests/ ./tests/
 
 
 
-FROM node:14.18-alpine AS BUILD
+FROM node:18.9.0-alpine3.15 AS BUILD
 
 WORKDIR /usr/src
 COPY --from=TESTS /usr/src/ .
@@ -46,7 +49,7 @@ RUN [ "npm", "run", "build" ]
 
 
 
-FROM node:14.18-alpine AS SERVER
+FROM node:18.9.0-alpine3.15 AS SERVER
 LABEL author="fazenda"
 LABEL project="manga-up"
 
