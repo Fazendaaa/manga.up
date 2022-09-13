@@ -54,7 +54,7 @@
           >
             <v-responsive class="pt-4">
               <v-avatar size="180" class="grey lighten-2">
-                <img :src="subject.cover" />
+                <img :src="subject.cover" :width="size" :height="size" />
               </v-avatar>
             </v-responsive>
             <v-card-text>
@@ -122,6 +122,7 @@ export default defineComponent({
     return {
       // https://stackoverflow.com/a/63688940/7092954
       subjects: this.subjects_prop,
+      size: 180,
     };
   },
   methods: {

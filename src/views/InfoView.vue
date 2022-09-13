@@ -1,7 +1,15 @@
 <template>
   <div>
-    <p>{{ id }}</p>
-    <Info />
+    <p>Manga Info</p>
+    <Info :id="id" />
+    <!-- Sources -->
+    <!-- Where to buy -->
+    <!-- MAL -->
+    <!-- ANILIST -->
+    <!-- NetFlix -->
+    <!-- Amazon Prime -->
+    <!-- Crunchyroll -->
+    <!-- etc -->
   </div>
 </template>
 
@@ -17,7 +25,14 @@ export default defineComponent({
   },
   setup() {
     const route = useRoute();
-    const id = computed(() => route.params.id.toUpperCase());
+    const id = computed(() => {
+      const id =
+        "string" == typeof route.params.id
+          ? route.params.id
+          : route.params.id[0];
+
+      return id.toUpperCase();
+    });
 
     return { id };
   },

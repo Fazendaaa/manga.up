@@ -2,7 +2,7 @@ import { createStore } from "vuex";
 
 export default createStore({
   state: {
-    theme: "light",
+    theme: "dark",
     msalConfig: {
       auth: {
         clientId: "e7857093-616f-42cd-82f8-7e5c6bcb9650",

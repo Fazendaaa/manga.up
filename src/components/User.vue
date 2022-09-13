@@ -7,7 +7,7 @@
     <div v-show="toggle">
       <v-avatar size="180" class="grey lighten-2">
         <img
-          src="https://raw.githubusercontent.com/Fazendaaa/manga.up/feature/vue3Vuetify/public/img/icons/logo.svg"
+          src="https://raw.githubusercontent.com/Fazendaaa/manga.up/master/public/img/icons/logo.svg"
         />
       </v-avatar>
       <br />
