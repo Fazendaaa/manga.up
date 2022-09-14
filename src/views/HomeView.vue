@@ -5,14 +5,14 @@
     <Display header="Trending" :subjects_prop="trending" />
     <Display header="Recommended" :subjects_prop="recommendations" />
     <Stores />
-    <Help />
+    <Contact />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import Intro from "@/components/Intro.vue";
-import Help from "@/components/Help.vue";
+import Contact from "@/components/Contact.vue";
 import Display from "@/components/Display.vue";
 import Stores from "@/components/Stores.vue";
 
@@ -20,7 +20,7 @@ export default defineComponent({
   name: "HomeView",
   components: {
     Intro,
-    Help,
+    Contact,
     Display,
     Stores,
   },

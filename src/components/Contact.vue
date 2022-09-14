@@ -1,24 +1,14 @@
 <template>
   <div>
-    <h1 class="subheading grey--text">Help</h1>
-    <v-container class="my-5">
-      <p>
-        Here are some sources so you can choose to help in any way you can this
-        project:
-      </p>
-    </v-container>
+    <h1 class="subheading grey--text">Contact</h1>
     <v-container class="my-5">
       <v-btn target="_blank" href="https://github.com/Fazendaaa/manga.up">
         <v-icon>mid-github</v-icon>
-        <span>Github</span>
+        <span>Give us a like so we can keep going</span>
       </v-btn>
       <v-btn target="_blank" href="https://twitter.com/the_fznd">
         <v-icon>mid-twitter</v-icon>
         <span>Creator's Twitter</span>
-      </v-btn>
-      <v-btn target="_blank" href="https://www.buymeacoffee.com/fazenda">
-        <v-icon>mid-coffee-maker-check-outline</v-icon>
-        <span>Buy me a coffee</span>
       </v-btn>
     </v-container>
   </div>
@@ -28,7 +18,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "HelpComponent",
+  name: "ContactComponent",
 
   data() {
     return {};
