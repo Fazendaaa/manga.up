@@ -18,9 +18,11 @@ interface ResponseToken {
 
 export default defineComponent({
   name: "InfoComponent",
+
   props: {
     id: String,
   },
+
   async created() {
     const username = process.env.VUE_APP_MD_USERNAME;
     const password = process.env.VUE_APP_MD_PASSWORD;
@@ -29,6 +31,7 @@ export default defineComponent({
 
     console.log(token);
   },
+
   methods: {
     fetchToken: async (username: string, password: string, email: string) => {
       return fetch("https://api.mangadex.org/auth/login", {

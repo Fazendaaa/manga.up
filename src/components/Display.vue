@@ -54,28 +54,34 @@
                 flat
                 class="text-xs-center ma-3 `pa-3 manga ${subject.status}`"
               >
-                <v-responsive class="pt-4">
-                  <v-avatar size="180" class="grey lighten-2">
-                    <img :src="subject.cover" :width="size" :height="size" />
-                  </v-avatar>
-                </v-responsive>
-                <v-card-text>
-                  <div class="subheading">{{ subject.title }}</div>
-                  <div class="grey--text">{{ subject.chapters }}</div>
-                  <div class="center">
-                    <v-chip
-                      small
-                      :class="`${subject.status} white--text my-2 caption`"
-                      >{{ subject.status }}</v-chip
-                    >
-                  </div>
-                </v-card-text>
+                <router-link
+                  flat
+                  style="text-decoration: none; color: inherit"
+                  :to="{ name: 'Info', params: { id: subject.title } }"
+                >
+                  <v-responsive class="pt-4">
+                    <v-avatar size="180" class="grey lighten-2">
+                      <img :src="subject.cover" :width="size" :height="size" />
+                    </v-avatar>
+                  </v-responsive>
+                  <v-card-text>
+                    <div class="subheading">{{ subject.title }}</div>
+                    <div class="grey--text">{{ subject.chapters }}</div>
+                    <div class="center">
+                      <v-chip
+                        small
+                        :class="`${subject.status} white--text my-2 caption`"
+                        >{{ subject.status }}</v-chip
+                      >
+                    </div>
+                  </v-card-text>
+                </router-link>
                 <v-card-actions>
                   <v-btn
                     flat
                     color="grey"
-                    :to="{ name: 'Info', params: { id: subject.title } }"
                     custom
+                    :to="{ name: 'Reader', params: { id: subject.title } }"
                   >
                     <v-icon small left>mdi-book-open-variant</v-icon>
                     <span>Read</span>
@@ -120,7 +126,7 @@ export default defineComponent({
 
   components: {
     Carousel,
-    // Slide,
+    Slide,
     Pagination,
     Navigation,
   },

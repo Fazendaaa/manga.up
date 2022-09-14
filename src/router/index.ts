@@ -14,7 +14,7 @@ const routes: Array<RouteRecordRaw> = [
       import(/* webpackChunkName: "reader" */ "../views/PageNotFoundView.vue"),
   },
   {
-    path: "/reader/",
+    path: "/reader/:id",
     name: "Reader",
     component: () =>
       import(/* webpackChunkName: "reader" */ "../views/ReaderView.vue"),

@@ -32,6 +32,9 @@ export default defineComponent({
           flipHorizontal: false,
           flipVertical: false,
         },
+        fullscreen: {
+          navigationUI: "hide",
+        },
       },
       // https://imgur.com/a/MbCYD
       images: [
@@ -40,13 +43,6 @@ export default defineComponent({
         "https://i.imgur.com/jUKbxbW.png",
       ],
     };
-  },
-  methods: {
-    show() {
-      this.$viewerApi({
-        images: this.images,
-      });
-    },
   },
 });
 </script>
