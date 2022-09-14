@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <About />
+    <Intro />
     <Display header="Latest" :subjects_prop="latest" />
     <Display header="Trending" :subjects_prop="trending" />
     <Display header="Recommended" :subjects_prop="recommendations" />
@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import About from "@/components/About.vue";
+import Intro from "@/components/Intro.vue";
 import Help from "@/components/Help.vue";
 import Display from "@/components/Display.vue";
 import Stores from "@/components/Stores.vue";
@@ -19,7 +19,7 @@ import Stores from "@/components/Stores.vue";
 export default defineComponent({
   name: "HomeView",
   components: {
-    About,
+    Intro,
     Help,
     Display,
     Stores,

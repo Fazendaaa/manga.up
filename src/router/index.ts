@@ -14,31 +14,31 @@ const routes: Array<RouteRecordRaw> = [
       import(/* webpackChunkName: "reader" */ "../views/PageNotFoundView.vue"),
   },
   {
-    path: "/reader",
+    path: "/reader/",
     name: "Reader",
     component: () =>
       import(/* webpackChunkName: "reader" */ "../views/ReaderView.vue"),
   },
   {
-    path: "/settings",
+    path: "/settings/",
     name: "Settings",
     component: () =>
       import(/* webpackChunkName: "settings" */ "../views/SettingsView.vue"),
   },
   {
-    path: "/search",
+    path: "/search/",
     name: "Search",
     component: () =>
       import(/* webpackChunkName: "search" */ "../views/SearchView.vue"),
   },
   {
-    path: "/favorites",
+    path: "/favorites/",
     name: "Favorites",
     component: () =>
       import(/* webpackChunkName: "favorites" */ "../views/FavoritesView.vue"),
   },
   {
-    path: "/firewall",
+    path: "/firewall/",
     name: "Firewall",
     component: () =>
       import(/* webpackChunkName: "firewall" */ "../views/FirewallView.vue"),
@@ -48,6 +48,12 @@ const routes: Array<RouteRecordRaw> = [
     name: "Info",
     component: () =>
       import(/* webpackChunkName: "info" */ "../views/InfoView.vue"),
+  },
+  {
+    path: "/about/",
+    name: "About",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
   },
 ];
 
