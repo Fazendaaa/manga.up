@@ -4,7 +4,7 @@ RUN [ "npm", "install", "--global", "@vue/cli" ]
 
 WORKDIR /usr/src/
 
-COPY package* .
+COPY package.json .
 
 RUN [ "npm", "install" ]
 

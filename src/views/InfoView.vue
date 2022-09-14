@@ -3,6 +3,10 @@
     <p>Manga Info</p>
     <Info :id="id" />
     <Chapters :id="id" />
+    <v-btn :to="{ name: 'Reader' }">
+      <v-icon>mid-book-arrow-left-outline</v-icon>
+      <span>Read</span>
+    </v-btn>
     <!-- Sources -->
     <!-- Where to buy -->
     <!-- MAL -->

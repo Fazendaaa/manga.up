@@ -6,6 +6,7 @@
       <li v-for="item in items" v-bind:key="item.message">
         {{ item.message }}
       </li>
+      <p>Besides helping you stay focus and up to date in your favorites</p>
     </v-container>
   </div>
 </template>
@@ -20,7 +21,7 @@ export default defineComponent({
     return {
       items: [
         {
-          message: "an Free Software implementation",
+          message: "A Free Software implementation -- 'free' as in beer",
         },
         {
           message: "test",
