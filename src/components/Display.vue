@@ -113,7 +113,7 @@ import { defineComponent } from "vue";
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
 
-interface Subject {
+export interface Subject {
   title: string;
   chapters: string;
   score: string;
