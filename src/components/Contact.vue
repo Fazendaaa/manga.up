@@ -6,9 +6,9 @@
         <v-icon>mid-github</v-icon>
         <span>Give us a like so we can keep going</span>
       </v-btn>
-      <v-btn target="_blank" href="https://twitter.com/the_fznd">
+      <v-btn target="_blank" href="https://twitter.com/mangaupofficial">
         <v-icon>mid-twitter</v-icon>
-        <span>Creator's Twitter</span>
+        <span>Twitter</span>
       </v-btn>
     </v-container>
   </div>

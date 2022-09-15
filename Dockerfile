@@ -8,6 +8,9 @@ COPY package.json .
 
 RUN [ "npm", "install" ]
 
+ARG VUE_APP_MD_TOKEN=${VUE_APP_MD_TOKEN}
+ARG VUE_APP_MD_TOKEN_REFRESH=${VUE_APP_MD_TOKEN_REFRESH}
+
 COPY ./public ./public/
 COPY *.js ./
 COPY *.json ./

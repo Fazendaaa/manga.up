@@ -10,11 +10,11 @@
     <v-container class="my-5">
       <v-btn target="_blank" href="https://github.com/Fazendaaa/manga.up">
         <v-icon>mid-github</v-icon>
-        <span>Github</span>
+        <span>Share a few translations or code</span>
       </v-btn>
       <v-btn target="_blank" href="https://twitter.com/the_fznd">
         <v-icon>mid-twitter</v-icon>
-        <span>Creator's Twitter</span>
+        <span>Follow creator's Twitter</span>
       </v-btn>
       <v-btn target="_blank" href="https://www.buymeacoffee.com/fazenda">
         <v-icon>mid-coffee-maker-check-outline</v-icon>
