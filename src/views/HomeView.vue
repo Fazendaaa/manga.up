@@ -74,10 +74,6 @@ export default defineComponent({
       latest: ["Highschool of The Dead", "Shingeki no Kyojin", "Vinland Saga"],
     };
   },
-
-  onCancel() {
-    console.log("User cancelled the loader.");
-  },
 });
 </script>
 

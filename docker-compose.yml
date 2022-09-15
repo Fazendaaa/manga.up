@@ -6,13 +6,26 @@ services:
       context: .
       dockerfile: Dockerfile
       target: SERVER
+      args:
+        - VUE_APP_MD_TOKEN_SESSION=${VUE_APP_MD_TOKEN_SESSION}
+        - VUE_APP_MD_TOKEN_REFRESH=${VUE_APP_MD_TOKEN_REFRESH}
     container_name: vue
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.vue.tls=true"
       - "traefik.http.routers.vue.rule=Host(`vue.docker.localhost`)"
-    volumes:
-      - "${PWD}/src/:/usr/src/src"
+    networks:
+      - proxy
+
+  allow-cors:
+    image: redocly/cors-anywhere
+    environment:
+      - PORT=80
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.cors.tls=true"
+      - traefik.http.services.cors.loadbalancer.server.port=80
+      - "traefik.http.routers.cors.rule=Host(`cors.docker.localhost`)"
     networks:
       - proxy
 

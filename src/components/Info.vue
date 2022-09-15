@@ -17,9 +17,6 @@ export default defineComponent({
   async created() {
     const token = process.env.VUE_APP_MD_TOKEN_SESSION;
     const session = process.env.VUE_APP_MD_TOKEN_REFRESH;
-
-    console.log(token);
-    console.log(session);
   },
 });
 </script>

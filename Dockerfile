@@ -8,9 +8,6 @@ COPY package.json .
 
 RUN [ "npm", "install" ]
 
-ARG VUE_APP_MD_TOKEN=${VUE_APP_MD_TOKEN}
-ARG VUE_APP_MD_TOKEN_REFRESH=${VUE_APP_MD_TOKEN_REFRESH}
-
 COPY ./public ./public/
 COPY *.js ./
 COPY *.json ./
@@ -48,6 +45,9 @@ FROM node:18.9.0-alpine3.15 AS BUILD
 WORKDIR /usr/src
 COPY --from=TESTS /usr/src/ .
 
+ARG VUE_APP_MD_TOKEN_SESSION=${VUE_APP_MD_TOKEN_SESSION}
+ARG VUE_APP_MD_TOKEN_REFRESH=${VUE_APP_MD_TOKEN_REFRESH}
+
 RUN [ "npm", "run", "build" ]
 
 
@@ -59,8 +59,8 @@ LABEL project="manga-up"
 WORKDIR /usr/src
 COPY --from=BUILD /usr/src/dist/ .
 
-RUN [ "npm", "install", "--global", "http-server" ]
+RUN [ "npm", "install", "--global", "serve" ]
 
-ENTRYPOINT [ "http-server", "--port", "80", "--address", "0.0.0.0", "." ]
+ENTRYPOINT [ "serve", "--single", "--listen", "tcp://0.0.0.0:80", "." ]
 
 EXPOSE 80

@@ -14,16 +14,32 @@ export interface Search {
   related: string;
 }
 
-const API = "https://api.mangadex.org/";
+const API_PROXY = "https://cors.docker.localhost/";
+const API_BASE = "https://api.mangadex.org/";
+const API =
+  "production" == process.env.NODE_ENV ? API_PROXY.concat(API_BASE) : API_BASE;
+const TOKEN = process.env.VUE_APP_MD_TOKEN_SESSION;
+const BASIC_REQUEST: RequestInit = {
+  redirect: "follow",
+  headers: {
+    "Content-Type": "application/json",
+  },
+};
 
-const fetchMangaDex = async (endpoint: string, method: string, body: string) =>
+const fetchMangaDex = async (
+  endpoint: string,
+  method: string,
+  body: Record<string, unknown>
+) =>
   fetch(API.concat(endpoint), {
-    method,
-    redirect: "follow",
-    headers: {
-      "Content-Type": "application/json",
+    ...BASIC_REQUEST,
+    ...{
+      method,
+      body: JSON.stringify({
+        ...body,
+        token: TOKEN,
+      }),
     },
-    body,
   })
     .then((response) => response.text())
     .then((result) => JSON.parse(result))
@@ -42,24 +58,16 @@ export const generateToken = async (
   password: string,
   email: string
 ) =>
-  fetchMangaDex(
-    "auth/login/",
-    "POST",
-    JSON.stringify({
-      username,
-      email,
-      password,
-    })
-  ).then((result: ResponseToken) => result["token"]);
+  fetchMangaDex("auth/login/", "POST", {
+    username,
+    email,
+    password,
+  }).then((result: ResponseToken) => result["token"]);
 
 export const refreshToken = async (token: string) =>
-  fetchMangaDex(
-    "auth/refresh/",
-    "POST",
-    JSON.stringify({
-      token,
-    })
-  ).then((result: ResponseToken) => result["token"]);
+  fetchMangaDex("auth/refresh/", "POST", {
+    token,
+  }).then((result: ResponseToken) => result["token"]);
 
 const getMangaID = async (title: string): Promise<Search[]> =>
   getMangaDex("manga", {
@@ -70,10 +78,6 @@ const getMangaID = async (title: string): Promise<Search[]> =>
 const getCoverID = async (mangaID: string) =>
   fetch(API.concat("cover/", mangaID), {
     method: "GET",
-    redirect: "follow",
-    headers: {
-      "Content-Type": "application/json",
-    },
   })
     .then((response) => response.text())
     .then((result) => JSON.parse(result))
