@@ -1,48 +1,53 @@
 <template>
-  <div class="home">
-    <Intro />
-    <Suspense>
-      <template #default>
-        <Display header="Latest" :ids="latest" />
-      </template>
-      <template #fallback>
+  <Intro />
+  <Suspense>
+    <template #default>
+      <Display header="Latest" :ids="latest" />
+    </template>
+    <template #fallback>
+      <div class="container">
         <v-progress-circular
+          class="center"
           :size="50"
-          color="amber"
+          color="blue-grey"
           indeterminate
-        ></v-progress-circular>
-      </template>
-    </Suspense>
-    <br />
-    <Suspense>
-      <template #default>
-        <Display header="Trending" :ids="trending" />
-      </template>
-      <template #fallback>
+        />
+      </div>
+    </template>
+  </Suspense>
+  <Suspense>
+    <template #default>
+      <Display header="Trending" :ids="trending" />
+    </template>
+    <template #fallback>
+      <div class="container">
         <v-progress-circular
+          class="center"
           :size="50"
-          color="amber"
+          color="deep-orange lighten-2"
           indeterminate
-        ></v-progress-circular>
-      </template>
-    </Suspense>
-    <br />
-    <Suspense>
-      <template #default>
-        <Display header="Recommended" :ids="recommendations" />
-      </template>
-      <template #fallback>
+        />
+      </div>
+    </template>
+  </Suspense>
+  <Suspense>
+    <template #default>
+      <Display header="Recommended" :ids="recommendations" />
+    </template>
+    <template #fallback>
+      <div class="container">
         <v-progress-circular
+          class="center"
           :size="50"
-          color="amber"
+          color="lime"
           indeterminate
-        ></v-progress-circular>
-      </template>
-    </Suspense>
-    <br />
-    <Stores />
-    <Contact />
-  </div>
+        />
+      </div>
+    </template>
+  </Suspense>
+  <br />
+  <Stores />
+  <Contact />
 </template>
 
 <script lang="ts">
@@ -67,14 +72,6 @@ export default defineComponent({
       recommendations: ["Bleach", "Berserk", "One Piece"],
       trending: ["Naruto", "HunterXHunter", "One Piece"],
       latest: ["Highschool of The Dead", "Shingeki no Kyojin", "Vinland Saga"],
-      isLoading: true,
-      fullPage: false,
-      loader: "spinner",
-      color: "#007bff",
-      bgColor: "#ffffff",
-      height: 128,
-      width: 128,
-      timeout: 3000, //ms
     };
   },
 
@@ -83,3 +80,19 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="scss" scoped>
+.container {
+  height: 200px;
+  position: relative;
+}
+
+.center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+</style>

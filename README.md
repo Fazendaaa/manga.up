@@ -68,3 +68,5 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - [Vue.js User Authentication and the new Azure SDKs](https://devblogs.microsoft.com/azure-sdk/vue-js-user-authentication/): note in Azure's Overview: `Application (client) ID` == `clientId` property in `store.ts` and `authority` trailing URL ID is `Directory (tenant) ID`
 - [Let’s write a Vue.js 3 Plugin with TypeScript from scratch – Part 1](https://q-now.de/2021/10/lets-write-a-vue-js-3-plugin-with-typescript-from-scratch-part-1/)
 - [How To Navigate Between Views with Vue Router](https://www.digitalocean.com/community/tutorials/how-to-navigate-between-views-with-vue-router)
+- [How TO - Center Elements Vertically](https://www.w3schools.com/howto/howto_css_center-vertical.asp)
+- [Swiper Vue.js Components](https://swiperjs.com/vue)
