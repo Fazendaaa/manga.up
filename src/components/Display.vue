@@ -109,16 +109,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { toRefs, defineComponent } from "vue";
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
+import { getMangaCover } from "@/scripts/mangadex";
 
-export interface Subject {
+export interface Display {
   title: string;
   chapters: string;
   score: string;
-  status: string;
   cover: string;
+  status: string;
 }
 
 export default defineComponent({
@@ -134,26 +135,41 @@ export default defineComponent({
   props: {
     header: String,
     // https://forum.vuejs.org/t/vue-typescript-problem-with-component-props-array-type-declaration/29478/15
-    subjects_prop: {
-      type: Array as () => Array<Subject>,
+    ids: {
+      type: Array as () => Array<string>,
       required: true,
       default: () => [],
     },
   },
 
-  data() {
+  async setup(props) {
+    const { ids } = toRefs(props);
+    const subjects: Display[] = [];
+
+    for (const title of ids.value) {
+      subjects.push({
+        title,
+        chapters: "400",
+        score: "7",
+        status: "ongoing",
+        cover: await getMangaCover("Bleach"),
+      });
+    }
+
     return {
       // https://stackoverflow.com/a/63688940/7092954
-      subjects: this.subjects_prop,
+      subjects,
       size: 180,
     };
   },
+
   methods: {
     sortBy(prop: string) {
-      this.subjects.sort((a: Subject, b: Subject) =>
-        a[prop as keyof Subject] < b[prop as keyof Subject] ? -1 : 1
+      this.subjects.sort((a: Display, b: Display) =>
+        a[prop as keyof Display] < b[prop as keyof Display] ? -1 : 1
       );
     },
+
     addToReadlist(title: string) {
       alert(title);
     },
