@@ -1,3 +1,5 @@
+include .env
+export $(shell sed 's/=.*//' .env)
 REGISTRY_OWNER:=fazenda
 MULTIARCH:=false
 ARCHS:=linux/amd64
@@ -35,8 +37,15 @@ run: build
 publish:
 	@docker buildx build \
   --platform linux/amd64 \
+	--build-arg VUE_APP_MD_TOKEN_SESSION=${VUE_APP_MD_TOKEN_SESSION} \
+	--build-arg VUE_APP_MD_TOKEN_SESSION=${VUE_APP_MD_TOKEN_SESSION} \
+	--build-arg VUE_APP_CORS_PROXY=${VUE_APP_CORS_PROXY} \
   --tag ${REGISTRY_OWNER}/manga-up:${PROJECT_TAG}  \
   --push .
+
+deploy: publish
+	@kubectl apply -f k8s/manga-up.rancher.yml
+	@kubectl apply -f k8s/corsproxy.rancher.yml
 
 local:
 	@docker buildx build \

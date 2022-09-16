@@ -14,15 +14,17 @@ export interface Search {
   related: string;
 }
 
-const API_PROXY = "https://cors.docker.localhost/";
+const API_PROXY = process.env.VUE_APP_CORS_PROXY;
 const API_BASE = "https://api.mangadex.org/";
-const API =
-  "production" == process.env.NODE_ENV ? API_PROXY.concat(API_BASE) : API_BASE;
+const API = API_PROXY.concat(API_BASE);
 const TOKEN = process.env.VUE_APP_MD_TOKEN_SESSION;
 const BASIC_REQUEST: RequestInit = {
+  cache: "default",
+  referrerPolicy: "no-referrer",
   redirect: "follow",
   headers: {
-    "Content-Type": "application/json",
+    accept:
+      "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
   },
 };
 

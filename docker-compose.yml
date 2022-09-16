@@ -9,6 +9,7 @@ services:
       args:
         - VUE_APP_MD_TOKEN_SESSION=${VUE_APP_MD_TOKEN_SESSION}
         - VUE_APP_MD_TOKEN_REFRESH=${VUE_APP_MD_TOKEN_REFRESH}
+        - VUE_APP_CORS_PROXY=https://cors.docker.localhost/
     container_name: vue
     labels:
       - "traefik.enable=true"

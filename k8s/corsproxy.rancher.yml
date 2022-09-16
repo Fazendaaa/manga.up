@@ -3,25 +3,28 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: default
-  name: manga-up
+  name: cors-anywhere
   labels:
-    app: manga-up
+    app: cors-anywhere
 spec:
   replicas: 3
   selector:
     matchLabels:
-      application: manga-up
+      application: cors-anywhere
   template:
     metadata:
       labels:
-        application: manga-up
+        application: cors-anywhere
     spec:
       containers:
-        - image: fazenda/manga-up
+        - image: redocly/cors-anywhere
           imagePullPolicy: Always
-          name: manga-up
+          name: cors-anywhere
+          env:
+            - name: CORSANYWHERE_WHITELIST
+              value: https://manga.up.fazenda.solutions,https://vue.docker.localhost
           ports:
-            - containerPort: 80
+            - containerPort: 8080
               protocol: TCP
           securityContext:
             privileged: false
@@ -32,14 +35,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: manga-up
+  name: cors-anywhere
 spec:
   ports:
     - port: 80
       protocol: TCP
-      targetPort: 80
+      targetPort: 8080
   selector:
-    application: manga-up
+    application: cors-anywhere
   type: ClusterIP
 
 ---
@@ -48,45 +51,45 @@ kind: Ingress
 metadata:
   annotations:
     cert-manager.io/issuer: rancher
-  name: manga-up-ingress
+  name: cors-anywhere-ingress
   namespace: default
 spec:
   rules:
-    - host: manga.up.fazenda.solutions
+    - host: cors.proxy.fazenda.solutions
       http:
         paths:
           - pathType: Prefix
             path: /
             backend:
               service:
-                name: manga-up
+                name: cors-anywhere
                 port:
                   number: 80
   tls:
     - hosts:
-        - manga.up.fazenda.solutions
-      secretName: manga-up-cert
+        - cors.proxy.fazenda.solutions
+      secretName: cors-anywhere-cert
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
     cert-manager.io/issuer: rancher
-  name: manga-up-ingress-tls
+  name: cors-anywhere-ingress-tls
   namespace: cattle-system
 spec:
   rules:
-    - host: manga.up.fazenda.solutions
+    - host: cors.proxy.fazenda.solutions
       http:
         paths:
           - pathType: Prefix
             path: /
             backend:
               service:
-                name: manga-up
+                name: cors-anywhere
                 port:
                   number: 80
   tls:
     - hosts:
-        - manga.up.fazenda.solutions
-      secretName: manga-up-cert-tls
+        - cors.proxy.fazenda.solutions
+      secretName: cors-anywhere-cert-tls

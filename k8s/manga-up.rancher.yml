@@ -1,0 +1,92 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: default
+  name: manga-up
+  labels:
+    app: manga-up
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      application: manga-up
+  template:
+    metadata:
+      labels:
+        application: manga-up
+    spec:
+      containers:
+        - image: fazenda/manga-up:latest
+          imagePullPolicy: Always
+          name: manga-up
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          securityContext:
+            privileged: false
+      imagePullSecrets:
+        - name: regcred
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: manga-up
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    application: manga-up
+  type: ClusterIP
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/issuer: rancher
+  name: manga-up-ingress
+  namespace: default
+spec:
+  rules:
+    - host: manga.up.fazenda.solutions
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: manga-up
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - manga.up.fazenda.solutions
+      secretName: manga-up-cert
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/issuer: rancher
+  name: manga-up-ingress-tls
+  namespace: cattle-system
+spec:
+  rules:
+    - host: manga.up.fazenda.solutions
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: manga-up
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - manga.up.fazenda.solutions
+      secretName: manga-up-cert-tls
