@@ -15,7 +15,7 @@
     "sourceMap": true,
     "resolveJsonModule": true,
     "baseUrl": ".",
-    "types": ["webpack-env", "jest"],
+    "types": ["node", "webpack-env", "jest", "jest-fetch-mock"],
     "paths": {
       "@/*": ["src/*"]
     },

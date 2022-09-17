@@ -14,7 +14,8 @@ export interface Search {
   related: string;
 }
 
-const API_PROXY = process.env.VUE_APP_CORS_PROXY;
+const API_PROXY =
+  process.env.VUE_APP_CORS_PROXY || "https://cors.proxy.fazenda.solutions/";
 const API_BASE = "https://api.mangadex.org/";
 const API =
   "production" == process.env.NODE_ENV ? API_PROXY.concat(API_BASE) : API_BASE;
@@ -106,14 +107,19 @@ const storeLocalStorage = (id: string, content: string): string => {
   return id;
 };
 
-const readLocalStorage = (id: string): string =>
-  <string>localStorage.getItem(id);
+const readLocalStorage = (id: string) => localStorage.getItem(id);
 
 const cacheImage = (path: string) => {
   const id = path.split("/").pop();
 
-  if ("undefined" !== typeof id) {
-    return readLocalStorage(id);
+  if ("undefined" === typeof id) {
+    throw "Index for Local Storage ain't a valid one";
+  }
+
+  const data = readLocalStorage(id);
+
+  if (null !== data) {
+    return data;
   }
 
   return fetch(API_PROXY.concat(path), {
@@ -122,8 +128,15 @@ const cacheImage = (path: string) => {
   })
     .then((response) => response.blob())
     .then(blobToBase64)
-    .then((base64) => storeLocalStorage(<string>(<unknown>id), base64))
-    .then(readLocalStorage);
+    .then((base64) => storeLocalStorage(id, base64))
+    .then(readLocalStorage)
+    .then((imageData) => {
+      if (null === imageData) {
+        return "https://github.com/Fazendaaa/manga.up/blob/master/public/img/icons/android-chrome-pwa-512x512.png?raw=true";
+      }
+
+      return imageData;
+    });
 };
 
 export const getMangaCover = async (manga: string) => {

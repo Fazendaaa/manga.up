@@ -65,3 +65,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - [How To Navigate Between Views with Vue Router](https://www.digitalocean.com/community/tutorials/how-to-navigate-between-views-with-vue-router)
 - [How TO - Center Elements Vertically](https://www.w3schools.com/howto/howto_css_center-vertical.asp)
 - [Swiper Vue.js Components](https://swiperjs.com/vue)
+- [Mock Fetch in TypeScript Jest Tests for Vue.js](https://www.damirscorner.com/blog/posts/20190517-MockFetchInTypeScriptJestTestsForVueJs.html)
