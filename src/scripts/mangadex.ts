@@ -16,16 +16,14 @@ export interface Search {
 
 const API_PROXY = process.env.VUE_APP_CORS_PROXY;
 const API_BASE = "https://api.mangadex.org/";
-const API = API_PROXY.concat(API_BASE);
-const TOKEN = process.env.VUE_APP_MD_TOKEN_SESSION;
+const API =
+  "production" == process.env.NODE_ENV ? API_PROXY.concat(API_BASE) : API_BASE;
+// const TOKEN = process.env.VUE_APP_MD_TOKEN_SESSION;
 const BASIC_REQUEST: RequestInit = {
   cache: "default",
+  referrer: "",
   referrerPolicy: "no-referrer",
   redirect: "follow",
-  headers: {
-    accept:
-      "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
-  },
 };
 
 const fetchMangaDex = async (
@@ -39,7 +37,7 @@ const fetchMangaDex = async (
       method,
       body: JSON.stringify({
         ...body,
-        token: TOKEN,
+        // token: TOKEN,
       }),
     },
   })
@@ -47,11 +45,16 @@ const fetchMangaDex = async (
     .then((result) => JSON.parse(result))
     .catch((error) => console.error("error", error));
 
-const getMangaDex = async (
+const queryMangaDex = async (
   endpoint: string,
   params: Record<string, string> | string
 ) =>
-  fetch(API.concat(endpoint, "?") + new URLSearchParams(params))
+  fetch(API.concat(endpoint, "?") + new URLSearchParams(params), {
+    ...BASIC_REQUEST,
+    ...{
+      method: "GET",
+    },
+  })
     .then((response) => response.text())
     .then((result) => JSON.parse(result));
 
@@ -72,7 +75,7 @@ export const refreshToken = async (token: string) =>
   }).then((result: ResponseToken) => result["token"]);
 
 const getMangaID = async (title: string): Promise<Search[]> =>
-  getMangaDex("manga", {
+  queryMangaDex("manga", {
     title,
     limit: "1",
   }).then((result) => result["data"][0]["relationships"]);
@@ -85,11 +88,50 @@ const getCoverID = async (mangaID: string) =>
     .then((result) => JSON.parse(result))
     .then((result) => result["data"]);
 
+// https://stackoverflow.com/a/61226119/7092954
+const blobToBase64 = (blob: Blob): Promise<any> => {
+  const reader = new FileReader();
+  reader.readAsDataURL(blob);
+
+  return new Promise((resolve) => {
+    reader.onloadend = () => {
+      resolve(reader.result);
+    };
+  });
+};
+
+const storeLocalStorage = (id: string, content: string): string => {
+  localStorage.setItem(id, content);
+
+  return id;
+};
+
+const readLocalStorage = (id: string): string =>
+  <string>localStorage.getItem(id);
+
+const cacheImage = (path: string) => {
+  const id = path.split("/").pop();
+
+  if ("undefined" !== typeof id) {
+    return readLocalStorage(id);
+  }
+
+  return fetch(API_PROXY.concat(path), {
+    method: "GET",
+    referrerPolicy: "no-referrer",
+  })
+    .then((response) => response.blob())
+    .then(blobToBase64)
+    .then((base64) => storeLocalStorage(<string>(<unknown>id), base64))
+    .then(readLocalStorage);
+};
+
 export const getMangaCover = async (manga: string) => {
   const data = await getMangaID(manga);
   const coverData = await getCoverID(data[2]["id"]);
   const mangaID = coverData["relationships"][0]["id"];
   const coverFilename = coverData["attributes"]["fileName"];
+  const path = `https://uploads.mangadex.org/covers/${mangaID}/${coverFilename}.256.jpg`;
 
-  return `https://uploads.mangadex.org/covers/${mangaID}/${coverFilename}.256.jpg`;
+  return await cacheImage(path);
 };

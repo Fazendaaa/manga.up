@@ -25,7 +25,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.cors.tls=true"
-      - traefik.http.services.cors.loadbalancer.server.port=80
+      - "traefik.http.services.cors.loadbalancer.server.port=80"
       - "traefik.http.routers.cors.rule=Host(`cors.docker.localhost`)"
     networks:
       - proxy
