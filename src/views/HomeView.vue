@@ -32,7 +32,7 @@
   </Suspense>
   <Suspense>
     <template #default>
-      <Display header="Recommended" :ids="recommendations" />
+      <RecommendedComponent numberOfRecommendations="3" />
     </template>
     <template #fallback>
       <div class="container">
@@ -45,7 +45,6 @@
       </div>
     </template>
   </Suspense>
-  <br />
   <Stores />
   <Contact />
 </template>
@@ -56,6 +55,7 @@ import Intro from "@/components/Intro.vue";
 import Contact from "@/components/Contact.vue";
 import Display from "@/components/Display.vue";
 import Stores from "@/components/Stores.vue";
+import RecommendedComponent from "@/components/RecommendedDisplay.vue";
 
 export default defineComponent({
   name: "HomeView",
@@ -65,13 +65,25 @@ export default defineComponent({
     Contact,
     Display,
     Stores,
+    RecommendedComponent,
   },
 
   setup() {
     return {
-      recommendations: ["Bleach", "Berserk", "One Piece"],
-      trending: ["Naruto", "HunterXHunter", "One Piece"],
-      latest: ["Highschool of The Dead", "Shingeki no Kyojin", "Vinland Saga"],
+      trending: [
+        "Naruto",
+        "HunterXHunter",
+        "One Piece",
+        "Overlord",
+        "Isekai Meikyuu de Harem wo",
+      ],
+      latest: [
+        "Highschool of The Dead",
+        "Shingeki no Kyojin",
+        "Vinland Saga",
+        "Atelier Pontdarc",
+        "Digimon",
+      ],
     };
   },
 });

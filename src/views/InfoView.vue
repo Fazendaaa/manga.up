@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>Manga Info</p>
+    <h1>{{ id }}</h1>
     <Info :id="id" />
     <Chapters :id="id" />
     <v-btn :to="{ name: 'Reader' }">

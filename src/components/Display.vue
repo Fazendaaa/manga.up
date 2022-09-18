@@ -39,17 +39,12 @@
         </v-tooltip>
       </v-layout>
 
-      <carousel :items-to-show="1">
-        <slide v-for="slide in 10" :key="slide">
+      <Carousel :items-to-show="3" :wrapAround="true">
+        <Slide v-for="subject in subjects" :key="subject.title">
+          <!-- https://ismail9k.github.io/vue3-carousel/examples.html#active-classes -->
+          <!-- <div class="carousel__item"> -->
           <v-layout row wrap>
-            <v-flex
-              xs12
-              sm6
-              md4
-              lg3
-              v-for="subject in subjects"
-              :key="subject.title"
-            >
+            <v-flex xs12 sm6 md4 lg3>
               <v-card
                 flat
                 class="text-xs-center ma-3 `pa-3 manga ${subject.status}`"
@@ -98,21 +93,23 @@
               </v-card>
             </v-flex>
           </v-layout>
-        </slide>
+          <!-- </div> -->
+        </Slide>
         <template #addons>
-          <navigation />
-          <pagination />
+          <Navigation />
+          <Pagination />
         </template>
-      </carousel>
+      </Carousel>
     </v-container>
   </div>
 </template>
 
 <script lang="ts">
 import { toRefs, defineComponent } from "vue";
-import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
 import { getMangaCover } from "@/scripts/mangadex";
+
+import "vue3-carousel/dist/carousel.css";
 
 export interface Display {
   title: string;
@@ -195,5 +192,24 @@ v-chip.complete {
 }
 .v-chip.overdue {
   background: #f83e70;
+}
+
+.carousel__slide > .carousel__item {
+  transform: scale(1);
+  opacity: 0.5;
+  transition: 0.5s;
+}
+.carousel__slide--visible > .carousel__item {
+  opacity: 1;
+  transform: rotateY(0);
+}
+.carousel__slide--next > .carousel__item {
+  transform: scale(0.9) translate(-10px);
+}
+.carousel__slide--prev > .carousel__item {
+  transform: scale(0.9) translate(10px);
+}
+.carousel__slide--active > .carousel__item {
+  transform: scale(1.1);
 }
 </style>
