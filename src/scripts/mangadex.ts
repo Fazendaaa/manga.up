@@ -1,3 +1,15 @@
-import { getMangaCover, getRandomMangas } from "./manga";
+import {
+  IManga,
+  IRelationships,
+  getRandomMangas,
+  getMangaCoverPreview,
+  getManga,
+} from "./manga";
 
-export { getMangaCover, getRandomMangas };
+export {
+  IManga,
+  IRelationships,
+  getRandomMangas,
+  getMangaCoverPreview,
+  getManga,
+};

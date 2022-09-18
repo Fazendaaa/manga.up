@@ -107,7 +107,7 @@
 <script lang="ts">
 import { toRefs, defineComponent } from "vue";
 import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
-import { getMangaCover } from "@/scripts/mangadex";
+import { IManga, getMangaCoverPreview } from "@/scripts/mangadex";
 
 import "vue3-carousel/dist/carousel.css";
 
@@ -132,25 +132,47 @@ export default defineComponent({
   props: {
     header: String,
     // https://forum.vuejs.org/t/vue-typescript-problem-with-component-props-array-type-declaration/29478/15
-    ids: {
-      type: Array as () => Array<string>,
+    mangas: {
+      type: Array as () => Array<IManga>,
       required: true,
       default: () => [],
     },
   },
 
   async setup(props) {
-    const { ids } = toRefs(props);
+    const { mangas } = toRefs(props);
     const subjects: Display[] = [];
 
-    for (const title of ids.value) {
-      subjects.push({
-        title,
-        chapters: "400",
-        score: "7",
-        status: "ongoing",
-        cover: await getMangaCover("Bleach"),
-      });
+    for (const manga of mangas.value) {
+      let chapters: string;
+
+      switch (typeof manga["attributes"]["lastChapter"]) {
+        case "string":
+          chapters = manga["attributes"]["lastChapter"];
+
+          if ("" === chapters && "ongoing" !== manga["attributes"]["status"]) {
+            chapters = "?";
+          }
+
+          break;
+        case "number":
+          chapters = manga["attributes"]["lastChapter"].toString();
+          break;
+        default:
+          chapters = "?";
+      }
+
+      for (const relationship of manga["relationships"]) {
+        if ("cover_art" === relationship["type"]) {
+          subjects.push({
+            title: manga["attributes"]["title"]["en"],
+            chapters,
+            score: "10",
+            status: manga["attributes"]["status"],
+            cover: await getMangaCoverPreview(manga["id"], relationship["id"]),
+          });
+        }
+      }
     }
 
     return {

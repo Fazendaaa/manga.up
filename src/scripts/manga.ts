@@ -1,12 +1,6 @@
 import { API, queryMangaDex } from "./API";
 import { cacheImage } from "./cache";
 
-export interface Search {
-  id: string;
-  type: string;
-  related: string;
-}
-
 export type ContentRating =
   | "--"
   | "safe"
@@ -14,90 +8,100 @@ export type ContentRating =
   | "erotica"
   | "pornographic";
 
+export type Status =
+  | "ongoing"
+  | "completed"
+  | "published"
+  | "hiatus"
+  | "cancelled";
+
 export type Languages = "en" | "ja";
+
+export type Locale = "ja";
 
 export type Demographic = "shounem";
 
-export type Status = "ongoing";
-
-export interface Title {
+export interface ITranslations {
   en: string;
 }
 
-export interface Name {
-  en: string;
-}
-
-export interface Description {
-  en: string;
-}
-
-export interface Links {
+export interface ILinks {
   mu: string;
   raw: string;
 }
 
 export interface TagAttribute {
-  name: Name;
+  name: ITranslations;
   description: unknown[];
   group: "genre" | "theme";
   version: number;
 }
 
-export interface Tags {
+export interface ITags {
   id: string;
   type: "tag";
   attributes: TagAttribute;
   relationships: unknown[];
 }
 
-export interface Attributes {
-  title: Title;
-  altTitles: Title[];
-  description: Description;
+export interface IMangaAttributes {
+  title: ITranslations;
+  altTitles: ITranslations[];
+  description: ITranslations;
   isLocked: boolean;
-  links: Links;
+  links: ILinks;
   originalLanguage: Languages;
-  lastVolume: unknown;
-  lastChapter: unknown;
+  lastVolume: number | string | null;
+  lastChapter: number | string | null;
   publicationDemographic: Demographic;
   status: Status;
   year: unknown;
   contentRating: ContentRating;
-  tags: Tags[];
+  tags: ITags[];
 }
 
-export interface Relationships {
+export interface IRelationships {
   id: string;
   type: "author" | "artist" | "cover_art";
 }
 
-export interface MangaSearch {
+export interface IManga {
   id: string;
   type: "manga";
-  attributes: Attributes;
-  relationships: Relationships[];
+  attributes: IMangaAttributes;
+  relationships: IRelationships[];
 }
 
-const getMangaID = async (title: string): Promise<Search[]> =>
-  queryMangaDex("manga", {
-    title,
-    limit: "1",
-  }).then((result) => result["data"][0]["relationships"]);
+export interface ICoverAttributes {
+  createdAt: string;
+  description: string;
+  fileName: string;
+  locale: Locale;
+  updatedAt: string;
+  version: number;
+  volume: unknown;
+}
 
-const getCoverID = async (mangaID: string) =>
-  fetch(API.concat("cover/", mangaID), {
+export interface ICover {
+  id: string;
+  type: "cover_art";
+  attributes: ICoverAttributes;
+  relationships: IRelationships[];
+}
+
+const getCover = async (ID: string): Promise<ICover> =>
+  fetch(API.concat("cover/", ID), {
     method: "GET",
   })
     .then((response) => response.text())
     .then((result) => JSON.parse(result))
     .then((result) => result["data"]);
 
-export const getMangaCover = async (manga: string) => {
-  const data = await getMangaID(manga);
-  const coverData = await getCoverID(data[2]["id"]);
-  const mangaID = coverData["relationships"][0]["id"];
-  const coverFilename = coverData["attributes"]["fileName"];
+export const getMangaCoverPreview = async (
+  mangaID: string,
+  coverID: string
+) => {
+  const coverFilename = (await getCover(coverID))["attributes"]["fileName"];
   const path = `https://uploads.mangadex.org/covers/${mangaID}/${coverFilename}.256.jpg`;
 
   return await cacheImage(path);
@@ -106,7 +110,7 @@ export const getMangaCover = async (manga: string) => {
 export const getRandomMangas = async (
   includes: string[],
   contentRating: ContentRating[]
-): Promise<MangaSearch> => {
+): Promise<IManga> => {
   const queryIncludes: string[] = [];
   const queryContentRating: string[] = [];
 
@@ -119,3 +123,9 @@ export const getRandomMangas = async (
 
   return queryMangaDex("manga/random", query).then((result) => result["data"]);
 };
+
+export const getManga = async (title: string): Promise<IManga[]> =>
+  queryMangaDex("manga", {
+    title,
+    limit: "1",
+  }).then((result) => result["data"]);

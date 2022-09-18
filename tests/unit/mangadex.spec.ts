@@ -1,4 +1,4 @@
-import { getMangaCover } from "@/scripts/mangadex";
+// import { getMangaCover } from "@/scripts/mangadex";
 import { enableFetchMocks } from "jest-fetch-mock";
 
 enableFetchMocks();

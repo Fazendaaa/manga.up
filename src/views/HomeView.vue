@@ -2,7 +2,7 @@
   <Intro />
   <Suspense>
     <template #default>
-      <Display header="Latest" :ids="latest" />
+      <LatestComponent :numberOfItems="numberOfItems" />
     </template>
     <template #fallback>
       <div class="container">
@@ -17,7 +17,7 @@
   </Suspense>
   <Suspense>
     <template #default>
-      <Display header="Trending" :ids="trending" />
+      <RecommendedComponent :numberOfItems="numberOfItems" />
     </template>
     <template #fallback>
       <div class="container">
@@ -32,7 +32,22 @@
   </Suspense>
   <Suspense>
     <template #default>
-      <RecommendedComponent numberOfRecommendations="3" />
+      <TrendingComponent :numberOfItems="numberOfItems" />
+    </template>
+    <template #fallback>
+      <div class="container">
+        <v-progress-circular
+          class="center"
+          :size="50"
+          color="purple lighten-2"
+          indeterminate
+        />
+      </div>
+    </template>
+  </Suspense>
+  <Suspense>
+    <template #default>
+      <RandomComponent :numberOfItems="numberOfItems" />
     </template>
     <template #fallback>
       <div class="container">
@@ -53,9 +68,11 @@
 import { defineComponent } from "vue";
 import Intro from "@/components/Intro.vue";
 import Contact from "@/components/Contact.vue";
-import Display from "@/components/Display.vue";
 import Stores from "@/components/Stores.vue";
-import RecommendedComponent from "@/components/RecommendedDisplay.vue";
+import LatestComponent from "@/views/Display/LatestDisplay.vue";
+import RandomComponent from "@/views/Display/RandomDisplay.vue";
+import RecommendedComponent from "@/views/Display/RecommendedDisplay.vue";
+import TrendingComponent from "@/views/Display/TrendingDisplay.vue";
 
 export default defineComponent({
   name: "HomeView",
@@ -63,27 +80,16 @@ export default defineComponent({
   components: {
     Intro,
     Contact,
-    Display,
     Stores,
+    LatestComponent,
+    RandomComponent,
     RecommendedComponent,
+    TrendingComponent,
   },
 
   setup() {
     return {
-      trending: [
-        "Naruto",
-        "HunterXHunter",
-        "One Piece",
-        "Overlord",
-        "Isekai Meikyuu de Harem wo",
-      ],
-      latest: [
-        "Highschool of The Dead",
-        "Shingeki no Kyojin",
-        "Vinland Saga",
-        "Atelier Pontdarc",
-        "Digimon",
-      ],
+      numberOfItems: 3,
     };
   },
 });

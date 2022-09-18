@@ -1,5 +1,4 @@
-const API_PROXY =
-  process.env.VUE_APP_CORS_PROXY || "https://cors.proxy.fazenda.solutions/";
+export const API_PROXY = process.env.VUE_APP_CORS_PROXY || "";
 const API_BASE = "https://api.mangadex.org/";
 export const API =
   "production" == process.env.NODE_ENV || API_PROXY

@@ -1,4 +1,4 @@
-import { API } from "./API";
+import { API_PROXY } from "./API";
 import { blobToBase64 } from "./utils";
 
 const storeLocalStorage = (id: string, content: string): string => {
@@ -22,7 +22,7 @@ export const cacheImage = (path: string) => {
     return data;
   }
 
-  return fetch(API.concat(path), {
+  return fetch(API_PROXY.concat(path), {
     method: "GET",
     referrerPolicy: "no-referrer",
   })
