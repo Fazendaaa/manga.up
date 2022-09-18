@@ -39,61 +39,65 @@
         </v-tooltip>
       </v-layout>
 
-      <Carousel :items-to-show="3" :wrapAround="true">
+      <Carousel :items-to-show="itemsToShow" :wrapAround="true">
         <Slide v-for="subject in subjects" :key="subject.title">
           <!-- https://ismail9k.github.io/vue3-carousel/examples.html#active-classes -->
-          <!-- <div class="carousel__item"> -->
-          <v-layout row wrap>
-            <v-flex xs12 sm6 md4 lg3>
-              <v-card
-                flat
-                class="text-xs-center ma-3 `pa-3 manga ${subject.status}`"
-              >
-                <router-link
+          <div class="carousel__item">
+            <v-layout row wrap>
+              <v-flex xs12 sm6 md4 lg3>
+                <v-card
                   flat
-                  style="text-decoration: none; color: inherit"
-                  :to="{ name: 'Info', params: { id: subject.title } }"
+                  class="text-xs-center ma-3 `pa-3 manga ${subject.status}`"
                 >
-                  <v-responsive class="pt-4">
-                    <v-avatar size="180" class="grey lighten-2">
-                      <img :src="subject.cover" :width="size" :height="size" />
-                    </v-avatar>
-                  </v-responsive>
-                  <v-card-text>
-                    <div class="subheading">{{ subject.title }}</div>
-                    <div class="grey--text">{{ subject.chapters }}</div>
-                    <div class="center">
-                      <v-chip
-                        small
-                        :class="`${subject.status} white--text my-2 caption`"
-                        >{{ subject.status }}</v-chip
-                      >
-                    </div>
-                  </v-card-text>
-                </router-link>
-                <v-card-actions>
-                  <v-btn
+                  <router-link
                     flat
-                    color="grey"
-                    custom
-                    :to="{ name: 'Reader', params: { id: subject.title } }"
+                    style="text-decoration: none; color: inherit"
+                    :to="{ name: 'Info', params: { id: subject.title } }"
                   >
-                    <v-icon small left>mdi-book-open-variant</v-icon>
-                    <span>Read</span>
-                  </v-btn>
-                  <v-btn
-                    flat
-                    color="grey"
-                    v-on:click="addToReadlist(subject.title)"
-                  >
-                    <v-icon small left>mdi-bookmark-plus-outline</v-icon>
-                    <span class="">Add to Readlist</span>
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-flex>
-          </v-layout>
-          <!-- </div> -->
+                    <v-responsive class="pt-4">
+                      <v-avatar size="180" class="grey lighten-2">
+                        <img
+                          :src="subject.cover"
+                          :width="size"
+                          :height="size"
+                        />
+                      </v-avatar>
+                    </v-responsive>
+                    <v-card-text>
+                      <div class="subheading">{{ subject.title }}</div>
+                      <div class="grey--text">{{ subject.chapters }}</div>
+                      <div class="center">
+                        <v-chip
+                          small
+                          :class="`${subject.status} white--text my-2 caption`"
+                          >{{ subject.status }}</v-chip
+                        >
+                      </div>
+                    </v-card-text>
+                  </router-link>
+                  <v-card-actions>
+                    <v-btn
+                      flat
+                      color="grey"
+                      custom
+                      :to="{ name: 'Reader', params: { id: subject.title } }"
+                    >
+                      <v-icon small left>mdi-book-open-variant</v-icon>
+                      <span>Read</span>
+                    </v-btn>
+                    <v-btn
+                      flat
+                      color="grey"
+                      v-on:click="addToReadlist(subject.title)"
+                    >
+                      <v-icon small left>mdi-bookmark-plus-outline</v-icon>
+                      <span class="">Add to Readlist</span>
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-flex>
+            </v-layout>
+          </div>
         </Slide>
         <template #addons>
           <Navigation />
@@ -105,7 +109,7 @@
 </template>
 
 <script lang="ts">
-import { toRefs, defineComponent } from "vue";
+import { toRefs, defineComponent, ref } from "vue";
 import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
 import { IManga, getMangaCoverPreview } from "@/scripts/mangadex";
 
@@ -139,9 +143,13 @@ export default defineComponent({
     },
   },
 
+  data: () => ({
+    itemsToShow: 3,
+  }),
+
   async setup(props) {
     const { mangas } = toRefs(props);
-    const subjects: Display[] = [];
+    const subjects = ref<Array<Display>>([]);
 
     for (const manga of mangas.value) {
       let chapters: string;
@@ -164,7 +172,7 @@ export default defineComponent({
 
       for (const relationship of manga["relationships"]) {
         if ("cover_art" === relationship["type"]) {
-          subjects.push({
+          subjects.value.push({
             title: manga["attributes"]["title"]["en"],
             chapters,
             score: "10",
@@ -192,28 +200,65 @@ export default defineComponent({
     addToReadlist(title: string) {
       alert(title);
     },
+
+    onResize() {
+      // xs
+      if (window.innerWidth < 600) {
+        this.itemsToShow = 1.5;
+        return;
+      }
+      // sm
+      if (600 <= window.innerWidth && window.innerWidth < 960) {
+        this.itemsToShow = 3;
+        return;
+      }
+      // md
+      if (960 <= window.innerWidth && window.innerWidth < 1264) {
+        this.itemsToShow = 5;
+        return;
+      }
+      // lg
+      if (1264 <= window.innerWidth && window.innerWidth < 1904) {
+        this.itemsToShow = 6;
+        return;
+      }
+      // lg
+      else {
+        this.itemsToShow = 10;
+        return;
+      }
+    },
+  },
+
+  beforeUnmount() {
+    if (typeof window === "undefined") return;
+
+    window.removeEventListener("resize", this.onResize);
+  },
+
+  mounted() {
+    this.onResize();
+
+    window.addEventListener("resize", this.onResize, { passive: true });
   },
 });
 </script>
 
 <style scoped lang="scss">
-.manga.complete {
-  border-left: 4px solid #3cd1c2;
-}
-.manga.ongoing {
-  border-left: 4px solid orange;
-}
-.manga.overdue {
-  border-left: 4px solid tomato;
-}
-v-chip.complete {
-  background: #3cd1c2;
+.v-chip.completed {
+  background: #18a17c;
 }
 .v-chip.ongoing {
   background: #ffaa2c;
 }
-.v-chip.overdue {
+.v-chip.hiatus {
   background: #f83e70;
+}
+.v-chip.cancelled {
+  background: #a1188a;
+}
+.v-chip.published {
+  background: #f5c242;
 }
 
 .carousel__slide > .carousel__item {

@@ -1,5 +1,5 @@
 <template>
-  <Display header="Random" :ids="recommendations" />
+  <Display header="Random" :mangas="mangas" />
 </template>
 
 <script lang="ts">
@@ -20,17 +20,15 @@ export default defineComponent({
 
   async setup(props) {
     const { numberOfItems } = toRefs(props);
-    const recommendations: IManga[] = [];
+    const mangas: IManga[] = [];
     const amount = numberOfItems.value;
 
     for (const _ in [...Array(amount).keys()]) {
-      recommendations.push(
-        await getRandomMangas(["naruto", "boruto"], ["safe"])
-      );
+      mangas.push(await getRandomMangas(["naruto", "boruto"], ["safe"]));
     }
 
     return {
-      recommendations,
+      mangas,
     };
   },
 });

@@ -28,7 +28,7 @@ export const fetchMangaDex = async (
     },
   })
     .then((response) => response.text())
-    .then((result) => JSON.parse(result))
+    .then(JSON.parse)
     .catch((error) => console.error("error", error));
 
 export const queryMangaDex = async (
@@ -53,6 +53,6 @@ export const queryMangaDex = async (
 
       return response.text();
     })
-    .then((result) => JSON.parse(result))
+    .then(JSON.parse)
     .catch(console.error);
 };

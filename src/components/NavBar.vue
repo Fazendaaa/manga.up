@@ -1,7 +1,13 @@
 <template>
   <!-- UPPER -->
   <v-app-bar density="compact" class="hidden-md-and-down">
-    <v-btn v-for="item in menuItems" :key="item.title" :to="item.path">
+    <v-btn
+      :loading="item.loading"
+      v-for="item in menuItems"
+      :key="item.title"
+      :to="item.path"
+      @click="loader(item)"
+    >
       <span>{{ item.title }}</span>
       <v-icon>{{ item.icon }}</v-icon>
     </v-btn>
@@ -71,9 +77,9 @@ export default defineComponent({
     loader(item: Item) {
       item.loading = !item.loading;
 
-      setTimeout(() => {
-        // this[loadingState] = false;
-      }, 1000);
+      // setTimeout(() => {
+      //   // this[loadingState] = false;
+      // }, 1000);
 
       item.loading = !item.loading;
     },
