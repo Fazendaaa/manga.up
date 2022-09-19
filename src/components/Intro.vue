@@ -1,14 +1,18 @@
 <template>
-  <div>
-    <h1 class="subheading grey--text">Intro</h1>
-    <h2 class="subheading grey--text">
-      The <strong>OFFLINE</strong> website manga app reader experience
-    </h2>
-    <v-container class="my-5">
+  <v-card>
+    <v-card-title>
+      <h1><strong>Manga.up</strong>: <strong>OFFLINE</strong> manga reader</h1>
+    </v-card-title>
+    <v-card-subtitle class="subheading grey--text">
+      <h1>
+        Read <strong>WHATEVER</strong> the device <strong>ANYTIME</strong>
+      </h1>
+    </v-card-subtitle>
+    <v-card-text class="my-5">
       <p>
         <strong>Manga.up</strong> is a project meant to help anyone that wants
-        to read manga <strong>WHEREVER</strong> the device -- tablet, computer,
-        smartphone, smart-fridge -- at <strong>ANYTIME</strong>.
+        to read manga in all devices -- tablet, computer, smartphone,
+        smart-fridge -- at their own time.
       </p>
       <br />
       <p>
@@ -27,6 +31,7 @@
       </p>
       <br />
       <p>
+        <v-icon>mdi-alert</v-icon>
         <strong>THIS IS A BETA IMPLEMENTATION</strong>:
         <i>"use it at your own risk"</i>
       </p>
@@ -41,8 +46,8 @@
         <v-icon>mid-information-outline</v-icon>
         <span>About this project</span>
       </v-btn>
-    </v-container>
-  </div>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script lang="ts">
@@ -50,9 +55,5 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "IntroComponent",
-
-  data() {
-    return {};
-  },
 });
 </script>

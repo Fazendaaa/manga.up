@@ -33,6 +33,7 @@
 
 <script lang="ts">
 import { defineComponent, toRefs } from "vue";
+import { getManga } from "@/scripts/manga";
 
 export default defineComponent({
   name: "SocialMediaComponent",
@@ -43,21 +44,18 @@ export default defineComponent({
       required: true,
       default: "",
     },
-    name: {
-      type: String,
-      required: true,
-      default: "",
-    },
   },
 
-  setup(props) {
-    const { id, name } = toRefs(props);
+  async setup(props) {
+    const { id } = toRefs(props);
+    const manga = await getManga(id.value);
+    const title = manga["attributes"]["title"]["en"];
 
     return {
-      title: `Read '${name.value}' now!`,
-      url: `https://manga.up.fazenda.solutions/info/${id.value}`,
+      title: `Read '${title}' now!`,
+      url: `\n\nhttps://manga.up.fazenda.solutions/info/${id.value.toLowerCase()}\n\n\n`,
       description: "Read this and many others mangas at Manga.up!",
-      hashtags: `MangaUp,Manga,${name.value}`,
+      hashtags: `MangaUp,Manga,${title}`,
     };
   },
 });

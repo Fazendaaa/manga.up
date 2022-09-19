@@ -1,13 +1,7 @@
 <template>
   <!-- UPPER -->
   <v-app-bar density="compact" class="hidden-md-and-down">
-    <v-btn
-      :loading="item.loading"
-      v-for="item in menuItems"
-      :key="item.title"
-      :to="item.path"
-      @click="loader(item)"
-    >
+    <v-btn v-for="item in upperMenuItems" :key="item.title" :to="item.path">
       <span>{{ item.title }}</span>
       <v-icon>{{ item.icon }}</v-icon>
     </v-btn>
@@ -20,13 +14,7 @@
     :value="value"
     color="primary"
   >
-    <v-btn
-      :loading="item.loading"
-      v-for="item in menuItems"
-      :key="item.title"
-      :to="item.path"
-      @click="loader(item)"
-    >
+    <v-btn v-for="item in lowerMenuItems" :key="item.title" :to="item.path">
       <span>{{ item.title }}</span>
       <v-icon>{{ item.icon }}</v-icon>
     </v-btn>
@@ -36,53 +24,39 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
-interface Item {
-  title: string;
-  path: string;
-  icon: string;
-  loading: boolean;
-}
-
 export default defineComponent({
-  name: "NavBar",
+  name: "NavBarComponent",
 
   data() {
+    const menuItems = [
+      { title: "Home", path: "/", icon: "mdi-home-outline" },
+      {
+        title: "Search",
+        path: "/search",
+        icon: "mdi-card-search",
+      },
+      {
+        title: "Favorites",
+        path: "/favorites",
+        icon: "mdi-heart",
+      },
+      {
+        title: "Settings",
+        path: "/settings",
+        icon: "mdi-cog-outline",
+      },
+    ];
+    const upperMenuItems = [
+      ...menuItems,
+      { title: "About", path: "/about", icon: "mdi-information-outline" },
+    ];
+    const lowerMenuItems = menuItems;
+
     return {
       value: 1,
-      menuItems: [
-        { title: "Home", path: "/", icon: "mdi-home-outline", loading: false },
-        {
-          title: "Search",
-          path: "/search",
-          icon: "mdi-card-search",
-          loading: false,
-        },
-        {
-          title: "Favorites",
-          path: "/favorites",
-          icon: "mdi-heart",
-          loading: false,
-        },
-        {
-          title: "Settings",
-          path: "/settings",
-          icon: "mdi-cog-outline",
-          loading: false,
-        },
-      ],
+      upperMenuItems,
+      lowerMenuItems,
     };
-  },
-
-  methods: {
-    loader(item: Item) {
-      item.loading = !item.loading;
-
-      // setTimeout(() => {
-      //   // this[loadingState] = false;
-      // }, 1000);
-
-      item.loading = !item.loading;
-    },
   },
 });
 </script>

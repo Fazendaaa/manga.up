@@ -1,5 +1,18 @@
 # manga.up
 
+## Alternatives
+
+- [MangaDex](https://mangadex.org/)
+- [Tachiyomi](https://tachiyomi.org/)
+- [Mango](https://getmango.app/#/)
+- [kavitareader](https://www.kavitareader.com/)
+- [Komga](https://komga.org/)
+- [LANraragi](https://lrr.tvc-16.science/)
+- [Tanoshi](https://faldez.github.io/tanoshi)
+- [villain](https://villain.js.org/)
+- [cubari](https://cubari.moe/)
+- [mangahere](https://www.mangahere.cc/)
+
 ## Project setup
 
 ```
@@ -71,3 +84,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - [Using promises in IndexedDB](https://dev.to/andyhaskell/using-promises-in-indexeddb-4nc0)
 - [Display Breakpoints](https://vuetifyjs.com/en/features/breakpoints/#display-breakpoints)
 - [How to add Social Media Sharing Links to a Vue Website](https://dev.to/lindaojo/how-to-add-social-media-sharing-links-to-a-vue-website-5d3l)
+- [Suspense – new feature in Vue 3](https://vueschool.io/articles/vuejs-tutorials/suspense-new-feature-in-vue-3/)
