@@ -5,12 +5,11 @@
     <v-container class="my-5">
       <v-layout row justify-start class="mb-3">
         <v-tooltip top>
-          <template v-slot:activator="{ on, attrs }">
+          <template v-slot:activator="{ props }">
             <v-btn
               small
               flat
-              v-bind="attrs"
-              v-on="on"
+              v-bind="props"
               color="grey"
               @click="sortBy('title')"
             >
@@ -22,11 +21,10 @@
         </v-tooltip>
 
         <v-tooltip top>
-          <template v-slot:activator="{ on, attrs }">
+          <template v-slot:activator="{ props }">
             <v-btn
               small
-              v-bind="attrs"
-              v-on="on"
+              v-bind="props"
               flat
               color="grey"
               @click="sortBy('score')"

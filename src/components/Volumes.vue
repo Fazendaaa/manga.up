@@ -6,9 +6,24 @@
   >
     <v-row align="center" align-content="center" no-gutters dense>
       <v-col v-for="item in rows" :key="item">
-        <v-card class="pa-2" align="center" outlined tile>
-          {{ item["volume"] }}
-        </v-card>
+        <v-dialog transition="dialog-top-transition" max-width="600">
+          <template v-slot:activator="{ props }">
+            <v-btn outlined block v-bind="props" align="center">
+              {{ item["volume"] }}
+            </v-btn>
+          </template>
+          <template v-slot:default="{ isActive }">
+            <v-card>
+              <v-toolbar color="primary">Opening from the top</v-toolbar>
+              <v-card-text>
+                <div class="text-h2 pa-12">Hello world!</div>
+              </v-card-text>
+              <v-card-actions class="justify-end">
+                <v-btn text @click="isActive.value = false">Close</v-btn>
+              </v-card-actions>
+            </v-card>
+          </template>
+        </v-dialog>
       </v-col>
     </v-row>
   </v-container>
@@ -46,9 +61,15 @@ export default defineComponent({
       }
     }
 
+    console.log(issues);
+
     return {
       issues,
     };
+  },
+
+  methods: {
+    ping: (data: unknown) => console.log(data),
   },
 });
 </script>

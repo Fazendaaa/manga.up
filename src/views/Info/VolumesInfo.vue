@@ -1,5 +1,5 @@
 <template>
-  <div v-if="error">Error while loading social media share</div>
+  <div v-if="error">Error while loading volumes</div>
   <Suspense v-else>
     <template #default>
       <Volumes :id="id" />
