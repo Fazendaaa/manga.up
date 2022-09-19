@@ -14,9 +14,18 @@
           </template>
           <template v-slot:default="{ isActive }">
             <v-card>
-              <v-toolbar color="primary">Opening from the top</v-toolbar>
+              <v-toolbar color="primary">
+                Volume: {{ item["volume"] }}
+              </v-toolbar>
+              Chapters:
               <v-card-text>
-                <div class="text-h2 pa-12">Hello world!</div>
+                <v-btn
+                  v-for="chapter in item['chapters']"
+                  :key="chapter"
+                  class="text-h2 pa-12"
+                >
+                  {{ chapter["chapter"] }}
+                </v-btn>
               </v-card-text>
               <v-card-actions class="justify-end">
                 <v-btn text @click="isActive.value = false">Close</v-btn>
