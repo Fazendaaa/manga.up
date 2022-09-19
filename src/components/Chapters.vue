@@ -1,5 +1,5 @@
 <template>
-  <p>{{ id }}: Chapters</p>
+  <div v-for="volume in issues" v-bind:key="volume">{{ volume["volume"] }}</div>
 </template>
 
 <script lang="ts">
@@ -19,6 +19,7 @@ export default defineComponent({
   async setup(props) {
     const { id } = toRefs(props);
     const issues = await getMangaIssues(id.value);
+
     console.log(issues);
 
     return {

@@ -181,7 +181,7 @@ export const searchManga = async (title: string): Promise<IManga[]> =>
 
 export const getMangaIssues = async (mangaID: string): Promise<IAggregate> =>
   fetchGetManga(`manga/${mangaID.toLowerCase()}/aggregate`).then(
-    (result) => result["volumes"]["none"]
+    (result) => result["volumes"]
   );
 
 export const getManga = async (mangaID: string): Promise<IManga> =>

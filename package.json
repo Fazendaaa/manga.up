@@ -28,6 +28,7 @@
     "vue-social-sharing": "^4.0.0-alpha4",
     "vue3-carousel": "^0.1.46",
     "vue3-google-oauth2": "^1.0.6",
+    "vue3-markdown-it": "^1.0.10",
     "vuetify": "^3.0.0-alpha.0",
     "vuex": "^4.0.0",
     "webfontloader": "^1.0.0"

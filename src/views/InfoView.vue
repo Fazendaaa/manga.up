@@ -16,10 +16,6 @@
         <h1>Loading Chapters...</h1>
       </template>
     </Suspense>
-    <v-btn :to="{ name: 'Reader' }">
-      <v-icon>mid-book-arrow-left-outline</v-icon>
-      <span>Read</span>
-    </v-btn>
     <!-- Sources -->
     <!-- Where to buy -->
     <!-- MAL -->
