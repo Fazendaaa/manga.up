@@ -1,10 +1,26 @@
 <template>
-  <h2>Year: {{ manga["attributes"]["year"] }}</h2>
-  <h2>Rating: {{ manga["attributes"]["contentRating"] }}</h2>
-  <h2>Tags: {{ manga["attributes"]["contentRating"] }}</h2>
-  <h2>Status: {{ manga["attributes"]["status"] }}</h2>
-  <h2>Description</h2>
-  <Markdown :source="manga['attributes']['description']['en']" />
+  <div>
+    <strong>Year: </strong>
+    {{ manga["attributes"]["year"] }}
+  </div>
+  <div>
+    <strong>Rating: </strong>
+    {{ manga["attributes"]["contentRating"] }}
+  </div>
+  <div>
+    <strong>Status: </strong>
+    {{ manga["attributes"]["status"] }}
+  </div>
+  <div>
+    <strong>Tags: </strong>
+    <span v-for="tag in manga['attributes']['tags']" v-bind:key="tag">
+      {{ tag["attributes"]["name"]["en"] }},
+    </span>
+  </div>
+  <div>
+    <strong>Description: </strong>
+    <Markdown :source="manga['attributes']['description']['en']" />
+  </div>
 </template>
 
 <script lang="ts">

@@ -1,5 +1,6 @@
 <template>
-  <Suspense>
+  <div v-if="error">Error while loading title</div>
+  <Suspense v-else>
     <template #default>
       <Header :id="id" />
     </template>
@@ -10,7 +11,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, onErrorCaptured, ref } from "vue";
 import Header from "@/components/Header.vue";
 
 export default defineComponent({
@@ -26,6 +27,22 @@ export default defineComponent({
       required: true,
       default: "",
     },
+  },
+
+  setup() {
+    const error = ref(false);
+    const errorMessage = ref("");
+
+    onErrorCaptured((e) => {
+      errorMessage.value = `${e}`;
+      error.value = true;
+      return true;
+    });
+
+    return {
+      error,
+      errorMessage,
+    };
   },
 });
 </script>
