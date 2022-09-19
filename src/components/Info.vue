@@ -1,22 +1,29 @@
 <template>
-  <p>{{ id }}: Info</p>
-  <!-- <div>{{ data }}</div> -->
+  <h1>{{ manga["attributes"]["title"]["en"] }}</h1>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-// import { fetchToken, Token } from "@/scripts/mangadex";
+import { defineComponent, toRefs } from "vue";
+import { getManga } from "@/scripts/mangadex";
 
 export default defineComponent({
   name: "InfoComponent",
 
   props: {
-    id: String,
+    id: {
+      type: String,
+      required: true,
+      default: "",
+    },
   },
 
-  async created() {
-    const token = process.env.VUE_APP_MD_TOKEN_SESSION;
-    const session = process.env.VUE_APP_MD_TOKEN_REFRESH;
+  async setup(props) {
+    const { id } = toRefs(props);
+    const manga = await getManga(id.value);
+
+    return {
+      manga,
+    };
   },
 });
 </script>

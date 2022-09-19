@@ -52,7 +52,7 @@
                   <router-link
                     flat
                     style="text-decoration: none; color: inherit"
-                    :to="{ name: 'Info', params: { id: subject.title } }"
+                    :to="{ name: 'Info', params: { id: subject.id } }"
                   >
                     <v-responsive class="pt-4">
                       <v-avatar size="180" class="grey lighten-2">
@@ -80,7 +80,7 @@
                       flat
                       color="grey"
                       custom
-                      :to="{ name: 'Reader', params: { id: subject.title } }"
+                      :to="{ name: 'Reader', params: { id: subject.id } }"
                     >
                       <v-icon small left>mdi-book-open-variant</v-icon>
                       <span>Read</span>
@@ -88,7 +88,7 @@
                     <v-btn
                       flat
                       color="grey"
-                      v-on:click="addToReadlist(subject.title)"
+                      v-on:click="addToReadlist(subject.id)"
                     >
                       <v-icon small left>mdi-bookmark-plus-outline</v-icon>
                       <span class="">Add to Readlist</span>
@@ -111,11 +111,12 @@
 <script lang="ts">
 import { toRefs, defineComponent, ref } from "vue";
 import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
-import { IManga, getMangaCoverPreview } from "@/scripts/mangadex";
+import { IManga, searchMangaCoverPreview } from "@/scripts/mangadex";
 
 import "vue3-carousel/dist/carousel.css";
 
 export interface Display {
+  id: string;
   title: string;
   chapters: string;
   score: string;
@@ -173,11 +174,15 @@ export default defineComponent({
       for (const relationship of manga["relationships"]) {
         if ("cover_art" === relationship["type"]) {
           subjects.value.push({
+            id: manga["id"],
             title: manga["attributes"]["title"]["en"],
             chapters,
             score: "10",
             status: manga["attributes"]["status"],
-            cover: await getMangaCoverPreview(manga["id"], relationship["id"]),
+            cover: await searchMangaCoverPreview(
+              manga["id"],
+              relationship["id"]
+            ),
           });
         }
       }

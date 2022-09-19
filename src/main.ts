@@ -9,6 +9,7 @@ import VueViewer from "v-viewer";
 import i18n from "./i18n";
 import Emitter, { TinyEmitter } from "tiny-emitter";
 import GAuth, { GoogleOptions } from "vue3-google-oauth2";
+import VueSocialSharing from "vue-social-sharing";
 
 loadFonts();
 
@@ -36,6 +37,7 @@ app
   .use(i18n)
   .use(router)
   .use(store)
+  .use(VueSocialSharing)
   .use(vuetify)
   .use(VueViewer)
   .use(GAuth, gAuthOptions)

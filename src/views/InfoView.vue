@@ -1,8 +1,21 @@
 <template>
   <div>
-    <h1>{{ id }}</h1>
-    <Info :id="id" />
-    <Chapters :id="id" />
+    <Suspense>
+      <template #default>
+        <Info :id="id" />
+      </template>
+      <template #fallback>
+        <h1>Loading Info...</h1>
+      </template>
+    </Suspense>
+    <Suspense>
+      <template #default>
+        <Chapters :id="id" />
+      </template>
+      <template #fallback>
+        <h1>Loading Chapters...</h1>
+      </template>
+    </Suspense>
     <v-btn :to="{ name: 'Reader' }">
       <v-icon>mid-book-arrow-left-outline</v-icon>
       <span>Read</span>
@@ -15,6 +28,7 @@
     <!-- Amazon Prime -->
     <!-- Crunchyroll -->
     <!-- etc -->
+    <SocialMedia />
   </div>
 </template>
 
@@ -23,6 +37,7 @@ import { computed, defineComponent } from "vue";
 import { useRoute } from "vue-router";
 import Info from "@/components/Info.vue";
 import Chapters from "@/components/Chapters.vue";
+import SocialMedia from "@/components/SocialMedia.vue";
 
 export default defineComponent({
   name: "InfoView",
@@ -30,20 +45,27 @@ export default defineComponent({
   components: {
     Info,
     Chapters,
+    SocialMedia,
   },
 
   setup() {
     const route = useRoute();
     const id = computed(() => {
-      const id =
-        "string" == typeof route.params.id
-          ? route.params.id
-          : route.params.id[0];
+      if (undefined !== route.params.id) {
+        const id =
+          "string" == typeof route.params.id
+            ? route.params.id
+            : route.params.id[0];
 
-      return id.toUpperCase();
+        return id.toUpperCase();
+      } else {
+        return "";
+      }
     });
 
-    return { id };
+    return {
+      id,
+    };
   },
 });
 </script>

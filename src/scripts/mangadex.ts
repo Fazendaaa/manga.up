@@ -2,14 +2,18 @@ import {
   IManga,
   IRelationships,
   getRandomMangas,
-  getMangaCoverPreview,
+  searchMangaCoverPreview,
+  searchManga,
   getManga,
+  getMangaIssues,
 } from "./manga";
 
 export {
   IManga,
   IRelationships,
   getRandomMangas,
-  getMangaCoverPreview,
+  searchMangaCoverPreview,
+  searchManga,
   getManga,
+  getMangaIssues,
 };

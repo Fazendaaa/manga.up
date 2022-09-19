@@ -15,21 +15,39 @@ const BASIC_REQUEST: RequestInit = {
 export const fetchMangaDex = async (
   endpoint: string,
   method: string,
-  body: Record<string, unknown>
-) =>
-  fetch(API.concat(endpoint), {
+  body?: Record<string, unknown>
+) => {
+  const basicRequest = {
     ...BASIC_REQUEST,
     ...{
       method,
-      body: JSON.stringify({
-        ...body,
-        // token: TOKEN,
-      }),
     },
-  })
-    .then((response) => response.text())
+  };
+  let toRequest: RequestInit = basicRequest;
+
+  if (undefined !== body) {
+    toRequest = {
+      ...basicRequest,
+      ...{
+        body: JSON.stringify({
+          ...body,
+          // token: TOKEN,
+        }),
+      },
+    };
+  }
+
+  return fetch(API.concat(endpoint), toRequest)
+    .then((response) => {
+      if (200 !== response.status) {
+        throw new Error("Wrong response code");
+      }
+
+      return response.text();
+    })
     .then(JSON.parse)
-    .catch((error) => console.error("error", error));
+    .catch(console.error);
+};
 
 export const queryMangaDex = async (
   endpoint: string,

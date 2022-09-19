@@ -1,5 +1,6 @@
-import { API, queryMangaDex } from "./API";
+import { API, queryMangaDex, fetchMangaDex } from "./API";
 import { cacheImage } from "./cache";
+import { MISSING_IMAGE } from "./utils";
 
 export type ContentRating =
   | "--"
@@ -89,8 +90,22 @@ export interface ICover {
   relationships: IRelationships[];
 }
 
-const MISSING_IMAGE =
-  "https://github.com/Fazendaaa/manga.up/blob/master/public/img/icons/android-chrome-pwa-512x512.png?raw=true";
+export interface IChapter {
+  id: string;
+  chapter: string;
+  count: number;
+  others: string[];
+}
+
+export interface IChapters {
+  [issue: string]: IChapter;
+}
+
+export interface IAggregate {
+  volume: string;
+  count: number;
+  chapters: IChapters;
+}
 
 const getCover = async (ID: string): Promise<ICover> => {
   if ("" === ID) {
@@ -116,7 +131,10 @@ const getCover = async (ID: string): Promise<ICover> => {
     });
 };
 
-export const getMangaCoverPreview = async (
+const fetchGetManga = async (endpoint: string) =>
+  fetchMangaDex(endpoint, "GET");
+
+export const searchMangaCoverPreview = async (
   mangaID: string,
   coverID: string
 ): Promise<string> => {
@@ -155,8 +173,18 @@ export const getRandomMangas = async (
   return queryMangaDex("manga/random", query).then((result) => result["data"]);
 };
 
-export const getManga = async (title: string): Promise<IManga[]> =>
+export const searchManga = async (title: string): Promise<IManga[]> =>
   queryMangaDex("manga", {
     title,
     limit: "1",
   }).then((result) => result["data"]);
+
+export const getMangaIssues = async (mangaID: string): Promise<IAggregate> =>
+  fetchGetManga(`manga/${mangaID.toLowerCase()}/aggregate`).then(
+    (result) => result["volumes"]["none"]
+  );
+
+export const getManga = async (mangaID: string): Promise<IManga> =>
+  fetchGetManga(`manga/${mangaID.toLowerCase()}`).then(
+    (result) => result["data"]
+  );

@@ -70,3 +70,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - [IndexedDB](https://javascript.info/indexeddb)
 - [Using promises in IndexedDB](https://dev.to/andyhaskell/using-promises-in-indexeddb-4nc0)
 - [Display Breakpoints](https://vuetifyjs.com/en/features/breakpoints/#display-breakpoints)
+- [How to add Social Media Sharing Links to a Vue Website](https://dev.to/lindaojo/how-to-add-social-media-sharing-links-to-a-vue-website-5d3l)

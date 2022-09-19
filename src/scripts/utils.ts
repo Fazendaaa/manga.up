@@ -9,3 +9,6 @@ export const blobToBase64 = (blob: Blob): Promise<string> => {
     };
   });
 };
+
+export const MISSING_IMAGE =
+  "https://github.com/Fazendaaa/manga.up/blob/master/public/img/icons/android-chrome-pwa-512x512.png?raw=true";

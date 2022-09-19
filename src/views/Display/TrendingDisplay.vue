@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import { defineComponent, toRefs } from "vue";
-import { getManga, IManga } from "@/scripts/mangadex";
+import { searchManga, IManga } from "@/scripts/mangadex";
 import Display from "@/components/Display.vue";
 
 export default defineComponent({
@@ -32,7 +32,7 @@ export default defineComponent({
 
     // for (const _ in [...Array(amount).keys()]) {
     for (const title of titles) {
-      mangas.push((await getManga(title))[0]);
+      mangas.push((await searchManga(title))[0]);
     }
 
     return {

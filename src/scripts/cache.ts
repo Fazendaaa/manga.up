@@ -1,6 +1,6 @@
 import { API_PROXY } from "./API";
 import { readFromDatabase, saveToDatabase } from "./database";
-import { blobToBase64 } from "./utils";
+import { blobToBase64, MISSING_IMAGE } from "./utils";
 
 const storeImage = async (id: string, content: Blob): Promise<string> =>
   saveToDatabase("covers", id, content).then((stored) => {
@@ -14,7 +14,11 @@ const storeImage = async (id: string, content: Blob): Promise<string> =>
 const readImage = async (id: string): Promise<string | null> =>
   readFromDatabase("covers", id)
     .then((result) => {
-      return blobToBase64(<Blob>result["data"]);
+      if (undefined !== result && "data" in result) {
+        return blobToBase64(<Blob>result["data"]);
+      }
+
+      return null;
     })
     .catch((error) => {
       console.error(error);
