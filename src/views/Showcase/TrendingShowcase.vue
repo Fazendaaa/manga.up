@@ -1,0 +1,67 @@
+<template>
+  <div v-if="error"></div>
+  <Suspense v-else>
+    <template #default>
+      <TrendingDisplay :numberOfItems="numberOfItems" />
+    </template>
+    <template #fallback>
+      <div class="container">
+        <v-progress-circular
+          class="center"
+          :size="50"
+          color="purple lighten-2"
+          indeterminate
+        />
+      </div>
+    </template>
+  </Suspense>
+</template>
+
+<script lang="ts">
+import { defineComponent, onErrorCaptured, ref } from "vue";
+import TrendingDisplay from "@/views/Display/TrendingDisplay.vue";
+
+export default defineComponent({
+  name: "TrendingShowcaseComponent",
+
+  components: {
+    TrendingDisplay,
+  },
+
+  props: {
+    numberOfItems: Number,
+  },
+
+  setup() {
+    const error = ref(false);
+    const errorMessage = ref("");
+
+    onErrorCaptured((e) => {
+      errorMessage.value = `${e}`;
+      error.value = true;
+      return true;
+    });
+
+    return {
+      error,
+      errorMessage,
+    };
+  },
+});
+</script>
+
+<style lang="scss" scoped>
+.container {
+  height: 200px;
+  position: relative;
+}
+
+.center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+</style>

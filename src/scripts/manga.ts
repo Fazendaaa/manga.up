@@ -122,8 +122,16 @@ const getCover = async (ID: string): Promise<ICover> => {
 
       return response.text();
     })
-    .then((result) => JSON.parse(result))
-    .then((result) => result["data"])
+    .then((result) => {
+      if ("" === result) {
+        throw new Error("Empty response while fetching cover");
+      }
+
+      return JSON.parse(result);
+    })
+    .then((result) => {
+      return result["data"];
+    })
     .catch((error) => {
       console.error(error);
 
@@ -177,7 +185,19 @@ export const searchManga = async (title: string): Promise<IManga[]> =>
   queryMangaDex("manga", {
     title,
     limit: "1",
-  }).then((result) => result["data"]);
+  })
+    .then((result) => {
+      if (undefined !== result && "data" in result) {
+        return result["data"];
+      }
+
+      throw new Error("Missing manga data");
+    })
+    .catch((error) => {
+      console.error(error);
+
+      throw new AggregateError("searchManga: ", error);
+    });
 
 export const getMangaIssues = async (mangaID: string): Promise<IAggregate> =>
   fetchGetManga(`manga/${mangaID.toLowerCase()}/aggregate`).then(

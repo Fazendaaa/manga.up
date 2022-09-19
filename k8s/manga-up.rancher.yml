@@ -17,7 +17,7 @@ spec:
         application: manga-up
     spec:
       containers:
-        - image: fazenda/manga-up:added-tabs
+        - image: fazenda/manga-up:added-hidde-showcase
           imagePullPolicy: Always
           name: manga-up
           ports:

@@ -71,6 +71,12 @@ export const queryMangaDex = async (
 
       return response.text();
     })
-    .then(JSON.parse)
+    .then((result) => {
+      if ("" === result) {
+        throw new Error("Empty response while queryMangaDex");
+      }
+
+      return JSON.parse(result);
+    })
     .catch(console.error);
 };
