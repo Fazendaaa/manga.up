@@ -1,31 +1,36 @@
 <template>
-  <div>
-    <Suspense>
-      <template #default>
-        <Info :id="id" />
-      </template>
-      <template #fallback>
-        <h1>Loading Info...</h1>
-      </template>
-    </Suspense>
-    <Suspense>
-      <template #default>
-        <Chapters :id="id" />
-      </template>
-      <template #fallback>
-        <h1>Loading Chapters...</h1>
-      </template>
-    </Suspense>
-    <!-- Sources -->
-    <!-- Where to buy -->
-    <!-- MAL -->
-    <!-- ANILIST -->
-    <!-- NetFlix -->
-    <!-- Amazon Prime -->
-    <!-- Crunchyroll -->
-    <!-- etc -->
-    <SocialMedia />
-  </div>
+  <Suspense>
+    <template #default>
+      <Info :id="id" />
+    </template>
+    <template #fallback>
+      <h1>Loading Info...</h1>
+    </template>
+  </Suspense>
+  <Suspense>
+    <template #default>
+      <Chapters :id="id" />
+    </template>
+    <template #fallback>
+      <h1>Loading Chapters...</h1>
+    </template>
+  </Suspense>
+  <v-toolbar>
+    <v-tabs dark background-color="primary" grow>
+      <v-tab> Details </v-tab>
+      <v-tab> Chapters </v-tab>
+      <v-tab> Others </v-tab>
+    </v-tabs>
+  </v-toolbar>
+  <!-- Sources -->
+  <!-- Where to buy -->
+  <!-- MAL -->
+  <!-- ANILIST -->
+  <!-- NetFlix -->
+  <!-- Amazon Prime -->
+  <!-- Crunchyroll -->
+  <!-- etc -->
+  <SocialMedia />
 </template>
 
 <script lang="ts">
