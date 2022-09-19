@@ -1,5 +1,4 @@
 <template>
-  <h1>{{ manga["attributes"]["title"]["en"] }}</h1>
   <h2>Year: {{ manga["attributes"]["year"] }}</h2>
   <h2>Rating: {{ manga["attributes"]["contentRating"] }}</h2>
   <h2>Tags: {{ manga["attributes"]["contentRating"] }}</h2>

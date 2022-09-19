@@ -1,53 +1,53 @@
 <template>
-  <Suspense>
-    <template #default>
-      <Info :id="id" />
-    </template>
-    <template #fallback>
-      <h1>Loading Info...</h1>
-    </template>
-  </Suspense>
-  <Suspense>
-    <template #default>
-      <Chapters :id="id" />
-    </template>
-    <template #fallback>
-      <h1>Loading Chapters...</h1>
-    </template>
-  </Suspense>
-  <v-toolbar>
-    <v-tabs dark background-color="primary" grow>
-      <v-tab> Details </v-tab>
-      <v-tab> Chapters </v-tab>
-      <v-tab> Others </v-tab>
-    </v-tabs>
-  </v-toolbar>
-  <!-- Sources -->
-  <!-- Where to buy -->
-  <!-- MAL -->
-  <!-- ANILIST -->
-  <!-- NetFlix -->
-  <!-- Amazon Prime -->
-  <!-- Crunchyroll -->
-  <!-- etc -->
-  <SocialMedia />
+  <Header :id="id" />
+  <v-card>
+    <v-toolbar>
+      <v-tabs v-model="tab" dark background-color="primary" grow>
+        <v-tab value="details"> Details </v-tab>
+        <v-tab value="volumes"> Volumes </v-tab>
+        <v-tab value="others"> Others </v-tab>
+      </v-tabs>
+    </v-toolbar>
+    <v-card-text>
+      <v-window v-model="tab">
+        <v-window-item value="details">
+          <Details :id="id" />
+        </v-window-item>
+        <v-window-item value="volumes">
+          <Volumes :id="id" />
+        </v-window-item>
+        <v-window-item value="others">
+          <Others :id="id" />
+        </v-window-item>
+      </v-window>
+    </v-card-text>
+  </v-card>
+  <SocialMedia :id="id" />
 </template>
 
 <script lang="ts">
 import { computed, defineComponent } from "vue";
 import { useRoute } from "vue-router";
-import Info from "@/components/Info.vue";
-import Chapters from "@/components/Chapters.vue";
 import SocialMedia from "@/components/SocialMedia.vue";
+import Header from "@/views/Info/HeaderInfo.vue";
+import Details from "@/views/Info/DetailsInfo.vue";
+import Volumes from "@/views/Info/VolumesInfo.vue";
+import Others from "@/views/Info/OthersInfo.vue";
 
 export default defineComponent({
   name: "InfoView",
 
   components: {
-    Info,
-    Chapters,
     SocialMedia,
+    Header,
+    Details,
+    Volumes,
+    Others,
   },
+
+  data: () => ({
+    tab: null,
+  }),
 
   setup() {
     const route = useRoute();

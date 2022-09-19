@@ -1,13 +1,14 @@
 <template>
-  <div v-for="volume in issues" v-bind:key="volume">{{ volume["volume"] }}</div>
+  <h1>{{ title }}</h1>
 </template>
 
 <script lang="ts">
+import { getManga } from "@/scripts/manga";
 import { defineComponent, toRefs } from "vue";
-import { getMangaIssues } from "@/scripts/mangadex";
 
 export default defineComponent({
-  name: "ChaptersComponent",
+  name: "HeaderComponent",
+
   props: {
     id: {
       type: String,
@@ -18,12 +19,10 @@ export default defineComponent({
 
   async setup(props) {
     const { id } = toRefs(props);
-    const issues = await getMangaIssues(id.value);
-
-    console.log(issues);
+    const manga = await getManga(id.value);
 
     return {
-      issues,
+      title: manga["attributes"]["title"]["en"],
     };
   },
 });
