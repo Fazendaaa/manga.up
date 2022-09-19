@@ -97,14 +97,14 @@ export interface IChapter {
   others: string[];
 }
 
-export interface IChapters {
+export interface IVolumes {
   volume: string;
   count: number;
-  chapters: IChapters;
+  chapters: IChapter;
 }
 
 export interface IAggregate {
-  [issue: string]: IChapter;
+  [issue: string]: IVolumes;
 }
 
 const getCover = async (ID: string): Promise<ICover> => {
