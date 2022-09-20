@@ -4,13 +4,13 @@ import router from "./router";
 import store from "./store";
 import vuetify from "./plugins/vuetify";
 import { loadFonts } from "./plugins/webfontloader";
-import "viewerjs/dist/viewer.css";
-import VueViewer from "v-viewer";
 import i18n from "./i18n";
 import Emitter, { TinyEmitter } from "tiny-emitter";
 import GAuth, { GoogleOptions } from "vue3-google-oauth2";
 import VueSocialSharing from "vue-social-sharing";
 import Markdown from "vue3-markdown-it";
+// @ts-expect-error: going to do later on
+import VuePictureSwipe from "vue3-picture-swipe";
 
 loadFonts();
 
@@ -40,7 +40,7 @@ app
   .use(store)
   .use(VueSocialSharing)
   .use(vuetify)
-  .use(VueViewer)
+  .use(VuePictureSwipe)
   .use(Markdown)
   .use(GAuth, gAuthOptions)
   .mount("#app");

@@ -1,8 +1,20 @@
 <template>
   <p>Manga: {{ id }}</p>
-  <div class>
-    <Reader />
-  </div>
+  <Suspense>
+    <template #default>
+      <Reader />
+    </template>
+    <template #fallback>
+      <div class="container">
+        <v-progress-circular
+          class="center"
+          :size="50"
+          color="pink"
+          indeterminate
+        />
+      </div>
+    </template>
+  </Suspense>
 </template>
 
 <script lang="ts">

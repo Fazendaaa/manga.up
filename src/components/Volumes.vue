@@ -23,6 +23,7 @@
                 :key="chapter"
                 outlined
                 block
+                :to="{ name: 'Reader', params: { id: chapter['id'] } }"
               >
                 {{ chapter["chapter"] }}
               </v-btn>
@@ -84,10 +85,6 @@ export default defineComponent({
     return {
       issues,
     };
-  },
-
-  methods: {
-    ping: (data: unknown) => console.log(data),
   },
 });
 </script>
