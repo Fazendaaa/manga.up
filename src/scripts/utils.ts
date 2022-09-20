@@ -10,12 +10,19 @@ export const blobToBase64 = (blob: Blob): Promise<string> => {
   });
 };
 
+export const base64ToBlob = (base64: string): Promise<Blob> =>
+  fetch(base64).then((res) => res.blob());
+
 export const MISSING_IMAGE =
   "https://github.com/Fazendaaa/manga.up/blob/master/public/img/icons/android-chrome-pwa-512x512.png?raw=true";
 
 // https://stackoverflow.com/a/20965997/7092954
 // https://stackoverflow.com/a/4409745/7092954
-export const resizeImage = (img: string, width: number, height: number) => {
+export const resizeImage = async (
+  img: string,
+  width: number,
+  height: number
+): Promise<string> => {
   // create an off-screen canvas
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
@@ -25,15 +32,20 @@ export const resizeImage = (img: string, width: number, height: number) => {
   canvas.width = width;
   canvas.height = height;
 
-  imageCanvas.onload = () => {
-    // draw source image into the off-screen canvas:
-    // @ts-expect-error: going to type it later
-    ctx.drawImage(imageCanvas, 0, 0, width, height);
-  };
   imageCanvas.src = img;
 
-  // encode image to data-uri with base64 version of compressed image
-  return canvas.toDataURL();
+  return new Promise(
+    (resolve: (image: string) => void, reject: (error: Error) => void) => {
+      imageCanvas.onload = () => {
+        // draw source image into the off-screen canvas:
+        // @ts-expect-error: going to type it later
+        ctx.drawImage(imageCanvas, 0, 0, width, height);
+
+        // encode image to data-uri with base64 version of compressed image
+        resolve(canvas.toDataURL());
+      };
+    }
+  );
 };
 
 interface IImageDimensions {

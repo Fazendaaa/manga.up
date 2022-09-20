@@ -2,7 +2,13 @@ import { API_PROXY } from "./API";
 import { readFromDatabase, saveToDatabase } from "./database";
 import { IVolumesImages } from "./manga";
 import { IChapterBlobContent, IChapterContent } from "./types";
-import { blobToBase64, getImageDimensions, MISSING_IMAGE } from "./utils";
+import {
+  base64ToBlob,
+  blobToBase64,
+  getImageDimensions,
+  MISSING_IMAGE,
+  resizeImage,
+} from "./utils";
 
 const storeImage = async (
   objectStorage: string,
@@ -127,6 +133,7 @@ const getChapterImages = async (
   const base =
     "https://cors.proxy.fazenda.solutions/https://uploads.mangadex.org/data/";
   const links: string[] = [];
+  const thumbDimensions = 150;
 
   for (const image of chapter["chapter"]["data"]) {
     links.push(`${base}${chapter["chapter"]["hash"]}/${image}`);
@@ -141,19 +148,23 @@ const getChapterImages = async (
         .then((response) => response.blob())
         .then(async (blob) => {
           const image = await blobToBase64(blob);
-          const thumbnail = await blobToBase64(blob);
-          const dimensions = await getImageDimensions(image);
+          const thumbnail = await resizeImage(
+            image,
+            thumbDimensions,
+            thumbDimensions
+          );
+          const imageDimensions = await getImageDimensions(image);
 
           return {
             image: {
               data: blob,
-              height: dimensions["height"],
-              width: dimensions["width"],
+              height: imageDimensions["height"],
+              width: imageDimensions["width"],
             },
             thumbnail: {
-              data: blob,
-              height: dimensions["height"],
-              width: dimensions["width"],
+              data: await base64ToBlob(thumbnail),
+              height: thumbDimensions,
+              width: thumbDimensions,
             },
           };
         })
