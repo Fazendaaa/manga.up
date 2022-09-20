@@ -10,6 +10,7 @@ export const blobToBase64 = (blob: Blob): Promise<string> => {
   });
 };
 
+// https://stackoverflow.com/a/36183085/7092954
 export const base64ToBlob = (base64: string): Promise<Blob> =>
   fetch(base64).then((res) => res.blob());
 

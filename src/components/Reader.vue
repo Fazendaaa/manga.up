@@ -1,12 +1,27 @@
 <template>
-  <vue-picture-swipe :items="items" :options="options"></vue-picture-swipe>
+  <div id="gallery" align="center">
+    <a
+      v-for="(image, key) in items"
+      :download="`${key}.png`"
+      :key="key"
+      :href="image.src"
+      :data-pswp-width="image.w"
+      :data-pswp-height="image.h"
+      target="_blank"
+      rel="noreferrer"
+    >
+      <img :src="image.thumbnail" alt="" />
+    </a>
+  </div>
+  <ReaderNavigation />
 </template>
 
 <script lang="ts">
 import { getChapter } from "@/scripts/manga";
 import { defineComponent, toRefs } from "vue";
-// @ts-expect-error: going to type it later
-import VuePictureSwipe from "vue3-picture-swipe";
+import ReaderNavigation from "./ReaderNavigation.vue";
+import "photoswipe/style.css";
+import PhotoSwipeLightbox from "photoswipe/lightbox";
 
 interface Image {
   src: string;
@@ -27,14 +42,13 @@ export default defineComponent({
   },
 
   components: {
-    VuePictureSwipe,
+    ReaderNavigation,
   },
 
   async setup(props) {
     const { id } = toRefs(props);
     const data = await getChapter(id.value);
     const items: Image[] = [];
-
     for (const item of data) {
       items.push({
         src: item["image"],
@@ -43,7 +57,6 @@ export default defineComponent({
         h: item["height"],
       });
     }
-
     return {
       options: {
         shareEl: false,
@@ -52,19 +65,23 @@ export default defineComponent({
       items,
     };
   },
+
+  mounted() {
+    if (!this.lightbox) {
+      this.lightbox = new PhotoSwipeLightbox({
+        gallery: "#gallery",
+        children: "a",
+        pswpModule: () => import("photoswipe"),
+      });
+      this.lightbox.init();
+    }
+  },
+
+  unmounted() {
+    if (this.lightbox) {
+      this.lightbox.destroy();
+      this.lightbox = null;
+    }
+  },
 });
 </script>
-
-<style lang="scss" scoped>
-v-img {
-  border: 1px solid #ddd; /* Gray border */
-  border-radius: 4px; /* Rounded border */
-  padding: 5px; /* Some padding */
-  width: 150px; /* Set a small width */
-}
-
-/* Add a hover effect (blue shadow) */
-v-img:hover {
-  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
-}
-</style>

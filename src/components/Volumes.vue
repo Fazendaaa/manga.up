@@ -80,8 +80,6 @@ export default defineComponent({
       }
     }
 
-    console.log(issues);
-
     return {
       issues,
     };
