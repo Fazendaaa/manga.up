@@ -35,3 +35,31 @@ export const resizeImage = (img: string, width: number, height: number) => {
   // encode image to data-uri with base64 version of compressed image
   return canvas.toDataURL();
 };
+
+interface IImageDimensions {
+  width: number;
+  height: number;
+}
+
+// https://stackoverflow.com/a/17775293/7092954
+export const getImageDimensions = async (
+  base64: string
+): Promise<IImageDimensions> => {
+  const image = new Image();
+
+  image.src = base64;
+
+  return new Promise(
+    (
+      resolve: (dimensions: IImageDimensions) => void,
+      reject: (error: Error) => void
+    ) => {
+      image.onload = () => {
+        resolve({
+          width: image.width,
+          height: image.height,
+        });
+      };
+    }
+  );
+};

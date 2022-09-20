@@ -1,7 +1,8 @@
 import { API_PROXY } from "./API";
 import { readFromDatabase, saveToDatabase } from "./database";
 import { IVolumesImages } from "./manga";
-import { blobToBase64, MISSING_IMAGE } from "./utils";
+import { IChapterBlobContent, IChapterContent } from "./types";
+import { blobToBase64, getImageDimensions, MISSING_IMAGE } from "./utils";
 
 const storeImage = async (
   objectStorage: string,
@@ -19,15 +20,21 @@ const storeImage = async (
 const storeChapter = async (
   objectStorage: string,
   id: string,
-  content: Blob[]
-): Promise<string> =>
-  saveToDatabase(objectStorage, id, content).then((stored) => {
-    if (stored) {
-      return id;
-    }
+  content: IChapterBlobContent[]
+): Promise<string | null> =>
+  saveToDatabase(objectStorage, id, content)
+    .then((stored) => {
+      if (stored) {
+        return id;
+      }
 
-    throw new Error("Error while storing in database");
-  });
+      throw new Error("Error while storing in database");
+    })
+    .catch((error) => {
+      console.error(error);
+
+      return null;
+    });
 
 const readImage = async (
   objectStorage: string,
@@ -50,11 +57,23 @@ const readImage = async (
 const readChapter = async (
   objectStorage: string,
   id: string
-): Promise<string[] | null> =>
+): Promise<IChapterContent[] | null> =>
   readFromDatabase(objectStorage, id)
     .then((result) => {
       if (undefined !== result && "data" in result) {
-        return Promise.all((<Blob[]>result["data"]).map(blobToBase64));
+        return Promise.all(
+          (<IChapterBlobContent[]>result["data"]).map(async (data) => {
+            const image = await blobToBase64(data["image"]["data"]);
+            const thumbnail = await blobToBase64(data["thumbnail"]["data"]);
+
+            return {
+              image,
+              thumbnail,
+              height: data["image"]["height"],
+              width: data["image"]["width"],
+            };
+          })
+        );
       }
 
       return null;
@@ -102,7 +121,9 @@ export const cacheImage = async (
     });
 };
 
-const getChapterImages = async (chapter: IVolumesImages): Promise<Blob[]> => {
+const getChapterImages = async (
+  chapter: IVolumesImages
+): Promise<IChapterBlobContent[]> => {
   const base =
     "https://cors.proxy.fazenda.solutions/https://uploads.mangadex.org/data/";
   const links: string[] = [];
@@ -116,16 +137,43 @@ const getChapterImages = async (chapter: IVolumesImages): Promise<Blob[]> => {
       fetch(API_PROXY.concat(link), {
         method: "GET",
         referrerPolicy: "no-referrer",
-      }).then((response) => response.blob())
+      })
+        .then((response) => response.blob())
+        .then(async (blob) => {
+          const image = await blobToBase64(blob);
+          const thumbnail = await blobToBase64(blob);
+          const dimensions = await getImageDimensions(image);
+
+          return {
+            image: {
+              data: blob,
+              height: dimensions["height"],
+              width: dimensions["width"],
+            },
+            thumbnail: {
+              data: blob,
+              height: dimensions["height"],
+              width: dimensions["width"],
+            },
+          };
+        })
     )
   );
 };
 
 export const cacheChapter = async (
   chapter: IVolumesImages
-): Promise<string[]> => {
+): Promise<IChapterContent[]> => {
   const objectStorage = "chapters";
   const id = chapter["chapter"]["hash"];
+  const missing = [
+    {
+      image: MISSING_IMAGE,
+      thumbnail: MISSING_IMAGE,
+      height: 200,
+      width: 200,
+    },
+  ];
 
   if ("undefined" === typeof id) {
     throw "Index for Local Storage ain't a valid one";
@@ -139,10 +187,10 @@ export const cacheChapter = async (
 
   return getChapterImages(chapter)
     .then((base64) => storeChapter(objectStorage, id, base64))
-    .then((response) => readChapter(objectStorage, response))
+    .then((response) => readChapter(objectStorage, <string>response))
     .then((imageData) => {
       if (null === imageData) {
-        return [MISSING_IMAGE];
+        return missing;
       }
 
       return imageData;
@@ -150,6 +198,6 @@ export const cacheChapter = async (
     .catch((error) => {
       console.error(error);
 
-      return [MISSING_IMAGE];
+      return missing;
     });
 };

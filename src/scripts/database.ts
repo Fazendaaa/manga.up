@@ -1,3 +1,5 @@
+import { IChapterBlobContent } from "./types";
+
 export interface IDabaseData {
   id: string;
   data: unknown;
@@ -73,7 +75,7 @@ const initDatabase = () =>
 export const saveToDatabase = async (
   objectStore: string,
   id: string,
-  data: string | Blob | Blob[]
+  data: string | Blob | Blob[] | IChapterBlobContent[]
 ): Promise<boolean> =>
   initDatabase()
     .then((database) => {

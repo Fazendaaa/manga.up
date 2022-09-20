@@ -4,7 +4,6 @@
 
 <script lang="ts">
 import { getChapter } from "@/scripts/manga";
-import { resizeImage } from "@/scripts/utils";
 import { defineComponent, toRefs } from "vue";
 // @ts-expect-error: going to type it later
 import VuePictureSwipe from "vue3-picture-swipe";
@@ -36,15 +35,12 @@ export default defineComponent({
     const data = await getChapter(id.value);
     const items: Image[] = [];
 
-    for (const url of data) {
-      // const thumbnail = resizeImage(url, 150, 150);
-
+    for (const item of data) {
       items.push({
-        src: url,
-        // thumbnail,
-        thumbnail: url,
-        w: 1081,
-        h: 1920,
+        src: item["image"],
+        thumbnail: item["thumbnail"],
+        w: item["width"],
+        h: item["height"],
       });
     }
 
