@@ -107,6 +107,18 @@ export interface IAggregate {
   [issue: string]: IVolumes;
 }
 
+export interface IChapterImages {
+  hash: string;
+  data: string[];
+  dataSaver: string[];
+}
+
+export interface IVolumesImages {
+  result: string;
+  baseURL: string;
+  chapter: IChapterImages;
+}
+
 const getCover = async (ID: string): Promise<ICover> => {
   if ("" === ID) {
     throw new Error("Missing ID");
@@ -156,7 +168,7 @@ export const searchMangaCoverPreview = async (
 
       return `https://uploads.mangadex.org/covers/${mangaID}/${coverFilename}.256.jpg`;
     })
-    .then(cacheImage)
+    .then((result) => cacheImage("covers", result))
     .catch((error) => {
       console.error(error);
 
@@ -208,3 +220,28 @@ export const getManga = async (mangaID: string): Promise<IManga> =>
   fetchGetManga(`manga/${mangaID.toLowerCase()}`).then(
     (result) => result["data"]
   );
+
+export const getChapter = async (chatperID: string) =>
+  fetchGetManga(`at-home/server/${chatperID.toLowerCase()}?forcePort443=false`)
+    .then((result: IVolumesImages) => {
+      if (
+        undefined !== result &&
+        "result" in result &&
+        "ok" === result["result"]
+      ) {
+        return result;
+      }
+
+      throw new Error("Getting chapter");
+    })
+    .then((data) => {
+      const base =
+        "https://cors.proxy.fazenda.solutions/https://uploads.mangadex.org/data/";
+      const links: string[] = [];
+
+      for (const image of data["chapter"]["data"]) {
+        links.push(`${base}${data["chapter"]["hash"]}/${image}`);
+      }
+
+      return Promise.all(links.map((link) => cacheImage("chapters", link)));
+    });

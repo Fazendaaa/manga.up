@@ -1,8 +1,9 @@
 <template>
-  <p>Manga: {{ id }}</p>
-  <Suspense>
+  <!-- <p>Manga: {{ id }}</p> -->
+  <div v-if="error">Error while loading social media share</div>
+  <Suspense v-else>
     <template #default>
-      <Reader />
+      <Reader :id="id" />
     </template>
     <template #fallback>
       <div class="container">
@@ -18,7 +19,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, onErrorCaptured, ref } from "vue";
 import { useRoute } from "vue-router";
 import Reader from "@/components/Reader.vue";
 
@@ -35,8 +36,20 @@ export default defineComponent({
 
       return id.toUpperCase();
     });
+    const error = ref(false);
+    const errorMessage = ref("");
 
-    return { id };
+    onErrorCaptured((e) => {
+      errorMessage.value = `${e}`;
+      error.value = true;
+      return true;
+    });
+
+    return {
+      id,
+      error,
+      errorMessage,
+    };
   },
 
   components: {
@@ -44,3 +57,19 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="scss" scoped>
+.container {
+  height: 200px;
+  position: relative;
+}
+
+.center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+</style>

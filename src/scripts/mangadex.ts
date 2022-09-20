@@ -6,6 +6,7 @@ import {
   searchManga,
   getManga,
   getMangaIssues,
+  getChapter,
 } from "./manga";
 
 export {
@@ -16,4 +17,5 @@ export {
   searchManga,
   getManga,
   getMangaIssues,
+  getChapter,
 };

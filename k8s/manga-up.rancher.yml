@@ -17,7 +17,7 @@ spec:
         application: manga-up
     spec:
       containers:
-        - image: fazenda/manga-up:dialog-chapters
+        - image: fazenda/manga-up:render-chapters
           imagePullPolicy: Always
           name: manga-up
           ports:

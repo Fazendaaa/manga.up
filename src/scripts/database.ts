@@ -22,6 +22,7 @@ const handleDBVersions =
     switch (event.oldVersion) {
       case 0:
         database.createObjectStore("covers", { keyPath: "id" });
+        database.createObjectStore("chapters", { keyPath: "id" });
         // initDatabase
         break;
       case 1:
