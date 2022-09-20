@@ -85,3 +85,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - [Display Breakpoints](https://vuetifyjs.com/en/features/breakpoints/#display-breakpoints)
 - [How to add Social Media Sharing Links to a Vue Website](https://dev.to/lindaojo/how-to-add-social-media-sharing-links-to-a-vue-website-5d3l)
 - [Suspense – new feature in Vue 3](https://vueschool.io/articles/vuejs-tutorials/suspense-new-feature-in-vue-3/)
+- [Vue Charts: Line Series](https://www.ag-grid.com/vue-charts/line-series/)

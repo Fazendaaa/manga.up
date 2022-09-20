@@ -15,6 +15,7 @@
     "@azure/msal-browser": "^2.28.3",
     "@azure/storage-blob": "^12.11.0",
     "@mdi/font": "5.9.55",
+    "ag-charts-vue3": "^6.1.1",
     "caniuse-lite": "^1.0.30001407",
     "core-js": "^3.25.2",
     "photoswipe": "^5.3.2",

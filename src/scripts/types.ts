@@ -15,3 +15,25 @@ export interface IChapterContent {
   width: number;
   height: number;
 }
+
+export interface IStatisticsRating {
+  average: number;
+  bayesian: number;
+  distribution: {
+    [index: string]: number;
+  };
+}
+
+export interface IMangaStatisticsItem {
+  rating: IStatisticsRating;
+  follows: number;
+}
+
+export interface IMangaStatistics {
+  [id: string]: IMangaStatisticsItem;
+}
+
+export interface IMangaStatisticsResult {
+  result: string;
+  statistics: IMangaStatistics;
+}

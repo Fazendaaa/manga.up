@@ -1,5 +1,6 @@
 import { API, queryMangaDex, fetchMangaDex } from "./API";
 import { cacheChapter, cacheImage } from "./cache";
+import { IMangaStatistics, IMangaStatisticsResult } from "./types";
 import { MISSING_IMAGE } from "./utils";
 
 export type ContentRating =
@@ -235,3 +236,20 @@ export const getChapter = async (chatperID: string) =>
       throw new Error("Getting chapter");
     })
     .then(cacheChapter);
+
+export const getMangaStatistics = async (
+  mangaID: string
+): Promise<IMangaStatistics> =>
+  fetchGetManga(`statistics/manga/${mangaID.toLowerCase()}`).then(
+    (result: IMangaStatisticsResult) => {
+      if (
+        undefined !== result &&
+        "result" in result &&
+        "ok" === result["result"]
+      ) {
+        return result["statistics"];
+      }
+
+      throw new Error("Getting statistics");
+    }
+  );

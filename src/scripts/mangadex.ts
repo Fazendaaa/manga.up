@@ -7,6 +7,7 @@ import {
   getManga,
   getMangaIssues,
   getChapter,
+  getMangaStatistics,
 } from "./manga";
 
 export {
@@ -18,4 +19,5 @@ export {
   getManga,
   getMangaIssues,
   getChapter,
+  getMangaStatistics,
 };
