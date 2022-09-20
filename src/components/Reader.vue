@@ -2,15 +2,12 @@
   <div id="gallery" align="center">
     <a
       v-for="(image, key) in items"
-      :download="`${key}.png`"
       :key="key"
       :href="image.src"
       :data-pswp-width="image.w"
       :data-pswp-height="image.h"
-      target="_blank"
-      rel="noreferrer"
     >
-      <img :src="image.thumbnail" alt="" />
+      <img :src="image.thumbnail" :alt="`page-${key}`" />
     </a>
   </div>
   <ReaderNavigation />
@@ -20,7 +17,6 @@
 import { getChapter } from "@/scripts/manga";
 import { defineComponent, toRefs } from "vue";
 import ReaderNavigation from "./ReaderNavigation.vue";
-import "photoswipe/style.css";
 import PhotoSwipeLightbox from "photoswipe/lightbox";
 
 interface Image {
@@ -45,10 +41,17 @@ export default defineComponent({
     ReaderNavigation,
   },
 
+  data() {
+    return {
+      lightbox: null,
+    };
+  },
+
   async setup(props) {
     const { id } = toRefs(props);
     const data = await getChapter(id.value);
     const items: Image[] = [];
+
     for (const item of data) {
       items.push({
         src: item["image"],
@@ -57,11 +60,8 @@ export default defineComponent({
         h: item["height"],
       });
     }
+
     return {
-      options: {
-        shareEl: false,
-        preload: [1, 4],
-      },
       items,
     };
   },
@@ -85,3 +85,7 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="scss" scoped>
+@import "photoswipe/style.css";
+</style>
