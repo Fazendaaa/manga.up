@@ -73,7 +73,7 @@ const initDatabase = () =>
 export const saveToDatabase = async (
   objectStore: string,
   id: string,
-  data: string | Blob
+  data: string | Blob | Blob[]
 ): Promise<boolean> =>
   initDatabase()
     .then((database) => {

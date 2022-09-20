@@ -1,5 +1,5 @@
 import { API, queryMangaDex, fetchMangaDex } from "./API";
-import { cacheImage } from "./cache";
+import { cacheChapter, cacheImage } from "./cache";
 import { MISSING_IMAGE } from "./utils";
 
 export type ContentRating =
@@ -234,14 +234,4 @@ export const getChapter = async (chatperID: string) =>
 
       throw new Error("Getting chapter");
     })
-    .then((data) => {
-      const base =
-        "https://cors.proxy.fazenda.solutions/https://uploads.mangadex.org/data/";
-      const links: string[] = [];
-
-      for (const image of data["chapter"]["data"]) {
-        links.push(`${base}${data["chapter"]["hash"]}/${image}`);
-      }
-
-      return Promise.all(links.map((link) => cacheImage("chapters", link)));
-    });
+    .then(cacheChapter);
