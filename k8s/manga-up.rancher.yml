@@ -17,7 +17,7 @@ spec:
         application: manga-up
     spec:
       containers:
-        - image: fazenda/manga-up:improved-reader
+        - image: fazenda/manga-up:drop-down-volume
           imagePullPolicy: Always
           name: manga-up
           ports:

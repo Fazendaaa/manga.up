@@ -1,4 +1,6 @@
 <template>
+  <h1>Select a volume to read:</h1>
+
   <v-container
     v-for="rows in issues"
     v-bind:key="rows"
@@ -6,16 +8,39 @@
   >
     <v-row align="center" align-content="center" no-gutters dense>
       <v-col v-for="item in rows" :key="item">
-        <v-btn outlined block @click="dialog[item['volume']] = true">
-          {{ item["volume"] }}
-        </v-btn>
-        <v-dialog
-          v-model="dialog[item['volume']]"
-          transition="dialog-top-transition"
-          max-width="600"
-        >
-          <v-card>
+        <v-expansion-panels>
+          <v-expansion-panel>
+            <v-expansion-panel-title>
+              <template v-slot:default="{ expanded }">
+                <v-row no-gutters v-if="!expanded">
+                  {{ item["volume"] }}
+                </v-row>
+                <v-col cols="8" class="text-grey">
+                  <v-fade-transition leave-absolute>
+                    <span v-if="expanded" key="0"> Now a chapter: </span>
+                  </v-fade-transition>
+                </v-col>
+              </template>
+            </v-expansion-panel-title>
+            <v-expansion-panel-text>
+              <v-card-text>
+                <v-btn
+                  v-for="chapter in item['chapters']"
+                  :key="chapter"
+                  outlined
+                  block
+                  :to="{ name: 'Reader', params: { id: chapter['id'] } }"
+                >
+                  {{ chapter["chapter"] }}
+                </v-btn>
+              </v-card-text>
+            </v-expansion-panel-text>
+          </v-expansion-panel>
+        </v-expansion-panels>
+
+        <!-- <v-card>
             <v-toolbar> Volume: {{ item["volume"] }} </v-toolbar>
+            <v-divider></v-divider>
             Chapters:
             <v-card-text>
               <v-btn
@@ -32,7 +57,7 @@
               <v-btn text @click="dialog[item['volume']] = false">Close</v-btn>
             </v-card-actions>
           </v-card>
-        </v-dialog>
+        </v-dialog> -->
       </v-col>
     </v-row>
   </v-container>
@@ -42,10 +67,6 @@
 import { defineComponent, toRefs } from "vue";
 import { getMangaIssues } from "@/scripts/mangadex";
 import { IVolumes } from "@/scripts/manga";
-
-interface Dialog {
-  [id: string]: boolean;
-}
 
 export default defineComponent({
   name: "VolumesComponent",
@@ -58,11 +79,23 @@ export default defineComponent({
     },
   },
 
-  data() {
-    return {
-      dialog: {} as Dialog,
-    };
-  },
+  data: () => ({
+    date: null,
+    trip: {
+      name: "",
+      location: null,
+      start: null,
+      end: null,
+    },
+    locations: [
+      "Australia",
+      "Barbados",
+      "Chile",
+      "Denmark",
+      "Ecuador",
+      "France",
+    ],
+  }),
 
   async setup(props) {
     const { id } = toRefs(props);
