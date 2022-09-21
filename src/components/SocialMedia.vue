@@ -42,7 +42,7 @@ export default defineComponent({
 
     return {
       sharing: {
-        url: `\n\nhttps://manga.up.fazenda.solutions/info/${id.value.toLowerCase()}\n\n\n`,
+        url: `https://manga.up.fazenda.solutions/info/${id.value.toLowerCase()}`,
         title: `Read '${title}' now!`,
         description: "Read this and many others mangas at Manga.up!",
         quote: "'A new way to enjoy manga!' - Manga Up Creator",

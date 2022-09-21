@@ -17,7 +17,7 @@ spec:
         application: manga-up
     spec:
       containers:
-        - image: fazenda/manga-up:improved-idom-select
+        - image: fazenda/manga-up:removed-spacing-sharing
           imagePullPolicy: Always
           name: manga-up
           ports:
