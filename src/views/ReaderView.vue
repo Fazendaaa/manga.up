@@ -6,11 +6,21 @@
       <Reader :id="id" />
     </template>
     <template #fallback>
-      <div class="container">
+      <div v-if="cached" class="container">
+        <div class="status">Reading from device ...</div>
         <v-progress-circular
           class="center"
           :size="50"
-          color="pink"
+          color="green"
+          indeterminate
+        />
+      </div>
+      <div v-else class="container">
+        <div class="status">Downloading ...</div>
+        <v-progress-circular
+          class="center"
+          :size="50"
+          color="purple"
           indeterminate
         />
       </div>
@@ -38,6 +48,7 @@ export default defineComponent({
     });
     const error = ref(false);
     const errorMessage = ref("");
+    const cached = false;
 
     onErrorCaptured((e) => {
       errorMessage.value = `${e}`;
@@ -48,6 +59,7 @@ export default defineComponent({
     return {
       id,
       error,
+      cached,
       errorMessage,
     };
   },
@@ -69,6 +81,15 @@ export default defineComponent({
   position: absolute;
   top: 50%;
   left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.status {
+  margin: 0;
+  position: absolute;
+  top: 75%;
+  left: 51%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }

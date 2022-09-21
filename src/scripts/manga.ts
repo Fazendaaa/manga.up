@@ -53,6 +53,7 @@ export interface IMangaAttributes {
   isLocked: boolean;
   links: ILinks;
   originalLanguage: Languages;
+  availableTranslatedLanguages: string[];
   lastVolume: number | string | null;
   lastChapter: number | string | null;
   publicationDemographic: Demographic;
@@ -212,10 +213,23 @@ export const searchManga = async (title: string): Promise<IManga[]> =>
       throw new AggregateError("searchManga: ", error);
     });
 
-export const getMangaIssues = async (mangaID: string): Promise<IAggregate> =>
-  fetchGetManga(`manga/${mangaID.toLowerCase()}/aggregate`).then(
-    (result) => result["volumes"]
-  );
+export const getMangaIssues = async (
+  mangaID: string,
+  translations?: string[]
+): Promise<IAggregate> => {
+  const toTranslate =
+    undefined === translations
+      ? ""
+      : translations.reduce(
+          (previvous, current) =>
+            `${previvous}translatedLanguage%5B%5D=${current}`,
+          "?"
+        );
+
+  return fetchGetManga(
+    `manga/${mangaID.toLowerCase()}/aggregate${toTranslate}`
+  ).then((result) => result["volumes"]);
+};
 
 export const getManga = async (mangaID: string): Promise<IManga> =>
   fetchGetManga(`manga/${mangaID.toLowerCase()}`).then(

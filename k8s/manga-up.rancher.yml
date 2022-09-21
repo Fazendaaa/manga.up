@@ -17,7 +17,7 @@ spec:
         application: manga-up
     spec:
       containers:
-        - image: fazenda/manga-up:statistics
+        - image: fazenda/manga-up:improved-social
           imagePullPolicy: Always
           name: manga-up
           ports:

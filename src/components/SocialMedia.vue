@@ -2,31 +2,20 @@
   <h3>Share on:</h3>
   <v-btn>
     <ShareNetwork
-      network="facebook"
-      :title="title"
-      :description="description"
-      :url="url"
-      :hashtags="hashtags"
+      v-for="network in networks"
+      :network="network.network"
+      :key="network.network"
+      :url="sharing.url"
+      :title="sharing.title"
+      :description="sharing.description"
+      :quote="sharing.quote"
+      :hashtags="sharing.hashtags"
+      :twitterUser="sharing.twitterUser"
       flat
       style="text-decoration: none; color: inherit"
     >
-      <v-icon>mid-facebook</v-icon>
-      <span>Facebook</span>
-    </ShareNetwork>
-  </v-btn>
-  <v-btn>
-    <ShareNetwork
-      network="twitter"
-      :url="url"
-      :title="title"
-      :description="description"
-      :hashtags="hashtags"
-      twitter-user="mangaupofficial"
-      flat
-      style="text-decoration: none; color: inherit"
-    >
-      <v-icon>mid-twitter</v-icon>
-      <span>Twitter</span>
+      <v-icon>{{ network.icon }}</v-icon>
+      <span>{{ network.name }}</span>
     </ShareNetwork>
   </v-btn>
 </template>
@@ -52,10 +41,36 @@ export default defineComponent({
     const title = manga["attributes"]["title"]["en"];
 
     return {
-      title: `Read '${title}' now!`,
-      url: `\n\nhttps://manga.up.fazenda.solutions/info/${id.value.toLowerCase()}\n\n\n`,
-      description: "Read this and many others mangas at Manga.up!",
-      hashtags: `MangaUp,Manga,${title}`,
+      sharing: {
+        url: `\n\nhttps://manga.up.fazenda.solutions/info/${id.value.toLowerCase()}\n\n\n`,
+        title: `Read '${title}' now!`,
+        description: "Read this and many others mangas at Manga.up!",
+        quote: "'A new way to enjoy manga!' - Manga Up Creator",
+        hashtags: `MangaUp,Manga,${title}`,
+        twitterUser: "mangaupofficial",
+      },
+      networks: [
+        {
+          network: "twitter",
+          name: "Twitter",
+          icon: "mdi-twitter",
+        },
+        {
+          network: "whatsapp",
+          name: "Whatsapp",
+          icon: "mdi-whatsapp",
+        },
+        {
+          network: "telegram",
+          name: "Telegram",
+          icon: "mdi-telegram",
+        },
+        {
+          network: "messenger",
+          name: "Messenger",
+          icon: "mdi-messenger",
+        },
+      ],
     };
   },
 });

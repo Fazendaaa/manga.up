@@ -9,15 +9,15 @@
     </v-container>
     <v-container class="my-5">
       <v-btn target="_blank" href="https://github.com/Fazendaaa/manga.up">
-        <v-icon>mid-github</v-icon>
+        <v-icon>mdi-github</v-icon>
         <span>Share a few translations or code</span>
       </v-btn>
       <v-btn target="_blank" href="https://twitter.com/the_fznd">
-        <v-icon>mid-twitter</v-icon>
+        <v-icon>mdi-twitter</v-icon>
         <span>Follow creator's Twitter</span>
       </v-btn>
       <v-btn target="_blank" href="https://www.buymeacoffee.com/fazenda">
-        <v-icon>mid-coffee-maker-check-outline</v-icon>
+        <v-icon>mdi-coffee</v-icon>
         <span>Buy me a coffee</span>
       </v-btn>
     </v-container>

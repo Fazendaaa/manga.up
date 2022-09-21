@@ -1,13 +1,10 @@
 <template>
   <v-card>
-    <v-card-title>
-      <h1><strong>Manga.up</strong>: <strong>OFFLINE</strong> manga reader</h1>
-    </v-card-title>
-    <v-card-subtitle class="subheading grey--text">
-      <h1>
-        Read <strong>WHATEVER</strong> the device <strong>ANYTIME</strong>
-      </h1>
-    </v-card-subtitle>
+    <div class="text-h3"><strong>Manga.up</strong>:</div>
+    <div class="text-h6"><strong>OFFLINE</strong> manga reader</div>
+    <div class="text-subtitle-2 grey--text">
+      Read <strong>WHATEVER</strong> the device at <strong>ANYTIME</strong>
+    </div>
     <v-card-text class="my-5">
       <p>
         <strong>Manga.up</strong> is a project meant to help anyone that wants
@@ -43,7 +40,7 @@
       </p>
       <br />
       <v-btn :to="{ name: 'About' }">
-        <v-icon>mid-information-outline</v-icon>
+        <v-icon>mdi-information-outline</v-icon>
         <span>About this project</span>
       </v-btn>
     </v-card-text>
