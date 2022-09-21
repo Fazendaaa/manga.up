@@ -2,38 +2,22 @@
   <h1>Select a volume to read:</h1>
   <br />
 
-  <v-expansion-panels>
-    <v-expansion-panel>
-      <v-expansion-panel-title v-slot="{ open }">
-        <v-row no-gutters>
-          <v-col cols="4" class="d-flex justify-start"> Translation </v-col>
-          <v-col cols="8" class="text--secondary">
-            <v-fade-transition leave-absolute>
-              <span v-if="open" key="0">
-                Select an available idiom to read
-              </span>
-              <span v-else key="1">
-                {{ chosenTranslation }}
-              </span>
-            </v-fade-transition>
-          </v-col>
-        </v-row>
-      </v-expansion-panel-title>
-      <v-expansion-panel-text>
-        <v-row no-gutters>
-          <v-col>
-            <v-select
-              v-model="chosenTranslation"
-              :items="translations"
-              chips
-              flat
-              solo
-            ></v-select>
-          </v-col>
-        </v-row>
-      </v-expansion-panel-text>
-    </v-expansion-panel>
-  </v-expansion-panels>
+  <v-container>
+    <v-row no-gutters dense>
+      <v-col>
+        <h2 flat solo class="center">Select an available idiom to read:</h2>
+      </v-col>
+      <v-col>
+        <v-select
+          v-model="chosenTranslation"
+          :items="translations"
+          chips
+          flat
+          solo
+        ></v-select>
+      </v-col>
+    </v-row>
+  </v-container>
 
   <v-container
     v-for="rows in issues"
@@ -138,3 +122,13 @@ export default defineComponent({
   },
 });
 </script>
+<style lang="scss" scoped>
+.center {
+  margin: 0;
+  position: relative;
+  top: 30%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+</style>
