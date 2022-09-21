@@ -1,6 +1,6 @@
 import { API_PROXY } from "./API";
 import { readFromDatabase, saveToDatabase } from "./database";
-import { IVolumesImages } from "./manga";
+import { IVolumesImages } from "./types";
 import { IChapterBlobContent, IChapterContent } from "./types";
 import {
   base64ToBlob,

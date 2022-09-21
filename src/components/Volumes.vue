@@ -62,24 +62,29 @@
 
 <script lang="ts">
 import { defineComponent, ref, Ref, toRefs, watch } from "vue";
-import { getMangaIssues, getManga } from "@/scripts/mangadex";
-import { IVolumes } from "@/scripts/manga";
+import { getMangaIssues, getManga, IVolumes } from "@/scripts/mangadex";
 
 const updateTranslations = async (
   id: string,
   translations?: string[]
 ): Promise<IVolumes[][]> => {
-  const data = await getMangaIssues(id, translations);
+  const data = Object.entries(await getMangaIssues(id, translations));
   const numberOfColumns = 3;
-  let rows: IVolumes[] = [];
   const issues: IVolumes[][] = [];
+  let index = 0;
+  let position = 0;
 
-  for (const [_, item] of Object.entries(data)) {
-    rows.push(item);
+  for (const [key, item] of data) {
+    if ("none" !== key) {
+      position = Math.floor(index / numberOfColumns);
+      console.log("index: ", index, "\tposition", position);
 
-    if (rows.length === numberOfColumns) {
-      issues.push(rows);
-      rows = [];
+      if (undefined === issues[position]) {
+        issues[position] = [];
+      }
+
+      issues[position].push(item);
+      index += 1;
     }
   }
 

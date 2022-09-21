@@ -68,7 +68,7 @@ export default defineComponent({
         {
           network: "messenger",
           name: "Messenger",
-          icon: "mdi-messenger",
+          icon: "mdi-facebook-messenger",
         },
       ],
     };

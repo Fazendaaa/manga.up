@@ -57,15 +57,15 @@ export default defineComponent({
         text: "Distribution",
       },
       subtitle: {
-        text: "",
+        text: "Of the scores given by users",
       },
       series: [
         {
           type: "line",
           xKey: "index",
-          xName: "",
+          xName: "Score",
           yKey: "item",
-          yName: "",
+          yName: "Number of people",
         },
       ],
     };

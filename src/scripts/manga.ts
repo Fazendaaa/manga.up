@@ -1,125 +1,15 @@
 import { API, queryMangaDex, fetchMangaDex } from "./API";
 import { cacheChapter, cacheImage } from "./cache";
-import { IMangaStatistics, IMangaStatisticsResult } from "./types";
+import {
+  ContentRating,
+  IAggregate,
+  ICover,
+  IManga,
+  IMangaStatistics,
+  IMangaStatisticsResult,
+  IVolumesImages,
+} from "./types";
 import { MISSING_IMAGE } from "./utils";
-
-export type ContentRating =
-  | "--"
-  | "safe"
-  | "suggestive"
-  | "erotica"
-  | "pornographic";
-
-export type Status =
-  | "ongoing"
-  | "completed"
-  | "published"
-  | "hiatus"
-  | "cancelled";
-
-export type Languages = "en" | "ja";
-
-export type Locale = "ja";
-
-export type Demographic = "shounem";
-
-export interface ITranslations {
-  en: string;
-}
-
-export interface ILinks {
-  mu: string;
-  raw: string;
-}
-
-export interface TagAttribute {
-  name: ITranslations;
-  description: unknown[];
-  group: "genre" | "theme";
-  version: number;
-}
-
-export interface ITags {
-  id: string;
-  type: "tag";
-  attributes: TagAttribute;
-  relationships: unknown[];
-}
-
-export interface IMangaAttributes {
-  title: ITranslations;
-  altTitles: ITranslations[];
-  description: ITranslations;
-  isLocked: boolean;
-  links: ILinks;
-  originalLanguage: Languages;
-  availableTranslatedLanguages: string[];
-  lastVolume: number | string | null;
-  lastChapter: number | string | null;
-  publicationDemographic: Demographic;
-  status: Status;
-  year: unknown;
-  contentRating: ContentRating;
-  tags: ITags[];
-}
-
-export interface IRelationships {
-  id: string;
-  type: "author" | "artist" | "cover_art";
-}
-
-export interface IManga {
-  id: string;
-  type: "manga";
-  attributes: IMangaAttributes;
-  relationships: IRelationships[];
-}
-
-export interface ICoverAttributes {
-  createdAt: string;
-  description: string;
-  fileName: string;
-  locale: Locale;
-  updatedAt: string;
-  version: number;
-  volume: unknown;
-}
-
-export interface ICover {
-  id: string;
-  type: "cover_art";
-  attributes: ICoverAttributes;
-  relationships: IRelationships[];
-}
-
-export interface IChapter {
-  id: string;
-  chapter: string;
-  count: number;
-  others: string[];
-}
-
-export interface IVolumes {
-  volume: string;
-  count: number;
-  chapters: IChapter;
-}
-
-export interface IAggregate {
-  [issue: string]: IVolumes;
-}
-
-export interface IChapterImages {
-  hash: string;
-  data: string[];
-  dataSaver: string[];
-}
-
-export interface IVolumesImages {
-  result: string;
-  baseURL: string;
-  chapter: IChapterImages;
-}
 
 const getCover = async (ID: string): Promise<ICover> => {
   if ("" === ID) {
@@ -151,6 +41,41 @@ const getCover = async (ID: string): Promise<ICover> => {
 
       throw error;
     });
+};
+
+const addLinksData = (manga: IManga): IManga => {
+  const links = manga.attributes.links;
+
+  links.mangaDex = `https://mangadex.org/title/${manga.id}`;
+
+  if ("al" in links) {
+    links.al = `https://anilist.com/manga/${links.al}`;
+  }
+  if ("ap" in links) {
+    links.ap = `https://www.anime-planet.com/manga/${links.ap}`;
+  }
+  if ("bw" in links) {
+    links.bw = `https://bookwalker.jp/${links.bw}`;
+  }
+  if ("mu" in links) {
+    links.mu = `https://www.mangaupdates.com/series.html?id=${links.mu}`;
+  }
+  if ("nu" in links) {
+    links.nu = `https://www.novelupdates.com/series/${links.nu}`;
+  }
+  if ("kt" in links) {
+    links.kt = `https://kitsu.io/api/edge/manga/${links.kt}`;
+  }
+  if ("ebj" in links) {
+    links.ebj = `https://anilist.com/manga/${links.ebj}`;
+  }
+  if ("mal" in links) {
+    links.mal = `https://myanimelist.net/manga/${links.mal}`;
+  }
+
+  manga.attributes.links = links;
+
+  return manga;
 };
 
 const fetchGetManga = async (endpoint: string) =>
@@ -232,8 +157,8 @@ export const getMangaIssues = async (
 };
 
 export const getManga = async (mangaID: string): Promise<IManga> =>
-  fetchGetManga(`manga/${mangaID.toLowerCase()}`).then(
-    (result) => result["data"]
+  fetchGetManga(`manga/${mangaID.toLowerCase()}`).then((result) =>
+    addLinksData(result["data"])
   );
 
 export const getChapter = async (chatperID: string) =>

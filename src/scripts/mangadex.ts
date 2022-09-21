@@ -1,6 +1,4 @@
 import {
-  IManga,
-  IRelationships,
   getRandomMangas,
   searchMangaCoverPreview,
   searchManga,
@@ -9,10 +7,13 @@ import {
   getChapter,
   getMangaStatistics,
 } from "./manga";
+import { IManga, IRelationships, IVolumes, ILinks } from "./types";
 
 export {
   IManga,
   IRelationships,
+  IVolumes,
+  ILinks,
   getRandomMangas,
   searchMangaCoverPreview,
   searchManga,

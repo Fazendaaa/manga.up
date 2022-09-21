@@ -17,7 +17,7 @@ spec:
         application: manga-up
     spec:
       containers:
-        - image: fazenda/manga-up:removed-spacing-sharing
+        - image: fazenda/manga-up:fixed-missing-volumes
           imagePullPolicy: Always
           name: manga-up
           ports:
