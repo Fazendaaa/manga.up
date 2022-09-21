@@ -40,7 +40,7 @@
                 </v-col>
               </template>
             </v-expansion-panel-title>
-            <v-expansion-panel-text>
+            <v-expansion-panel-text class="scroll">
               <v-card-text>
                 <v-btn
                   v-for="chapter in item['chapters']"
@@ -77,7 +77,6 @@ const updateTranslations = async (
   for (const [key, item] of data) {
     if ("none" !== key) {
       position = Math.floor(index / numberOfColumns);
-      console.log("index: ", index, "\tposition", position);
 
       if (undefined === issues[position]) {
         issues[position] = [];
@@ -85,6 +84,9 @@ const updateTranslations = async (
 
       issues[position].push(item);
       index += 1;
+    } else {
+      item.volume = "No volume linked";
+      issues[position] = [item];
     }
   }
 
