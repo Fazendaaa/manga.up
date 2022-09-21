@@ -4,7 +4,6 @@ export const API =
   "production" == process.env.NODE_ENV || API_PROXY
     ? API_PROXY.concat(API_BASE)
     : API_BASE;
-// const TOKEN = process.env.VUE_APP_MD_TOKEN_SESSION;
 const BASIC_REQUEST: RequestInit = {
   cache: "default",
   referrer: "",
@@ -31,7 +30,6 @@ export const fetchMangaDex = async (
       ...{
         body: JSON.stringify({
           ...body,
-          // token: TOKEN,
         }),
       },
     };

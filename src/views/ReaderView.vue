@@ -1,40 +1,21 @@
 <template>
-  <!-- <p>Manga: {{ id }}</p> -->
-  <div v-if="error">Error while loading social media share</div>
-  <Suspense v-else>
-    <template #default>
-      <Reader :id="id" />
-    </template>
-    <template #fallback>
-      <div v-if="cached" class="container">
-        <div class="status">Reading from device ...</div>
-        <v-progress-circular
-          class="center"
-          :size="50"
-          color="green"
-          indeterminate
-        />
-      </div>
-      <div v-else class="container">
-        <div class="status">Downloading ...</div>
-        <v-progress-circular
-          class="center"
-          :size="50"
-          color="purple"
-          indeterminate
-        />
-      </div>
-    </template>
-  </Suspense>
+  <DisplayReader :id="id" />
+  <NavigationReader :id="id" />
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, onErrorCaptured, ref } from "vue";
 import { useRoute } from "vue-router";
-import Reader from "@/components/Reader.vue";
+import DisplayReader from "@/views/Reader/DisplayReader.vue";
+import NavigationReader from "@/views/Reader/NavigationReader.vue";
 
 export default defineComponent({
   name: "ReaderView",
+
+  components: {
+    DisplayReader,
+    NavigationReader,
+  },
 
   setup() {
     const route = useRoute();
@@ -62,10 +43,6 @@ export default defineComponent({
       cached,
       errorMessage,
     };
-  },
-
-  components: {
-    Reader,
   },
 });
 </script>

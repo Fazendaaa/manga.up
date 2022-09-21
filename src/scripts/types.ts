@@ -38,12 +38,7 @@ export interface IMangaStatisticsResult {
   statistics: IMangaStatistics;
 }
 
-export type ContentRating =
-  | "--"
-  | "safe"
-  | "suggestive"
-  | "erotica"
-  | "pornographic";
+export type ContentRating = "safe" | "suggestive" | "erotica" | "pornographic";
 
 export type Status =
   | "ongoing"
@@ -52,11 +47,20 @@ export type Status =
   | "hiatus"
   | "cancelled";
 
-export type Languages = "en" | "ja";
+export type Languages =
+  | "en"
+  | "ja"
+  | "zh"
+  | "zh-hk"
+  | "pt-br"
+  | "es"
+  | "es-la"
+  | "jp-ro"
+  | "zh-ro";
 
 export type Locale = "ja";
 
-export type Demographic = "shounem";
+export type Demographic = "shounem" | "shoujo" | "josei" | "seinen";
 
 export interface ITranslations {
   en: string;

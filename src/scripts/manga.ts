@@ -1,5 +1,5 @@
 import { API, queryMangaDex, fetchMangaDex } from "./API";
-import { cacheChapter, cacheImage } from "./cache";
+import { cacheChapterImages, cacheImage } from "./cache";
 import {
   ContentRating,
   IAggregate,
@@ -161,7 +161,7 @@ export const getManga = async (mangaID: string): Promise<IManga> =>
     addLinksData(result["data"])
   );
 
-export const getChapter = async (chatperID: string) =>
+export const getChapterImages = async (chatperID: string) =>
   fetchGetManga(`at-home/server/${chatperID.toLowerCase()}?forcePort443=false`)
     .then((result: IVolumesImages) => {
       if (
@@ -174,7 +174,7 @@ export const getChapter = async (chatperID: string) =>
 
       throw new Error("Getting chapter");
     })
-    .then(cacheChapter);
+    .then(cacheChapterImages);
 
 export const getMangaStatistics = async (
   mangaID: string

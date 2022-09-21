@@ -10,13 +10,11 @@
       <img :src="image.thumbnail" :alt="`page-${key}`" />
     </a>
   </div>
-  <ReaderNavigation />
 </template>
 
 <script lang="ts">
-import { getChapter } from "@/scripts/manga";
+import { getChapterImages } from "@/scripts/manga";
 import { defineComponent, toRefs } from "vue";
-import ReaderNavigation from "./ReaderNavigation.vue";
 import PhotoSwipeLightbox from "photoswipe/lightbox";
 
 interface Image {
@@ -37,10 +35,6 @@ export default defineComponent({
     },
   },
 
-  components: {
-    ReaderNavigation,
-  },
-
   data() {
     return {
       lightbox: null,
@@ -49,7 +43,7 @@ export default defineComponent({
 
   async setup(props) {
     const { id } = toRefs(props);
-    const data = await getChapter(id.value);
+    const data = await getChapterImages(id.value);
     const items: Image[] = [];
 
     for (const item of data) {
@@ -72,6 +66,7 @@ export default defineComponent({
         gallery: "#gallery",
         children: "a",
         pswpModule: () => import("photoswipe"),
+        loop: false,
       });
       this.lightbox.init();
     }

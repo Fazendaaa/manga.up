@@ -127,7 +127,7 @@ export const cacheImage = async (
     });
 };
 
-const getChapterImages = async (
+const saveChapterImages = async (
   chapter: IVolumesImages
 ): Promise<IChapterBlobContent[]> => {
   const base =
@@ -172,7 +172,7 @@ const getChapterImages = async (
   );
 };
 
-export const cacheChapter = async (
+export const cacheChapterImages = async (
   chapter: IVolumesImages
 ): Promise<IChapterContent[]> => {
   const objectStorage = "chapters";
@@ -196,7 +196,7 @@ export const cacheChapter = async (
     return data;
   }
 
-  return getChapterImages(chapter)
+  return saveChapterImages(chapter)
     .then((base64) => storeChapter(objectStorage, id, base64))
     .then((response) => readChapter(objectStorage, <string>response))
     .then((imageData) => {
