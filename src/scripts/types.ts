@@ -216,15 +216,18 @@ export interface IChapter {
   relationships: IRelationships[];
 }
 
+export interface IIssues {
+  id: string;
+  number: string;
+}
+
+export interface IRelative {
+  previous: IIssues;
+  current: IIssues;
+  next: IIssues;
+}
+
 export interface IRelativeIssues {
-  volume: {
-    previous: string;
-    current: string;
-    next: string;
-  };
-  chapter: {
-    previous: string;
-    current: string;
-    next: string;
-  };
+  volume: IRelative;
+  chapter: IRelative;
 }

@@ -116,7 +116,7 @@ export default defineComponent({
         if (2 === content.index && this.history.length > 3) {
           this.$router.push({
             name: "Reader",
-            params: { id: this.issues.chapter.next },
+            params: { id: this.issues.chapter.next.id },
           });
           this.history = [];
         }
@@ -127,7 +127,7 @@ export default defineComponent({
         if (this.lastPage - 3 === content.index && 1 === lastVisited) {
           this.$router.push({
             name: "Reader",
-            params: { id: this.issues.chapter.previous },
+            params: { id: this.issues.chapter.previous.id },
           });
           this.history = [];
         }

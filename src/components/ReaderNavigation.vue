@@ -1,17 +1,17 @@
 <template>
   <div class="d-flex justify-space-around align-center flex-column flex-sm-row">
     <v-btn
-      v-if="'0' !== chapter.previous"
+      v-if="'0' !== chapter.previous.id"
       variant="outlined"
-      :to="{ name: 'Reader', force: true, params: { id: chapter.previous } }"
+      :to="{ name: 'Reader', force: true, params: { id: chapter.previous.id } }"
     >
       <v-icon>mdi-skip-previous</v-icon>
       <span>Previous Chapter</span>
     </v-btn>
     <v-btn
-      v-if="'0' !== chapter.next"
+      v-if="'0' !== chapter.next.id"
       variant="outlined"
-      :to="{ name: 'Reader', force: true, params: { id: chapter.next } }"
+      :to="{ name: 'Reader', force: true, params: { id: chapter.next.id } }"
     >
       <v-icon>mdi-skip-next</v-icon>
       <span>Next Chapter</span>
@@ -19,9 +19,9 @@
   </div>
   <div class="d-flex justify-space-around align-center flex-column flex-sm-row">
     <v-btn
-      v-if="'0' !== volume.previous"
+      v-if="'0' !== volume.previous.id"
       variant="outlined"
-      :to="{ name: 'Reader', force: true, params: { id: volume.previous } }"
+      :to="{ name: 'Reader', force: true, params: { id: volume.previous.id } }"
     >
       <v-icon>mdi-skip-backward</v-icon>
       <span>Previous Volume</span>
@@ -31,9 +31,9 @@
       <span>Back to Manga</span>
     </v-btn>
     <v-btn
-      v-if="'0' !== volume.next"
+      v-if="'0' !== volume.next.id"
       variant="outlined"
-      :to="{ name: 'Reader', force: true, params: { id: volume.next } }"
+      :to="{ name: 'Reader', force: true, params: { id: volume.next.id } }"
     >
       <v-icon>mdi-skip-forward</v-icon>
       <span>Next Volume</span>
@@ -53,6 +53,7 @@
           <span>Scan user</span>
         </v-btn>
         <div>
+          <div>Volume: {{ volume.current.number }}</div>
           <div>Chapter: {{ chapter.number }} - {{ chapter.title }}</div>
           <div>Upload Version: {{ version }}</div>
         </div>
@@ -112,15 +113,11 @@ export default defineComponent({
       mangaID,
       scanUserURL,
       scanGroupURL,
-      volume: {
-        next: issues.volume.next,
-        previous: issues.volume.previous,
-      },
+      volume: issues.volume,
       chapter: {
         title: chapterTitle,
         number: chapterNumber,
-        next: issues.chapter.next,
-        previous: issues.chapter.previous,
+        ...issues.chapter,
       },
     };
   },
