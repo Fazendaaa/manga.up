@@ -2,7 +2,7 @@
   <div v-if="error">Error while loading this chapter</div>
   <Suspense v-else>
     <template #default>
-      <Reader :id="id" />
+      <Reader :id="id" :open="open" :page="page" />
     </template>
     <template #fallback>
       <div v-if="cached" class="container">
@@ -43,6 +43,16 @@ export default defineComponent({
       type: String,
       required: true,
       default: "",
+    },
+    open: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    page: {
+      type: String,
+      required: false,
+      default: "0",
     },
   },
 

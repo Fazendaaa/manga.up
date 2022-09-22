@@ -1,5 +1,5 @@
 <template>
-  <DisplayReader :id="id" />
+  <DisplayReader :id="id" :open="open" :page="page" />
   <NavigationReader :id="id" />
 </template>
 
@@ -8,6 +8,14 @@ import { defineComponent, onErrorCaptured, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import DisplayReader from "@/views/Reader/DisplayReader.vue";
 import NavigationReader from "@/views/Reader/NavigationReader.vue";
+
+const stringToBoolean = (value: string): boolean => {
+  if (undefined === value || "" === value) {
+    return false;
+  }
+
+  return "true" === value;
+};
 
 export default defineComponent({
   name: "ReaderView",
@@ -20,6 +28,8 @@ export default defineComponent({
   setup() {
     const route = useRoute();
     const id = ref(route.params.id as string);
+    const open = ref(stringToBoolean(route.query.open as string));
+    const page = ref(route.query.page as string);
     const error = ref(false);
     const errorMessage = ref("");
 
@@ -35,9 +45,23 @@ export default defineComponent({
         id.value = newId as string;
       }
     );
+    watch(
+      () => route.query.open,
+      (newOpen) => {
+        open.value = stringToBoolean(newOpen as string);
+      }
+    );
+    watch(
+      () => route.query.page,
+      (newPage) => {
+        page.value = newPage as string;
+      }
+    );
 
     return {
       id,
+      open,
+      page,
       error,
       errorMessage,
     };

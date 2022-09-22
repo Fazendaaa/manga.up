@@ -6,8 +6,13 @@
       :href="image.src"
       :data-pswp-width="image.width"
       :data-pswp-height="image.height"
+      :id="`page-${key}-link`"
     >
-      <img :src="image.thumbnail" :alt="`page-${key}`" />
+      <img
+        :src="image.thumbnail"
+        :id="`page-${key}-img`"
+        :alt="`page-${key}`"
+      />
     </a>
   </div>
 </template>
@@ -52,6 +57,23 @@ interface ILightBoxEvent {
   isLazy: boolean;
 }
 
+interface IPoint {
+  x: number;
+  y: number;
+}
+
+interface IGallery {
+  gallery: HTMLElement;
+}
+
+interface ILightBox {
+  loadAndOpen: (
+    index: number,
+    dataSource?: IGallery,
+    point?: IPoint | null
+  ) => void;
+}
+
 export default defineComponent({
   name: "ReaderComponent",
 
@@ -61,16 +83,21 @@ export default defineComponent({
       required: true,
       default: "",
     },
-  },
-
-  data() {
-    return {
-      lightbox: null,
-      history: [],
-    };
+    open: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    page: {
+      type: String,
+      required: false,
+      default: "0",
+    },
   },
 
   async setup(props) {
+    const lightbox = ref<ILightBox>();
+    const history = ref([]);
     const { id } = toRefs(props);
     const lastPage = ref(0);
     const data = await getChapterImages(id.value);
@@ -100,6 +127,8 @@ export default defineComponent({
       items,
       issues,
       lastPage,
+      lightbox,
+      history,
     };
   },
 
@@ -116,7 +145,12 @@ export default defineComponent({
         if (2 === content.index && this.history.length > 3) {
           this.$router.push({
             name: "Reader",
-            params: { id: this.issues.chapter.next.id },
+            params: {
+              id: this.issues.chapter.next.id,
+            },
+            query: {
+              open: true,
+            },
           });
           this.history = [];
         }
@@ -127,13 +161,28 @@ export default defineComponent({
         if (this.lastPage - 3 === content.index && 1 === lastVisited) {
           this.$router.push({
             name: "Reader",
-            params: { id: this.issues.chapter.previous.id },
+            params: {
+              id: this.issues.chapter.previous.id,
+            },
+            query: {
+              open: true,
+              page: "-1",
+            },
           });
           this.history = [];
         }
 
         this.history.push(content.index);
       });
+      if (this.open) {
+        console.log(this.page);
+        const page = "-1" === this.page ? this.lastPage - 1 : this.page;
+        console.log(page);
+        const firstPage = document.getElementById(
+          `page-${page}-link`
+        ) as HTMLElement;
+        firstPage.click();
+      }
     }
   },
 
