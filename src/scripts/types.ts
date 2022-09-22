@@ -215,3 +215,16 @@ export interface IChapter {
   attributes: IChapterAttributes;
   relationships: IRelationships[];
 }
+
+export interface IRelativeIssues {
+  volume: {
+    previous: string;
+    current: string;
+    next: string;
+  };
+  chapter: {
+    previous: string;
+    current: string;
+    next: string;
+  };
+}

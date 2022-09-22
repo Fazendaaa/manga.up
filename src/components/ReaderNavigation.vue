@@ -1,6 +1,5 @@
 <template>
   <div class="d-flex justify-space-around align-center flex-column flex-sm-row">
-    <!-- TODO(Fazendaaa): fix this @click jerry rig implementation -->
     <v-btn
       v-if="'0' !== chapter.previous"
       variant="outlined"
@@ -64,68 +63,7 @@
 
 <script lang="ts">
 import { defineComponent, toRefs } from "vue";
-import {
-  getChapter,
-  getMangaIssues,
-  IVolumesAggregate,
-} from "@/scripts/mangadex";
-
-interface IIssues {
-  volume: {
-    previous: string;
-    current: string;
-    next: string;
-  };
-  chapter: {
-    previous: string;
-    current: string;
-    next: string;
-  };
-}
-
-const referenceIssues = (
-  chapterID: string,
-  issues: IVolumesAggregate
-): IIssues => {
-  const data = Object.entries(issues);
-  const chapter = {
-    previous: "0",
-    current: "0",
-    next: "0",
-  };
-  const volume = {
-    previous: "0",
-    current: "0",
-    next: "0",
-  };
-  let lastChapter = "0";
-
-  for (const [_, searchVolume] of data) {
-    for (const [_, searchChapter] of Object.entries(searchVolume.chapters)) {
-      if ("0" !== chapter.current) {
-        chapter.next = searchChapter.id;
-
-        break;
-      }
-      if (chapterID === searchChapter.id) {
-        chapter.previous = lastChapter;
-        chapter.current = searchChapter.id;
-        chapter.next = searchChapter.id;
-      }
-
-      lastChapter = searchChapter.id;
-    }
-
-    if ("0" !== chapter.current) {
-      break;
-    }
-  }
-
-  return {
-    volume,
-    chapter,
-  };
-};
+import { getChapter, getMangaIssues, relativeIssues } from "@/scripts/mangadex";
 
 export default defineComponent({
   name: "ReaderNavigationComponent",
@@ -164,7 +102,7 @@ export default defineComponent({
       }
     });
 
-    const issues = referenceIssues(
+    const issues = relativeIssues(
       id.value.toLowerCase(),
       await getMangaIssues(mangaID, [translatedLanguage])
     );

@@ -33,8 +33,6 @@ export default defineComponent({
       () => route.params.id,
       (newId) => {
         id.value = newId as string;
-        console.log("watch");
-        console.log(id.value);
       }
     );
 

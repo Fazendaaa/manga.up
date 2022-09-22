@@ -9,6 +9,7 @@ import {
   IMangaStatistics,
   IMangaStatisticsResult,
   IVolumesImages,
+  IRelativeIssues,
 } from "./types";
 import { MISSING_IMAGE } from "./utils";
 
@@ -206,3 +207,47 @@ export const getChapter = async (chapterID: string): Promise<IChapter> =>
 
     throw new Error("Getting chapter");
   });
+
+export const relativeIssues = (
+  chapterID: string,
+  issues: IVolumesAggregate
+): IRelativeIssues => {
+  const data = Object.entries(issues);
+  const chapter = {
+    previous: "0",
+    current: "0",
+    next: "0",
+  };
+  const volume = {
+    previous: "0",
+    current: "0",
+    next: "0",
+  };
+  let lastChapter = "0";
+
+  for (const [_, searchVolume] of data) {
+    for (const [_, searchChapter] of Object.entries(searchVolume.chapters)) {
+      if ("0" !== chapter.current) {
+        chapter.next = searchChapter.id;
+
+        break;
+      }
+      if (chapterID === searchChapter.id) {
+        chapter.previous = lastChapter;
+        chapter.current = searchChapter.id;
+        chapter.next = searchChapter.id;
+      }
+
+      lastChapter = searchChapter.id;
+    }
+
+    if ("0" !== chapter.current) {
+      break;
+    }
+  }
+
+  return {
+    volume,
+    chapter,
+  };
+};

@@ -13,8 +13,13 @@
 </template>
 
 <script lang="ts">
-import { getChapterImages } from "@/scripts/manga";
-import { defineComponent, toRefs } from "vue";
+import {
+  getChapterImages,
+  getChapter,
+  relativeIssues,
+  getMangaIssues,
+} from "@/scripts/manga";
+import { defineComponent, ref, toRefs } from "vue";
 import PhotoSwipeLightbox from "photoswipe/lightbox";
 
 interface Image {
@@ -22,6 +27,29 @@ interface Image {
   thumbnail: string;
   width: number;
   height: number;
+}
+
+interface IContent {
+  data: unknown;
+  displayedImageHeight: number;
+  displayedImageWidth: number;
+  element: unknown;
+  hasSlide: boolean;
+  height: number;
+  index: number;
+  instance: unknown;
+  isAttached: boolean;
+  isDecoding: boolean;
+  placeholder: unknown;
+  slide: unknown;
+  state: string;
+  type: string;
+  width: number;
+}
+
+interface ILightBoxEvent {
+  content: IContent;
+  isLazy: boolean;
 }
 
 export default defineComponent({
@@ -38,12 +66,23 @@ export default defineComponent({
   data() {
     return {
       lightbox: null,
+      history: [],
     };
   },
 
   async setup(props) {
     const { id } = toRefs(props);
+    const lastPage = ref(0);
     const data = await getChapterImages(id.value);
+    const chapter = await getChapter(id.value);
+    const translatedLanguage = chapter.attributes.translatedLanguage;
+    const mangaID = chapter.relationships.filter(
+      (item) => "manga" === item.type
+    );
+    const issues = await relativeIssues(
+      id.value.toLowerCase(),
+      await getMangaIssues(mangaID[0].id, [translatedLanguage])
+    );
     const items: Image[] = [];
 
     for (const item of data) {
@@ -55,8 +94,12 @@ export default defineComponent({
       });
     }
 
+    lastPage.value = data.length;
+
     return {
       items,
+      issues,
+      lastPage,
     };
   },
 
@@ -66,9 +109,31 @@ export default defineComponent({
         gallery: "#gallery",
         children: "a",
         pswpModule: () => import("photoswipe"),
-        loop: false,
       });
       this.lightbox.init();
+      this.lightbox.on("contentLoad", ({ content }: ILightBoxEvent) => {
+        // Move next chapter
+        if (2 === content.index && this.history.length > 3) {
+          this.$router.push({
+            name: "Reader",
+            params: { id: this.issues.chapter.next },
+          });
+          this.history = [];
+        }
+
+        // Move previous chapter
+        const lastItem = this.history.length - 1;
+        const lastVisited = this.history[lastItem - 2];
+        if (this.lastPage - 3 === content.index && 1 === lastVisited) {
+          this.$router.push({
+            name: "Reader",
+            params: { id: this.issues.chapter.previous },
+          });
+          this.history = [];
+        }
+
+        this.history.push(content.index);
+      });
     }
   },
 
