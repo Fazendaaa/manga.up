@@ -1,21 +1,19 @@
 <template>
   <Search />
-  <Sources />
+  <!-- <Sources /> -->
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import Search from "@/components/Search.vue";
-import Sources from "@/components/Sources.vue";
+// import Sources from "@/components/Sources.vue";
 
 export default defineComponent({
   name: "SearchView",
-  data() {
-    return {};
-  },
+
   components: {
     Search,
-    Sources,
+    // Sources,
   },
 });
 </script>

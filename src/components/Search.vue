@@ -1,48 +1,83 @@
 <template>
-  <!-- https://vuetifyjs.com/en/components/autocompletes/ -->
-  <v-card>
-    <v-card-title class="text-h5 font-weight-regular blue-grey white--text">
-      Search for something interesting to read
-    </v-card-title>
-    <v-card-text>
-      <v-subheader class="pa-0">
-        Just release your imagination, find something interesting here
-      </v-subheader>
-      <v-autocomplete
-        v-model="model"
-        :label="`Search here`"
-        persistent-hint
-        prepend-icon="mdi-magnify"
-      >
-        <template v-slot:append-outer>
-          <v-slide-x-reverse-transition mode="out-in">
-            <v-icon
-              :key="`icon-${isEditing}`"
-              :color="isEditing ? 'success' : 'info'"
-              @click="isEditing = !isEditing"
-              v-text="
-                isEditing ? 'mdi-check-outline' : 'mdi-circle-edit-outline'
-              "
-            ></v-icon>
-          </v-slide-x-reverse-transition>
-        </template>
-      </v-autocomplete>
-    </v-card-text>
-  </v-card>
+  <div class="ma-4 pa-4">
+    <v-card>
+      <v-card-title> Just do it! </v-card-title>
+
+      <v-card-text>
+        You can always check the source at
+        <a
+          class="text-grey-lighten-3"
+          href="https://mangadex.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+          >MangaDex</a
+        >.
+      </v-card-text>
+
+      <v-card-text>
+        <v-autocomplete
+          v-model:search="search"
+          :loading="isLoading"
+          hide-no-data
+          hide-selected
+          item-title="Description"
+          item-value="API"
+          label="Search Mangas..."
+          placeholder="Start typing to Search"
+          prepend-icon="mdi-card-search"
+          return-object
+        ></v-autocomplete>
+      </v-card-text>
+    </v-card>
+
+    <Suspense v-if="0 != entries.length">
+      <template #default>
+        <Display :header="header" :mangas="entries" />
+      </template>
+      <template #fallback>
+        <div>loading results</div>
+      </template>
+    </Suspense>
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { IManga, searchManga } from "@/scripts/mangadex";
+import { defineComponent, ref, watch } from "vue";
+import Display from "@/components/Display.vue";
 
 export default defineComponent({
   name: "SearchComponent",
-  data() {
+
+  components: {
+    Display,
+  },
+
+  setup() {
+    const descriptionLimit = ref(60);
+    const entries = ref<IManga[]>([]);
+    const isLoading = ref(false);
+    const model = ref(null);
+    const search = ref("");
+    const header = ref("");
+
+    watch(search, async (newSearch) => {
+      isLoading.value = true;
+      entries.value = [];
+      header.value = "";
+      entries.value = await searchManga(newSearch, "5");
+      header.value = "Results";
+      isLoading.value = false;
+    });
+
     return {
-      isEditing: false,
-      model: null,
+      descriptionLimit,
+      entries,
+      isLoading,
+      model,
+      search,
+      header,
     };
   },
 });
 </script>
-
-<style lang="scss"></style>

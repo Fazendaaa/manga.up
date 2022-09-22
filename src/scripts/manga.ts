@@ -122,10 +122,13 @@ export const getRandomMangas = async (
   return queryMangaDex("manga/random", query).then((result) => result["data"]);
 };
 
-export const searchManga = async (title: string): Promise<IManga[]> =>
+export const searchManga = async (
+  title: string,
+  limit = "1"
+): Promise<IManga[]> =>
   queryMangaDex("manga", {
     title,
-    limit: "1",
+    limit,
   })
     .then((result) => {
       if (undefined !== result && "data" in result) {

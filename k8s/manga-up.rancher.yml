@@ -17,7 +17,7 @@ spec:
         application: manga-up
     spec:
       containers:
-        - image: fazenda/manga-up:infinit-navigation
+        - image: fazenda/manga-up:adding-search
           imagePullPolicy: Always
           name: manga-up
           ports:
