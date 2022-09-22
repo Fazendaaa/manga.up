@@ -42,58 +42,52 @@
           <!-- https://ismail9k.github.io/vue3-carousel/examples.html#active-classes -->
           <div class="carousel__item">
             <v-layout row wrap>
-              <v-flex xs12 sm6 md4 lg3>
-                <v-card
+              <v-card
+                flat
+                class="text-xs-center ma-3 `pa-3 manga ${subject.status}`"
+              >
+                <router-link
                   flat
-                  class="text-xs-center ma-3 `pa-3 manga ${subject.status}`"
+                  style="text-decoration: none; color: inherit"
+                  :to="{ name: 'Info', params: { id: subject.id } }"
                 >
-                  <router-link
+                  <v-responsive class="pt-4">
+                    <v-avatar size="180" class="grey lighten-2">
+                      <img :src="subject.cover" :width="size" :height="size" />
+                    </v-avatar>
+                  </v-responsive>
+                  <v-card-text>
+                    <div class="subheading">{{ subject.title }}</div>
+                    <div class="grey--text">{{ subject.chapters }}</div>
+                    <div class="center">
+                      <v-chip
+                        small
+                        :class="`${subject.status} white--text my-2 caption`"
+                        >{{ subject.status }}</v-chip
+                      >
+                    </div>
+                  </v-card-text>
+                </router-link>
+                <v-card-actions>
+                  <v-btn
                     flat
-                    style="text-decoration: none; color: inherit"
-                    :to="{ name: 'Info', params: { id: subject.id } }"
+                    color="grey"
+                    custom
+                    :to="{ name: 'Reader', params: { id: subject.id } }"
                   >
-                    <v-responsive class="pt-4">
-                      <v-avatar size="180" class="grey lighten-2">
-                        <img
-                          :src="subject.cover"
-                          :width="size"
-                          :height="size"
-                        />
-                      </v-avatar>
-                    </v-responsive>
-                    <v-card-text>
-                      <div class="subheading">{{ subject.title }}</div>
-                      <div class="grey--text">{{ subject.chapters }}</div>
-                      <div class="center">
-                        <v-chip
-                          small
-                          :class="`${subject.status} white--text my-2 caption`"
-                          >{{ subject.status }}</v-chip
-                        >
-                      </div>
-                    </v-card-text>
-                  </router-link>
-                  <v-card-actions>
-                    <v-btn
-                      flat
-                      color="grey"
-                      custom
-                      :to="{ name: 'Reader', params: { id: subject.id } }"
-                    >
-                      <v-icon small left>mdi-book-open-variant</v-icon>
-                      <span>Read</span>
-                    </v-btn>
-                    <v-btn
-                      flat
-                      color="grey"
-                      v-on:click="addToReadlist(subject.id)"
-                    >
-                      <v-icon small left>mdi-bookmark-plus-outline</v-icon>
-                      <span class="">Add to Readlist</span>
-                    </v-btn>
-                  </v-card-actions>
-                </v-card>
-              </v-flex>
+                    <v-icon small left>mdi-book-open-variant</v-icon>
+                    <span>Read</span>
+                  </v-btn>
+                  <v-btn
+                    flat
+                    color="grey"
+                    v-on:click="addToReadlist(subject.id)"
+                  >
+                    <v-icon small left>mdi-bookmark-plus-outline</v-icon>
+                    <span class="">Add to Readlist</span>
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
             </v-layout>
           </div>
         </Slide>

@@ -54,7 +54,10 @@
         </v-btn>
         <div>
           <div>Volume: {{ volume.current.number }}</div>
-          <div>Chapter: {{ chapter.number }} - {{ chapter.title }}</div>
+          <div>
+            Chapter: {{ chapter.number }}
+            <strong v-if="'' != chapter.title">- {{ chapter.title }}</strong>
+          </div>
           <div>Upload Version: {{ version }}</div>
         </div>
       </v-expansion-panel-text>
