@@ -4,7 +4,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onErrorCaptured, ref } from "vue";
+import { defineComponent, onErrorCaptured, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import DisplayReader from "@/views/Reader/DisplayReader.vue";
 import NavigationReader from "@/views/Reader/NavigationReader.vue";
@@ -19,17 +19,9 @@ export default defineComponent({
 
   setup() {
     const route = useRoute();
-    const id = computed(() => {
-      const id =
-        "string" == typeof route.params.id
-          ? route.params.id
-          : route.params.id[0];
-
-      return id.toUpperCase();
-    });
+    const id = ref(route.params.id as string);
     const error = ref(false);
     const errorMessage = ref("");
-    const cached = false;
 
     onErrorCaptured((e) => {
       errorMessage.value = `${e}`;
@@ -37,10 +29,18 @@ export default defineComponent({
       return true;
     });
 
+    watch(
+      () => route.params.id,
+      (newId) => {
+        id.value = newId as string;
+        console.log("watch");
+        console.log(id.value);
+      }
+    );
+
     return {
       id,
       error,
-      cached,
       errorMessage,
     };
   },

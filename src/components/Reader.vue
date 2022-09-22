@@ -4,8 +4,8 @@
       v-for="(image, key) in items"
       :key="key"
       :href="image.src"
-      :data-pswp-width="image.w"
-      :data-pswp-height="image.h"
+      :data-pswp-width="image.width"
+      :data-pswp-height="image.height"
     >
       <img :src="image.thumbnail" :alt="`page-${key}`" />
     </a>
@@ -20,8 +20,8 @@ import PhotoSwipeLightbox from "photoswipe/lightbox";
 interface Image {
   src: string;
   thumbnail: string;
-  w: number;
-  h: number;
+  width: number;
+  height: number;
 }
 
 export default defineComponent({
@@ -50,8 +50,8 @@ export default defineComponent({
       items.push({
         src: item["image"],
         thumbnail: item["thumbnail"],
-        w: item["width"],
-        h: item["height"],
+        width: item["width"],
+        height: item["height"],
       });
     }
 

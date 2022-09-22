@@ -4,7 +4,9 @@
     <template #default>
       <ReaderNavigation :id="id" />
     </template>
-    <template #fallback> loading navigation... </template>
+    <template #fallback>
+      <div align="center">loading navigation...</div>
+    </template>
   </Suspense>
 </template>
 

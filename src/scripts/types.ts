@@ -1,3 +1,35 @@
+export type ContentRating = "safe" | "suggestive" | "erotica" | "pornographic";
+
+export type Content =
+  | "author"
+  | "artist"
+  | "cover_art"
+  | "scanlation_group"
+  | "user"
+  | "manga";
+
+export type Status =
+  | "ongoing"
+  | "completed"
+  | "published"
+  | "hiatus"
+  | "cancelled";
+
+export type Languages =
+  | "en"
+  | "ja"
+  | "zh"
+  | "zh-hk"
+  | "pt-br"
+  | "es"
+  | "es-la"
+  | "jp-ro"
+  | "zh-ro";
+
+export type Locale = "ja";
+
+export type Demographic = "shounem" | "shoujo" | "josei" | "seinen";
+
 export interface IImageBlob {
   data: Blob;
   width: number;
@@ -37,30 +69,6 @@ export interface IMangaStatisticsResult {
   result: string;
   statistics: IMangaStatistics;
 }
-
-export type ContentRating = "safe" | "suggestive" | "erotica" | "pornographic";
-
-export type Status =
-  | "ongoing"
-  | "completed"
-  | "published"
-  | "hiatus"
-  | "cancelled";
-
-export type Languages =
-  | "en"
-  | "ja"
-  | "zh"
-  | "zh-hk"
-  | "pt-br"
-  | "es"
-  | "es-la"
-  | "jp-ro"
-  | "zh-ro";
-
-export type Locale = "ja";
-
-export type Demographic = "shounem" | "shoujo" | "josei" | "seinen";
 
 export interface ITranslations {
   en: string;
@@ -127,7 +135,7 @@ export interface IMangaAttributes {
 
 export interface IRelationships {
   id: string;
-  type: "author" | "artist" | "cover_art";
+  type: Content;
 }
 
 export interface IManga {
@@ -154,20 +162,24 @@ export interface ICover {
   relationships: IRelationships[];
 }
 
-export interface IChapter {
+export interface IChapters {
   id: string;
   chapter: string;
   count: number;
   others: string[];
 }
 
+export interface IChaptersAggregate {
+  [issue: number]: IChapters;
+}
+
 export interface IVolumes {
   volume: string;
   count: number;
-  chapters: IChapter;
+  chapters: IChaptersAggregate;
 }
 
-export interface IAggregate {
+export interface IVolumesAggregate {
   [issue: string]: IVolumes;
 }
 
@@ -181,4 +193,25 @@ export interface IVolumesImages {
   result: string;
   baseURL: string;
   chapter: IChapterImages;
+}
+
+export interface IChapterAttributes {
+  volume: string;
+  chapter: string;
+  title: string;
+  translatedLanguage: Languages;
+  externalURL: string;
+  publishedAt: string;
+  readableAt: string;
+  createdAt: string;
+  updatedAt: string;
+  pages: number;
+  version: number;
+}
+
+export interface IChapter {
+  id: string;
+  type: "chapter";
+  attributes: IChapterAttributes;
+  relationships: IRelationships[];
 }

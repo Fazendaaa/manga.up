@@ -1,5 +1,7 @@
 # manga.up
 
+This is probably the ugliest Vue 3 + Vuetify 3 in existence, but is my first time coding a front-end application and my first time using Vue; so feel free to judge, yell but have the decency to at least reference a better approach or even suggest how to improve it.
+
 ## Alternatives
 
 - [MangaDex](https://mangadex.org/)

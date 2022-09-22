@@ -2,7 +2,8 @@ import { API, queryMangaDex, fetchMangaDex } from "./API";
 import { cacheChapterImages, cacheImage } from "./cache";
 import {
   ContentRating,
-  IAggregate,
+  IVolumesAggregate,
+  IChapter,
   ICover,
   IManga,
   IMangaStatistics,
@@ -141,7 +142,7 @@ export const searchManga = async (title: string): Promise<IManga[]> =>
 export const getMangaIssues = async (
   mangaID: string,
   translations?: string[]
-): Promise<IAggregate> => {
+): Promise<IVolumesAggregate> => {
   const toTranslate =
     undefined === translations
       ? ""
@@ -192,3 +193,16 @@ export const getMangaStatistics = async (
       throw new Error("Getting statistics");
     }
   );
+
+export const getChapter = async (chapterID: string): Promise<IChapter> =>
+  fetchGetManga(`chapter/${chapterID.toLowerCase()}`).then((result) => {
+    if (
+      undefined !== result &&
+      "result" in result &&
+      "ok" === result["result"]
+    ) {
+      return result["data"];
+    }
+
+    throw new Error("Getting chapter");
+  });

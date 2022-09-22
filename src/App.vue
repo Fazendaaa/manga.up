@@ -3,7 +3,7 @@
     <v-main>
       <Headline />
       <NavBar />
-      <router-view />
+      <router-view :key="$route.path" />
     </v-main>
   </v-app>
 </template>
