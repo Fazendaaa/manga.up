@@ -1,8 +1,10 @@
 <template>
-  <Intro />
-  <Showcase />
-  <Stores />
-  <Contact />
+  <div class="ma-4 pa-4">
+    <Intro />
+    <Showcase />
+    <Stores />
+    <Contact />
+  </div>
 </template>
 
 <script lang="ts">

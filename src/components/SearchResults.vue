@@ -19,13 +19,7 @@
     </router-link>
 
     <v-card-actions>
-      <v-btn
-        color="orange-lighten-2"
-        variant="text"
-        @click="addToReadlist(item.attributes.title.en)"
-      >
-        Add to list
-      </v-btn>
+      <AddToFavorites :id="item.id" />
 
       <v-spacer></v-spacer>
 
@@ -63,6 +57,7 @@ import {
   searchMangaCoverPreview,
 } from "@/scripts/mangadex";
 import { defineComponent, ref, toRefs, watch } from "vue";
+import AddToFavorites from "./AddToFavorites.vue";
 
 interface IShow {
   [id: string]: boolean;
@@ -104,6 +99,10 @@ export default defineComponent({
       required: true,
       default: "",
     },
+  },
+
+  components: {
+    AddToFavorites,
   },
 
   setup(props) {

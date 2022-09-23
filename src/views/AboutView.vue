@@ -1,6 +1,8 @@
 <template>
-  <About />
-  <Help />
+  <div class="ma-4 pa-4">
+    <About />
+    <Help />
+  </div>
 </template>
 
 <script lang="ts">

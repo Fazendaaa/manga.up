@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="ma-4 pa-4">
     <User />
     <Login />
     <br />

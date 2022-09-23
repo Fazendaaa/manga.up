@@ -24,19 +24,23 @@
       </v-card-text>
     </v-card>
 
+    <v-progress-linear
+      v-if="loading"
+      indeterminate
+      color="cyan"
+    ></v-progress-linear>
+
     <Suspense v-if="'' !== search">
       <template #default>
         <SearchResults :search="search" />
       </template>
-      <template #fallback>
-        <div align="center">loading results</div>
-      </template>
+      <template #fallback></template>
     </Suspense>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, watch } from "vue";
 import SearchResults from "@/components/SearchResults.vue";
 
 export default defineComponent({
@@ -48,9 +52,17 @@ export default defineComponent({
 
   setup() {
     const search = ref("");
+    const loading = ref(false);
+
+    watch(search, () => {
+      loading.value = true;
+      // TODO(Fazendaaa): this is ugly, jerry-rigged AF but works
+      setTimeout(() => (loading.value = false), 2000);
+    });
 
     return {
       search,
+      loading,
     };
   },
 });

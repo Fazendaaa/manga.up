@@ -41,19 +41,7 @@
                 </v-card-text>
               </router-link>
               <v-card-actions>
-                <v-btn
-                  flat
-                  color="grey"
-                  custom
-                  :to="{ name: 'Reader', params: { id: subject.id } }"
-                >
-                  <v-icon small left>mdi-book-open-variant</v-icon>
-                  <span>Read</span>
-                </v-btn>
-                <v-btn flat color="grey" v-on:click="addToReadlist(subject.id)">
-                  <v-icon small left>mdi-bookmark-plus-outline</v-icon>
-                  <span class="">Add to Readlist</span>
-                </v-btn>
+                <AddToFavorites :id="subject.id" />
               </v-card-actions>
             </v-card>
           </v-layout>
@@ -66,6 +54,7 @@
 <script lang="ts">
 import { toRefs, defineComponent, ref, watch } from "vue";
 import { IManga, searchMangaCoverPreview } from "@/scripts/mangadex";
+import AddToFavorites from "./AddToFavorites.vue";
 
 export interface IDisplay {
   id: string;
@@ -132,6 +121,10 @@ const parseMangas = async (
 
 export default defineComponent({
   name: "DisplayComponent",
+
+  components: {
+    AddToFavorites,
+  },
 
   props: {
     header: String,

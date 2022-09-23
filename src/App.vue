@@ -1,11 +1,13 @@
 <template>
-  <v-app :theme="this.$store.state.theme">
-    <v-main>
-      <Headline />
-      <NavBar />
-      <router-view :key="$route.path" />
-    </v-main>
-  </v-app>
+  <v-no-ssr>
+    <v-app :theme="this.$store.state.theme">
+      <v-main>
+        <Headline />
+        <NavBar />
+        <router-view :key="$route.path" />
+      </v-main>
+    </v-app>
+  </v-no-ssr>
 </template>
 
 <script lang="ts">

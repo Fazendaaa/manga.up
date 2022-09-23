@@ -1,18 +1,21 @@
 <template>
-  <Collection />
-  <Readlist />
+  <div class="ma-4 pa-4">
+    <Collection />
+    <v-btn to="{ name: 'ReadList' }">
+      <v-icon>mdi-format-list-text</v-icon>
+      <span>Create a Readlist</span>
+    </v-btn>
+  </div>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
 import Collection from "@/components/Collection.vue";
-import Readlist from "@/components/Readlist.vue";
 
 export default defineComponent({
   name: "FavoritesComponent",
-  data() {
-    return {};
+
+  components: {
+    Collection,
   },
-  components: { Collection, Readlist },
 });
 </script>
-<style lang="stylus"></style>
