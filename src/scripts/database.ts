@@ -82,7 +82,7 @@ const availableKey = async (request: IDBRequest): Promise<boolean> =>
     };
   });
 
-const addItem = async (request: IDBRequest): Promise<boolean> =>
+const resolveItem = async (request: IDBRequest): Promise<boolean> =>
   new Promise((resolve, reject) => {
     request.onsuccess = () => {
       resolve(true);
@@ -114,63 +114,12 @@ export const saveToDatabase = async (
     return true;
   }
 
-  return addItem(
+  return resolveItem(
     store.add({
       id,
       data,
     })
   );
-};
-
-const appendValue = async (
-  request: IDBRequest,
-  data: AllowedRecord
-): Promise<boolean> =>
-  new Promise((resolve, reject) => {
-    request.onsuccess = () => {
-      console.log("request.result:");
-      console.log(request.result);
-      resolve(true);
-    };
-
-    request.onerror = () => {
-      reject(new Error("Failure while adding data to db"));
-    };
-  });
-
-export const appendToDatabase = async (
-  objectStore: string,
-  initial: AllowedRecord,
-  id: string,
-  data: AllowedRecord
-): Promise<boolean> => {
-  const database = await initDatabase();
-  const transaction = database.transaction(objectStore, "readwrite");
-  const store = transaction.objectStore(objectStore);
-  const request = store.get(id);
-
-  return new Promise((resolve, reject) => {
-    request.onsuccess = () => {
-      if (undefined === request.result) {
-        const init = store.add({
-          id,
-          data: initial,
-        });
-
-        init.onerror = () => resolve(false);
-        init.onsuccess = () => {
-          const result = store.get(id);
-
-          result.onsuccess = () => {
-            resolve(appendValue(result.result, data));
-          };
-        };
-      } else {
-        console.log(request.result);
-        resolve(appendValue(request, data));
-      }
-    };
-  });
 };
 
 export const readFromDatabase = async (
@@ -199,6 +148,18 @@ export const readFromDatabase = async (
     );
 
 export const updateInDatabase = async (
+  objectStore: string,
   id: string,
-  data: string | Blob
-): Promise<boolean> => initDatabase().then((database) => true);
+  data: AllowedRecord
+): Promise<boolean> => {
+  const database = await initDatabase();
+  const transaction = database.transaction(objectStore, "readwrite");
+  const store = transaction.objectStore(objectStore);
+
+  return resolveItem(
+    store.put({
+      id,
+      data,
+    })
+  );
+};
