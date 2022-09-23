@@ -5,29 +5,36 @@
     class="mx-auto"
     max-width="344"
   >
-    <v-img :src="item.cover" height="200px" cover></v-img>
+    <router-link
+      flat
+      style="text-decoration: none; color: inherit"
+      :to="{ name: 'Info', params: { id: item.id } }"
+    >
+      <v-img :src="item.cover" height="200px" cover></v-img>
 
-    <v-card-title> {{ item.attributes.title.en }} </v-card-title>
-
-    <v-card-subtitle>
-      {{ item.attributes.availableTranslatedLanguages.join(", ") }}
-    </v-card-subtitle>
+      <v-card-title> {{ item.attributes.title.en }} </v-card-title>
+      <v-card-subtitle>
+        {{ item.attributes.availableTranslatedLanguages.join(", ") }}
+      </v-card-subtitle>
+    </router-link>
 
     <v-card-actions>
       <v-btn
         color="orange-lighten-2"
         variant="text"
-        :to="{ name: 'Info', params: { id: item.id } }"
+        @click="addToReadlist(item.attributes.title.en)"
       >
-        More about it
+        Add to list
       </v-btn>
 
       <v-spacer></v-spacer>
 
-      <v-btn
-        :icon="show[item.id] ? 'mdi-chevron-up' : 'mdi-chevron-down'"
-        @click="show[item.id] = !show[item.id]"
-      ></v-btn>
+      <v-btn @click="show[item.id] = !show[item.id]">
+        <v-icon
+          :icon="show[item.id] ? 'mdi-chevron-up' : 'mdi-chevron-down'"
+        ></v-icon>
+        <span>about</span>
+      </v-btn>
     </v-card-actions>
 
     <v-expand-transition>
@@ -126,6 +133,12 @@ export default defineComponent({
       length,
       entries,
     };
+  },
+
+  methods: {
+    addToReadlist(title: string) {
+      alert(title);
+    },
   },
 });
 </script>
