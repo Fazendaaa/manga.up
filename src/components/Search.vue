@@ -15,68 +15,42 @@
       </v-card-text>
 
       <v-card-text>
-        <v-autocomplete
-          v-model:search="search"
-          :loading="isLoading"
-          hide-no-data
-          hide-selected
-          item-title="Description"
-          item-value="API"
-          label="Search Mangas..."
-          placeholder="Start typing to Search"
+        <v-text-field
+          v-model="search"
+          filled
+          placeholder="Search Mangas..."
           prepend-icon="mdi-card-search"
-          return-object
-        ></v-autocomplete>
+        ></v-text-field>
       </v-card-text>
     </v-card>
 
-    <Suspense v-if="0 != entries.length">
+    <Suspense v-if="'' !== search">
       <template #default>
-        <Display :header="header" :mangas="entries" />
+        <SearchResults :search="search" />
       </template>
       <template #fallback>
-        <div>loading results</div>
+        <div align="center">loading results</div>
       </template>
     </Suspense>
   </div>
 </template>
 
 <script lang="ts">
-import { IManga, searchManga } from "@/scripts/mangadex";
-import { defineComponent, ref, watch } from "vue";
-import Display from "@/components/Display.vue";
+import { defineComponent, ref } from "vue";
+import SearchResults from "@/components/SearchResults.vue";
 
 export default defineComponent({
   name: "SearchComponent",
 
   components: {
-    Display,
+    SearchResults,
   },
 
   setup() {
-    const descriptionLimit = ref(60);
-    const entries = ref<IManga[]>([]);
-    const isLoading = ref(false);
-    const model = ref(null);
     const search = ref("");
-    const header = ref("");
-
-    watch(search, async (newSearch) => {
-      isLoading.value = true;
-      entries.value = [];
-      header.value = "";
-      entries.value = await searchManga(newSearch, "5");
-      header.value = "Results";
-      isLoading.value = false;
-    });
 
     return {
-      descriptionLimit,
-      entries,
-      isLoading,
-      model,
       search,
-      header,
     };
   },
 });

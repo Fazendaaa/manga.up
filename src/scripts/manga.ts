@@ -124,11 +124,13 @@ export const getRandomMangas = async (
 
 export const searchManga = async (
   title: string,
-  limit = "1"
+  limit = "1",
+  offset = "0"
 ): Promise<IManga[]> =>
   queryMangaDex("manga", {
     title,
     limit,
+    offset,
   })
     .then((result) => {
       if (undefined !== result && "data" in result) {

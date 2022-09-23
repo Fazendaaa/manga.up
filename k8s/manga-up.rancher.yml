@@ -17,7 +17,7 @@ spec:
         application: manga-up
     spec:
       containers:
-        - image: fazenda/manga-up:adding-search
+        - image: fazenda/manga-up:improved-search
           imagePullPolicy: Always
           name: manga-up
           ports:
