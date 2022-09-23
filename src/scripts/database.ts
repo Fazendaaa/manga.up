@@ -25,10 +25,9 @@ const handleDBVersions =
       case 0:
         database.createObjectStore("covers", { keyPath: "id" });
         database.createObjectStore("chapters", { keyPath: "id" });
-        // initDatabase
+        database.createObjectStore("user", { keyPath: "id" });
         break;
       case 1:
-        // handleMigration
         break;
     }
   };
@@ -72,34 +71,107 @@ const initDatabase = () =>
     }
   );
 
+const availableKey = async (request: IDBRequest): Promise<boolean> =>
+  new Promise((resolve, reject) => {
+    request.onsuccess = () => {
+      resolve(true);
+    };
+
+    request.onerror = () => {
+      resolve(false);
+    };
+  });
+
+const addItem = async (request: IDBRequest): Promise<boolean> =>
+  new Promise((resolve, reject) => {
+    request.onsuccess = () => {
+      resolve(true);
+    };
+
+    request.onerror = () => {
+      reject(new Error("Failure while adding data to db"));
+    };
+  });
+
+export type AllowedRecord =
+  | string
+  | Blob
+  | Blob[]
+  | IChapterBlobContent[]
+  | Record<any, any>;
+
 export const saveToDatabase = async (
   objectStore: string,
   id: string,
-  data: string | Blob | Blob[] | IChapterBlobContent[]
-): Promise<boolean> =>
-  initDatabase()
-    .then((database) => {
-      const transaction = database.transaction(objectStore, "readwrite");
-      const item = transaction.objectStore(objectStore);
+  data: AllowedRecord
+): Promise<boolean> => {
+  const database = await initDatabase();
+  const transaction = database.transaction(objectStore, "readwrite");
+  const store = transaction.objectStore(objectStore);
+  const isAvailable = await availableKey(store.get(id));
 
-      return item.add({
-        id,
-        data,
-      });
+  if (false === isAvailable) {
+    return true;
+  }
+
+  return addItem(
+    store.add({
+      id,
+      data,
     })
-    .then(
-      (response) =>
-        new Promise((resolve, reject) => {
-          response.onsuccess = () => {
-            resolve(true);
-          };
-          response.onerror = () => {
-            console.error("Error ", response.result);
+  );
+};
 
-            reject(new Error("Error while adding to database"));
+const appendValue = async (
+  request: IDBRequest,
+  data: AllowedRecord
+): Promise<boolean> =>
+  new Promise((resolve, reject) => {
+    request.onsuccess = () => {
+      console.log("request.result:");
+      console.log(request.result);
+      resolve(true);
+    };
+
+    request.onerror = () => {
+      reject(new Error("Failure while adding data to db"));
+    };
+  });
+
+export const appendToDatabase = async (
+  objectStore: string,
+  initial: AllowedRecord,
+  id: string,
+  data: AllowedRecord
+): Promise<boolean> => {
+  const database = await initDatabase();
+  const transaction = database.transaction(objectStore, "readwrite");
+  const store = transaction.objectStore(objectStore);
+  const request = store.get(id);
+
+  return new Promise((resolve, reject) => {
+    request.onsuccess = () => {
+      if (undefined === request.result) {
+        const init = store.add({
+          id,
+          data: initial,
+        });
+
+        init.onerror = () => resolve(false);
+        init.onsuccess = () => {
+          const result = store.get(id);
+
+          result.onsuccess = () => {
+            resolve(appendValue(result.result, data));
           };
-        })
-    );
+        };
+      } else {
+        console.log(request.result);
+        resolve(appendValue(request, data));
+      }
+    };
+  });
+};
 
 export const readFromDatabase = async (
   objectStore: string,

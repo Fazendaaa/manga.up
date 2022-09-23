@@ -17,7 +17,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { addToReadList } from "@/scripts/lists";
+import { defineComponent, ref, toRefs, watch } from "vue";
 
 export default defineComponent({
   props: {
@@ -28,13 +29,24 @@ export default defineComponent({
     },
   },
 
-  setup() {
+  setup(props) {
+    const { id } = toRefs(props);
     const snackbar = ref(false);
-    const text = ref(`Is added?`);
+    const text = ref("");
+
+    watch(snackbar, async (newSnackbar) => {
+      if (newSnackbar) {
+        const added = await addToReadList(id.value);
+        text.value = added
+          ? "Manga successful added"
+          : "Error while adding manga to read list";
+      }
+    });
 
     return {
       text,
       snackbar,
+      addToReadList,
     };
   },
 });
