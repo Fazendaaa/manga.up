@@ -1,6 +1,10 @@
 <template>
   <v-icon>mdi-translate</v-icon>
-  <span variant="plain" class="caption text-lowercase"> select idiom: </span>
+  <span
+    variant="plain"
+    class="caption text-lowercase"
+    v-html="$vuetify.locale.getScope().t('selectLanguage.ask')"
+  />
   <v-col align="left">
     <v-select
       v-model="chosenTranslation"

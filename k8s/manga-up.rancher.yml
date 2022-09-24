@@ -17,7 +17,7 @@ spec:
         application: manga-up
     spec:
       containers:
-        - image: fazenda/manga-up:remove-login
+        - image: fazenda/manga-up:main-ui-translated
           imagePullPolicy: Always
           name: manga-up
           ports:
