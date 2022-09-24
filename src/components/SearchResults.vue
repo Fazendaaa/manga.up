@@ -133,11 +133,5 @@ export default defineComponent({
       entries,
     };
   },
-
-  methods: {
-    addToReadlist(title: string) {
-      alert(title);
-    },
-  },
 });
 </script>

@@ -1,8 +1,8 @@
 <template>
   <div class="text-center ma-2">
     <v-btn @click="snackbar = true">
-      <v-icon>mdi-bookmark-plus-outline</v-icon>
-      <span> Add to favorites </span>
+      <v-icon>mdi-delete-empty</v-icon>
+      <span> Remove from favorites </span>
     </v-btn>
     <v-snackbar v-model="snackbar">
       {{ text }}
@@ -21,7 +21,7 @@ import { addToReadList } from "@/scripts/lists";
 import { defineComponent, ref, toRefs, watch } from "vue";
 
 export default defineComponent({
-  name: "AddToFavoritesComponent",
+  name: "RemoveFromFavoritesComponent",
 
   props: {
     id: {
@@ -40,7 +40,8 @@ export default defineComponent({
       if (newSnackbar) {
         const added = await addToReadList(id.value);
         text.value = added
-          ? "Manga successful added"
+          ? // ? "Manga successful removed"
+            "Not Implemented yet"
           : "Error while adding manga to read list";
       }
     });

@@ -1,9 +1,18 @@
 <template>
   <div class="ma-4 pa-4">
-    <Collection />
+    <Suspense>
+      <template #default>
+        <Collection />
+      </template>
+      <template #fallback> loading lists... </template>
+    </Suspense>
     <v-btn to="{ name: 'ReadList' }">
       <v-icon>mdi-format-list-text</v-icon>
-      <span>Create a Readlist</span>
+      <span> Create a Readlist </span>
+    </v-btn>
+    <v-btn to="{ name: 'ReadList' }">
+      <v-icon>mdi-folder-upload-outline</v-icon>
+      <span> Upload a Readlist </span>
     </v-btn>
   </div>
 </template>
