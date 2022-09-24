@@ -59,7 +59,6 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 - Fix cards
 - Fix style
-- Fix i18n support
 
 ## References
 

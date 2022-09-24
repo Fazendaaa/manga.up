@@ -1,9 +1,7 @@
 <template>
-  <div class="ma-4 pa-4">
-    <User />
-    <Login />
-    <Settings />
-  </div>
+  <User />
+  <Login />
+  <Settings />
 </template>
 
 <script lang="ts">

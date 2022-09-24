@@ -1,5 +1,6 @@
 <template>
   <v-system-bar>
+    <SelectLanguage />
     <v-icon icon="mdi-connection"></v-icon>
     <span class="caption text-lowercase"> Mangadex status: </span>
     <div v-if="error">Error while loading this status</div>
@@ -14,6 +15,7 @@
     <v-toolbar flat app>
       <v-toolbar-title class="text-uppercase grey--text">
         <span class="font-weight-light">Manga</span>
+        <strong>.</strong>
         <span>Up</span>
       </v-toolbar-title>
       <v-btn right icon flat @click="this.$store.commit('toggleTheme')">
@@ -26,12 +28,14 @@
 <script lang="ts">
 import { defineComponent, onErrorCaptured, ref } from "vue";
 import Status from "./Status.vue";
+import SelectLanguage from "./SelectLanguage.vue";
 
 export default defineComponent({
   name: "HeadlineComponent",
 
   components: {
     Status,
+    SelectLanguage,
   },
 
   setup() {

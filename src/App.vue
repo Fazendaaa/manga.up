@@ -4,7 +4,9 @@
       <v-main>
         <Headline />
         <NavBar />
-        <router-view :key="$route.path" />
+        <div class="ma-4 pa-4">
+          <router-view :key="$route.path" />
+        </div>
       </v-main>
     </v-app>
   </v-no-ssr>

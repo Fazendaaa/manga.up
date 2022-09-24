@@ -8,6 +8,7 @@ import { locale } from "./i18n";
 
 export default createVuetify({
   locale,
+  rtl: true,
   theme: {
     defaultTheme: "dark",
     themeCache: {
@@ -15,5 +16,4 @@ export default createVuetify({
       set: (key: string, value: string) => localStorage.setItem(key, value),
     },
   },
-  rtl: true,
 });

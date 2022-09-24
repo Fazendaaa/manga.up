@@ -3,9 +3,10 @@
     <v-card-text class="my-5">
       <div class="text-h3"><strong>Manga.up</strong></div>
       <div class="text-h6"><strong>OFFLINE</strong> manga reader</div>
-      <div class="text-subtitle-2 grey--text">
-        Read <strong>WHATEVER</strong> the device at <strong>ANYTIME</strong>
-      </div>
+      <div
+        class="text-subtitle-2 grey--text"
+        v-html="$vuetify.locale.getScope().t('intro.subtitle')"
+      />
       <v-expansion-panels variant="inset" class="my-4">
         <v-expansion-panel>
           <v-expansion-panel-title>Our intro</v-expansion-panel-title>
