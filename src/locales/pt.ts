@@ -1,6 +1,11 @@
+import intro from "@/locales/pt/intro";
+import about from "@/locales/pt/about";
+import help from "@/locales/pt/help";
+import navigationBar from "@/locales/pt/navigationBar";
+
 export default {
-  intro: {
-    subtitle:
-      "Leia <strong>O QUE QUISER</strong> independentemente do aparelho <strong>A QUALQUER</strong> horario",
-  },
+  intro,
+  about,
+  help,
+  navigationBar,
 };

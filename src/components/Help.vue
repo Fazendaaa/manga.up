@@ -1,37 +1,52 @@
 <template>
   <div>
-    <h1 class="subheading grey--text">Help</h1>
+    <h1
+      class="subheading grey--text"
+      v-html="$vuetify.locale.getScope().t('help.title')"
+    />
     <v-container class="my-5">
-      <p>
-        Here are some sources so you can choose to help in any way you can this
-        project:
-      </p>
+      <p v-html="$vuetify.locale.getScope().t('help.content')" />
     </v-container>
     <v-container class="my-5">
-      <v-btn target="_blank" href="https://github.com/Fazendaaa/manga.up">
-        <v-icon>mdi-github</v-icon>
-        <span>Share a few translations or code</span>
-      </v-btn>
-      <v-btn target="_blank" href="https://twitter.com/the_fznd">
-        <v-icon>mdi-twitter</v-icon>
-        <span>Follow creator's Twitter</span>
-      </v-btn>
-      <v-btn target="_blank" href="https://www.buymeacoffee.com/fazenda">
-        <v-icon>mdi-coffee</v-icon>
-        <span>Buy me a coffee</span>
-      </v-btn>
+      <div v-for="item in items" v-bind:key="item.href">
+        <v-btn target="_blank" :href="item.href">
+          <v-icon :icon="item.icon" />
+          <span>{{ item.message }}</span>
+        </v-btn>
+      </div>
     </v-container>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { useLocale } from "vuetify/lib/framework.mjs";
 
 export default defineComponent({
   name: "HelpComponent",
 
   data() {
-    return {};
+    const translator = useLocale();
+
+    return {
+      items: [
+        {
+          href: "https://github.com/Fazendaaa/manga.up",
+          icon: "mdi-github",
+          message: translator.t("help.github"),
+        },
+        {
+          href: "https://twitter.com/the_fznd",
+          icon: "mdi-twitter",
+          message: translator.t("help.twitter"),
+        },
+        {
+          href: "https://www.buymeacoffee.com/fazenda",
+          icon: "mdi-coffee",
+          message: translator.t("help.buyMeACoffee"),
+        },
+      ],
+    };
   },
 });
 </script>

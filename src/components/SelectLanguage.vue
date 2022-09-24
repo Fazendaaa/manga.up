@@ -36,21 +36,11 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.v-field__input {
-  color: inherit;
-  display: flex;
-  flex-wrap: wrap;
-  letter-spacing: 0.009375em;
-  opacity: var(--v-high-emphasis-opacity);
-  min-height: 0;
-  -webkit-padding-start: var(--v-field-padding-start);
-  padding-inline-start: var(--v-field-padding-start);
-  -webkit-padding-end: var(--v-field-padding-end);
-  padding-inline-end: var(--v-field-padding-end);
-  padding-top: calc(
-    var(--v-field-padding-top, 10px) + var(--v-input-padding-top, 0)
-  );
-  padding-bottom: 0;
-  width: 100%;
+.v-select {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
 }
 </style>
