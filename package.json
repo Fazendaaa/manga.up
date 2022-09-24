@@ -11,9 +11,6 @@
     "i18n:report": "vue-cli-service i18n:report --src \"./src/**/*.?(js|vue)\" --locales \"./src/locales/**/*.json\""
   },
   "dependencies": {
-    "@azure/core-http": "^2.2.7",
-    "@azure/msal-browser": "^2.28.3",
-    "@azure/storage-blob": "^12.11.0",
     "@mdi/font": "5.9.55",
     "ag-charts-vue3": "^6.1.1",
     "caniuse-lite": "^1.0.30001407",
@@ -21,13 +18,11 @@
     "photoswipe": "^5.3.2",
     "register-service-worker": "^1.7.2",
     "roboto-fontface": "^0.10.0",
-    "tiny-emitter": "^2.1.0",
     "vue": "^3.2.13",
     "vue-i18n": "^9.2.2",
     "vue-marquee-text-component": "^2.0.1",
     "vue-router": "^4.1.5",
     "vue-social-sharing": "^4.0.0-alpha4",
-    "vue3-google-oauth2": "^1.0.6",
     "vue3-markdown-it": "^1.0.10",
     "vuetify": "^3.0.0-beta.11",
     "vuex": "^4.0.2",

@@ -11,24 +11,20 @@
         />
       </v-avatar>
       <br />
-      <Anilist />
-      <MyAnimeList />
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Anilist from "./providers/Anilist.vue";
-import MyAnimeList from "./providers/MyAnimeList.vue";
 
 export default defineComponent({
   name: "UserComponent",
+
   data() {
     return {
       toggle: false,
     };
   },
-  components: { Anilist, MyAnimeList },
 });
 </script>
