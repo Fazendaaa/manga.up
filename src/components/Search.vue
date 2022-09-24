@@ -1,23 +1,12 @@
 <template>
   <v-card>
-    <v-card-title> Just do it! </v-card-title>
-
-    <v-card-text>
-      You can always check the source at
-      <a
-        class="text-grey-lighten-3"
-        href="https://mangadex.org/"
-        target="_blank"
-        rel="noopener noreferrer"
-        >MangaDex</a
-      >.
-    </v-card-text>
-
+    <v-card-title v-html="$vuetify.locale.getScope().t('search.title')" />
+    <v-card-text v-html="$vuetify.locale.getScope().t('search.subtitle')" />
     <v-card-text>
       <v-text-field
         v-model="search"
         filled
-        placeholder="Search Mangas..."
+        :placeholder="$vuetify.locale.getScope().t('search.placeholder')"
         prepend-icon="mdi-card-search"
       ></v-text-field>
     </v-card-text>

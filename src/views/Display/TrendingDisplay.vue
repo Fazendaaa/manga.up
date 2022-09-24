@@ -1,5 +1,8 @@
 <template>
-  <Display header="Trending" :mangas="mangas" />
+  <Display
+    :header="$vuetify.locale.getScope().t('display.trending')"
+    :mangas="mangas"
+  />
 </template>
 
 <script lang="ts">

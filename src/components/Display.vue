@@ -1,54 +1,47 @@
 <template>
-  <div class="dashboard">
-    <h1 class="subheading grey--text">{{ header }}</h1>
+  <h1 class="subheading grey--text">{{ header }}</h1>
 
-    <v-container align="center">
-      <v-carousel height="400" hide-delimiter-background>
-        <v-carousel-item
-          row
+  <v-carousel cycle hide-delimiter-background>
+    <v-carousel-item row v-for="(rowSub, index) in subjects" :key="index">
+      <v-layout>
+        <v-card
+          v-for="subject in rowSub"
+          :key="subject.id"
+          flat
           align="center"
-          v-for="(rowSub, index) in subjects"
-          :key="index"
+          width="300"
+          height="385"
+          class="mx-auto my-12 text-xs-center ma-3 `pa-3 manga ${subject.status}`"
         >
-          <v-layout>
-            <v-card
-              v-for="subject in rowSub"
-              :key="subject.id"
-              flat
-              align="center"
-              class="text-xs-center ma-3 `pa-3 manga ${subject.status}`"
-            >
-              <router-link
-                flat
-                style="text-decoration: none; color: inherit"
-                :to="{ name: 'Info', params: { id: subject.id } }"
-              >
-                <v-responsive class="pt-4">
-                  <v-avatar size="180" class="grey lighten-2">
-                    <img :src="subject.cover" :width="size" :height="size" />
-                  </v-avatar>
-                </v-responsive>
-                <v-card-text>
-                  <div class="subheading">{{ subject.title }}</div>
-                  <div class="grey--text">{{ subject.chapters }}</div>
-                  <div class="center">
-                    <v-chip
-                      small
-                      :class="`${subject.status} white--text my-2 caption`"
-                      >{{ subject.status }}</v-chip
-                    >
-                  </div>
-                </v-card-text>
-              </router-link>
-              <v-card-actions>
-                <AddToFavorites :id="subject.id" />
-              </v-card-actions>
-            </v-card>
-          </v-layout>
-        </v-carousel-item>
-      </v-carousel>
-    </v-container>
-  </div>
+          <router-link
+            flat
+            style="text-decoration: none; color: inherit"
+            :to="{ name: 'Info', params: { id: subject.id } }"
+          >
+            <v-responsive class="pt-4">
+              <v-avatar size="180" class="grey lighten-2">
+                <img :src="subject.cover" :width="size" :height="size" />
+              </v-avatar>
+            </v-responsive>
+            <v-card-text>
+              <div class="subheading">{{ subject.title }}</div>
+              <div class="grey--text">{{ subject.chapters }}</div>
+              <div class="center">
+                <v-chip
+                  small
+                  :class="`${subject.status} white--text my-2 caption`"
+                  >{{ subject.status }}</v-chip
+                >
+              </div>
+            </v-card-text>
+          </router-link>
+          <v-card-actions class="justify-center align-baseline">
+            <AddToFavorites :id="subject.id" />
+          </v-card-actions>
+        </v-card>
+      </v-layout>
+    </v-carousel-item>
+  </v-carousel>
 </template>
 
 <script lang="ts">
@@ -65,25 +58,11 @@ export interface IDisplay {
   status: string;
 }
 
-const parseMangas = async (
-  mangas: IManga[],
-  columns: number
-): Promise<IDisplay[][]> => {
-  const subjects: IDisplay[][] = [];
-  let counter = 0;
+const parseMangas = async (mangas: IManga[]): Promise<IDisplay[]> => {
+  const subjects: IDisplay[] = [];
   let chapters: string;
-  let lastRow = 0;
 
   for (const manga of mangas) {
-    if (columns === counter) {
-      counter = 0;
-    }
-    if (0 === counter) {
-      subjects.push([]);
-    }
-
-    lastRow = subjects.length - 1;
-
     switch (typeof manga["attributes"]["lastChapter"]) {
       case "string":
         chapters = manga["attributes"]["lastChapter"];
@@ -104,7 +83,7 @@ const parseMangas = async (
       (relationship) => "cover_art" === relationship.type
     )[0];
 
-    subjects[lastRow].push({
+    subjects.push({
       id: manga["id"],
       title: manga["attributes"]["title"]["en"],
       chapters,
@@ -112,6 +91,30 @@ const parseMangas = async (
       status: manga["attributes"]["status"],
       cover: await searchMangaCoverPreview(manga["id"], cover["id"]),
     });
+  }
+
+  return subjects;
+};
+
+const redistributeMangas = (
+  mangas: IDisplay[],
+  columns: number
+): IDisplay[][] => {
+  const subjects: IDisplay[][] = [];
+  let counter = 0;
+  let lastRow = 0;
+
+  for (const manga of mangas.flat()) {
+    if (columns === counter) {
+      counter = 0;
+    }
+    if (0 === counter) {
+      subjects.push([]);
+    }
+
+    lastRow = subjects.length - 1;
+
+    subjects[lastRow].push(manga);
 
     counter += 1;
   }
@@ -139,12 +142,14 @@ export default defineComponent({
   async setup(props) {
     const { mangas } = toRefs(props);
     const itemsToShow = ref(3);
+    const issues = ref<IDisplay[]>([]);
     const subjects = ref<IDisplay[][]>([]);
 
-    watch(itemsToShow, async (newNumber) => {
-      subjects.value = await parseMangas(mangas.value, newNumber);
+    watch(itemsToShow, (newNumber) => {
+      subjects.value = redistributeMangas(issues.value, newNumber);
     });
-    subjects.value = await parseMangas(mangas.value, itemsToShow.value);
+    issues.value = await parseMangas(mangas.value);
+    subjects.value = redistributeMangas(issues.value, itemsToShow.value);
 
     return {
       size: 180,
@@ -154,10 +159,6 @@ export default defineComponent({
   },
 
   methods: {
-    addToReadlist(title: string) {
-      alert(title);
-    },
-
     onResize() {
       // xs
       if (window.innerWidth < 600) {
@@ -166,22 +167,22 @@ export default defineComponent({
       }
       // sm
       if (600 <= window.innerWidth && window.innerWidth < 960) {
-        this.itemsToShow = 3;
+        this.itemsToShow = 2;
         return;
       }
       // md
       if (960 <= window.innerWidth && window.innerWidth < 1264) {
-        this.itemsToShow = 5;
+        this.itemsToShow = 3;
         return;
       }
       // lg
       if (1264 <= window.innerWidth && window.innerWidth < 1904) {
-        this.itemsToShow = 6;
+        this.itemsToShow = 3;
         return;
       }
       // lg
       else {
-        this.itemsToShow = 10;
+        this.itemsToShow = 4;
         return;
       }
     },

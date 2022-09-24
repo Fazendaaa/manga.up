@@ -1,5 +1,5 @@
 <template>
-  <div v-if="error">Error while loading favorites</div>
+  <div v-if="error" v-html="$vuetify.locale.getScope().t('favorites.error')" />
   <Suspense v-else>
     <template #default>
       <Collection />
@@ -15,11 +15,11 @@
   <div>
     <v-btn to="{ name: 'ReadList' }">
       <v-icon>mdi-format-list-text</v-icon>
-      <span> Create a Readlist </span>
+      <span v-html="$vuetify.locale.getScope().t('favorites.buttons.create')" />
     </v-btn>
     <v-btn to="{ name: 'ReadList' }">
       <v-icon>mdi-folder-upload-outline</v-icon>
-      <span> Upload a Readlist </span>
+      <span v-html="$vuetify.locale.getScope().t('favorites.buttons.upload')" />
     </v-btn>
   </div>
 </template>

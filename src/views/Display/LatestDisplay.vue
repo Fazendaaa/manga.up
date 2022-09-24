@@ -1,5 +1,8 @@
 <template>
-  <Display header="Latest" :mangas="mangas" />
+  <Display
+    :header="$vuetify.locale.getScope().t('display.latest')"
+    :mangas="mangas"
+  />
 </template>
 
 <script lang="ts">

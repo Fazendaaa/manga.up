@@ -1,5 +1,8 @@
 <template>
-  <Display header="Random" :mangas="mangas" />
+  <Display
+    :header="$vuetify.locale.getScope().t('display.random')"
+    :mangas="mangas"
+  />
 </template>
 
 <script lang="ts">

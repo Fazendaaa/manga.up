@@ -1,5 +1,8 @@
 <template>
-  <Display header="Recommended" :mangas="mangas" />
+  <Display
+    :header="$vuetify.locale.getScope().t('display.recommended')"
+    :mangas="mangas"
+  />
 </template>
 
 <script lang="ts">

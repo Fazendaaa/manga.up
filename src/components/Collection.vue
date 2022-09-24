@@ -1,7 +1,16 @@
 <template>
   <v-expansion-panels variant="inset" class="my-4">
     <v-expansion-panel v-for="item in lists" :key="item.name">
-      <v-expansion-panel-title>{{ item.name }}</v-expansion-panel-title>
+      <v-expansion-panel-title>
+        <v-icon>{{
+          $vuetify.locale.getScope().t(`favorites.items.${item.name}.icon`)
+        }}</v-icon>
+        <span>
+          {{
+            $vuetify.locale.getScope().t(`favorites.items.${item.name}.name`)
+          }}
+        </span>
+      </v-expansion-panel-title>
       <div v-if="0 !== Object.keys(item.items).length">
         <v-expansion-panel-text>
           <Suspense>
@@ -30,8 +39,7 @@
       </div>
       <div v-else>
         <v-expansion-panel-text>
-          Empty "<strong>{{ item.name }}</strong
-          >", try adding something from the home page or in the search
+          {{ $vuetify.locale.getScope().t("favorites.missing") }}
         </v-expansion-panel-text>
       </div>
     </v-expansion-panel>
@@ -58,17 +66,17 @@ export default defineComponent({
   async setup() {
     const lists: IList[] = [
       {
-        name: "Readlist",
+        name: "readlist",
         items: await getList().catch(() => {
           return {};
         }),
       },
       {
-        name: "Recommended by friends",
+        name: "recommended",
         items: {},
       },
       {
-        name: "Recommended based on your taste",
+        name: "taste",
         items: {},
       },
     ];
