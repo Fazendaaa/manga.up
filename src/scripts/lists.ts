@@ -26,4 +26,10 @@ export const addToReadList = async (mangaID: string): Promise<boolean> => {
 };
 
 export const getList = async (): Promise<IReadlist> =>
-  (await readFromDatabase(OBJECT_STORE, ID))["data"] as IReadlist;
+  readFromDatabase(OBJECT_STORE, ID).then((response) => {
+    if (undefined !== response) {
+      return response["data"] as IReadlist;
+    }
+
+    throw new Error("Undefined response in list");
+  });

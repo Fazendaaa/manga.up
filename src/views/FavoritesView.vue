@@ -1,23 +1,32 @@
 <template>
   <div class="ma-4 pa-4">
-    <Suspense>
+    <div v-if="error">Error while loading favorites</div>
+    <Suspense v-else>
       <template #default>
         <Collection />
       </template>
-      <template #fallback> loading lists... </template>
+      <template #fallback>
+        <v-progress-linear
+          color="orange"
+          indeterminate
+          reverse
+        ></v-progress-linear>
+      </template>
     </Suspense>
-    <v-btn to="{ name: 'ReadList' }">
-      <v-icon>mdi-format-list-text</v-icon>
-      <span> Create a Readlist </span>
-    </v-btn>
-    <v-btn to="{ name: 'ReadList' }">
-      <v-icon>mdi-folder-upload-outline</v-icon>
-      <span> Upload a Readlist </span>
-    </v-btn>
+    <div>
+      <v-btn to="{ name: 'ReadList' }">
+        <v-icon>mdi-format-list-text</v-icon>
+        <span> Create a Readlist </span>
+      </v-btn>
+      <v-btn to="{ name: 'ReadList' }">
+        <v-icon>mdi-folder-upload-outline</v-icon>
+        <span> Upload a Readlist </span>
+      </v-btn>
+    </div>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, onErrorCaptured, ref } from "vue";
 import Collection from "@/components/Collection.vue";
 
 export default defineComponent({
@@ -25,6 +34,24 @@ export default defineComponent({
 
   components: {
     Collection,
+  },
+
+  setup() {
+    const error = ref(false);
+    const errorMessage = ref("");
+    const cached = false;
+
+    onErrorCaptured((e) => {
+      errorMessage.value = `${e}`;
+      error.value = true;
+      return true;
+    });
+
+    return {
+      error,
+      cached,
+      errorMessage,
+    };
   },
 });
 </script>
