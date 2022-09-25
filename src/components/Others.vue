@@ -1,16 +1,22 @@
 <template>
-  <h1>Find out more about it at:</h1>
-  <div align="center">
-    <v-btn
-      v-for="link in links"
-      :key="link.name"
-      :href="link.value"
-      target="_blank"
-    >
-      <v-icon>{{ link.name }}</v-icon>
-      <span>{{ link.name }}</span>
-    </v-btn>
-  </div>
+  <v-card>
+    <v-card-title>
+      {{ $vuetify.locale.getScope().t("info.sources") }}:
+    </v-card-title>
+    <v-card-text>
+      <div align="center">
+        <v-btn
+          v-for="link in links"
+          :key="link.name"
+          :href="link.value"
+          target="_blank"
+        >
+          <v-icon>{{ link.name }}</v-icon>
+          <span>{{ link.name }}</span>
+        </v-btn>
+      </div>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script lang="ts">

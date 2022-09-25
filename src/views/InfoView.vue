@@ -3,9 +3,15 @@
   <v-card>
     <v-toolbar>
       <v-tabs v-model="tab" dark background-color="primary" grow>
-        <v-tab value="details"> Details </v-tab>
-        <v-tab value="volumes"> Volumes </v-tab>
-        <v-tab value="others"> Others </v-tab>
+        <v-tab value="details">
+          {{ $vuetify.locale.getScope().t("info.details") }}
+        </v-tab>
+        <v-tab value="volumes">
+          {{ $vuetify.locale.getScope().t("info.volumes") }}
+        </v-tab>
+        <v-tab value="others">
+          {{ $vuetify.locale.getScope().t("info.others") }}
+        </v-tab>
       </v-tabs>
     </v-toolbar>
     <v-card-text>

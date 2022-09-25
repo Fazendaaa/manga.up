@@ -17,7 +17,7 @@ spec:
         application: manga-up
     spec:
       containers:
-        - image: fazenda/manga-up:secondary-ui-translated
+        - image: fazenda/manga-up:improved-info
           imagePullPolicy: Always
           name: manga-up
           ports:

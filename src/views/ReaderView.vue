@@ -1,6 +1,7 @@
 <template>
   <DisplayReader :id="id" :open="open" :page="page" />
   <NavigationReader :id="id" />
+  <ShareReader :id="id" />
 </template>
 
 <script lang="ts">
@@ -8,6 +9,7 @@ import { defineComponent, onErrorCaptured, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import DisplayReader from "@/views/Reader/DisplayReader.vue";
 import NavigationReader from "@/views/Reader/NavigationReader.vue";
+import ShareReader from "./Reader/ShareReader.vue";
 
 const stringToBoolean = (value: string): boolean => {
   if (undefined === value || "" === value) {
@@ -23,6 +25,7 @@ export default defineComponent({
   components: {
     DisplayReader,
     NavigationReader,
+    ShareReader,
   },
 
   setup() {

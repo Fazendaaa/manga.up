@@ -9,6 +9,7 @@ import favorites from "@/locales/pt/favorites";
 import settings from "@/locales/pt/settings";
 import display from "@/locales/pt/display";
 import addToFavorites from "@/locales/pt/addToFavorites";
+import info from "@/locales/pt/info";
 
 export default {
   intro,
@@ -21,5 +22,5 @@ export default {
   favorites,
   settings,
   display,
-  addToFavorites,
+  info,
 };

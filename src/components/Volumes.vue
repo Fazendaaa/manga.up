@@ -1,72 +1,75 @@
 <template>
-  <h1>Select a volume to read:</h1>
-  <br />
+  <v-card>
+    <v-card-title>
+      <v-row no-gutters dense>
+        <v-col> {{ $vuetify.locale.getScope().t("info.select") }}: </v-col>
+        <v-col>
+          <v-select
+            v-model="chosenTranslation"
+            :items="translations"
+            :label="$vuetify.locale.getScope().t('info.idiom')"
+            flat
+            solo
+          ></v-select>
+        </v-col>
+      </v-row>
+    </v-card-title>
 
-  <v-container>
-    <v-row no-gutters dense>
-      <v-col>
-        <h2 flat solo class="center">Select an available idiom to read:</h2>
-      </v-col>
-      <v-col>
-        <v-select
-          v-model="chosenTranslation"
-          :items="translations"
-          chips
-          flat
-          solo
-        ></v-select>
-      </v-col>
-    </v-row>
-  </v-container>
-
-  <v-container
-    v-for="rows in issues"
-    v-bind:key="rows"
-    class="grey lighten-5 mb-6"
-  >
-    <v-row align="center" align-content="center" no-gutters dense>
-      <v-col v-for="item in rows" :key="item">
-        <v-expansion-panels>
-          <v-expansion-panel>
-            <v-expansion-panel-title>
-              <template v-slot:default="{ expanded }">
-                <v-row no-gutters v-if="!expanded">
-                  {{ item["volume"] }}
-                </v-row>
-                <v-col cols="8" class="text-grey">
-                  <v-fade-transition leave-absolute>
-                    <span v-if="expanded" key="0">Now a chapter:</span>
-                  </v-fade-transition>
-                </v-col>
-              </template>
-            </v-expansion-panel-title>
-            <v-expansion-panel-text class="scroll">
-              <v-card-text>
-                <v-btn
-                  v-for="chapter in item['chapters']"
-                  :key="chapter"
-                  outlined
-                  block
-                  :to="{ name: 'Reader', params: { id: chapter['id'] } }"
-                >
-                  {{ chapter["chapter"] }}
-                </v-btn>
-              </v-card-text>
-            </v-expansion-panel-text>
-          </v-expansion-panel>
-        </v-expansion-panels>
-      </v-col>
-    </v-row>
-  </v-container>
+    <v-card-text>
+      <v-row>
+        <v-container
+          v-for="(rows, indexA) in issues"
+          v-bind:key="indexA"
+          class="grey lighten-5 mb-6"
+        >
+          <v-row align="center" align-content="center" no-gutters dense>
+            <v-col v-for="(item, indexB) in rows" v-bind:key="indexB">
+              <v-expansion-panels>
+                <v-expansion-panel>
+                  <v-expansion-panel-title>
+                    <template v-slot:default="{ expanded }">
+                      <v-row no-gutters v-if="!expanded">
+                        {{ item["volume"] }}
+                      </v-row>
+                      <v-col cols="8" class="text-grey">
+                        <v-fade-transition leave-absolute>
+                          <span v-if="expanded" key="0">Now a chapter:</span>
+                        </v-fade-transition>
+                      </v-col>
+                    </template>
+                  </v-expansion-panel-title>
+                  <v-expansion-panel-text class="scroll">
+                    <v-card-text>
+                      <v-btn
+                        v-for="(chapter, indexC) in item['chapters']"
+                        v-bind:key="indexC"
+                        outlined
+                        block
+                        :to="{ name: 'Reader', params: { id: chapter['id'] } }"
+                      >
+                        {{ chapter["chapter"] }}
+                      </v-btn>
+                    </v-card-text>
+                  </v-expansion-panel-text>
+                </v-expansion-panel>
+              </v-expansion-panels>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-row>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, Ref, toRefs, watch } from "vue";
 import { getMangaIssues, getManga, IVolumes } from "@/scripts/mangadex";
+import { useLocale } from "vuetify/lib/framework.mjs";
 
 const updateTranslations = async (
   id: string,
-  translations?: string[]
+  missingVolume: string,
+  translations: string[]
 ): Promise<IVolumes[][]> => {
   const data = Object.entries(await getMangaIssues(id, translations));
   const numberOfColumns = 3;
@@ -85,7 +88,7 @@ const updateTranslations = async (
       issues[position].push(item);
       index += 1;
     } else {
-      item.volume = "No volume linked";
+      item.volume = missingVolume;
       issues[position] = [item];
     }
   }
@@ -106,20 +109,23 @@ export default defineComponent({
 
   async setup(props) {
     const { id } = toRefs(props);
+    const translator = useLocale();
+    const missingVolume = translator.t("info.missingVolume");
     const chosenTranslation = ref("");
     let issues: Ref<IVolumes[][]> = ref([]);
 
     watch(
       chosenTranslation,
-      async (current, previous) => {
+      async (current, _) => {
         issues.value = [];
-        issues.value = await updateTranslations(id.value, [current]);
+        issues.value = await updateTranslations(id.value, missingVolume, [
+          current,
+        ]);
       },
       { deep: true }
     );
     const translations = (await getManga(id.value)).attributes
       .availableTranslatedLanguages;
-    issues.value = await updateTranslations(id.value);
 
     return {
       issues,

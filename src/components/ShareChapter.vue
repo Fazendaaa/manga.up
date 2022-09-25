@@ -1,5 +1,4 @@
 <template>
-  <h3>{{ $vuetify.locale.getScope().t("info.share") }}:</h3>
   <ShareNetwork
     v-for="network in networks"
     :network="network.network"
@@ -21,11 +20,11 @@
 </template>
 
 <script lang="ts">
+import { getChapter } from "@/scripts/mangadex";
 import { defineComponent, toRefs } from "vue";
-import { getManga } from "@/scripts/manga";
 
 export default defineComponent({
-  name: "SocialMediaComponent",
+  name: "ShareChapterComponent",
 
   props: {
     id: {
@@ -37,16 +36,16 @@ export default defineComponent({
 
   async setup(props) {
     const { id } = toRefs(props);
-    const manga = await getManga(id.value);
-    const title = manga["attributes"]["title"]["en"];
+    const chapter = await getChapter(id.value.toLowerCase());
+    const title = chapter.attributes.title;
 
     return {
       sharing: {
-        url: `https://manga.up.fazenda.solutions/info/${id.value.toLowerCase()}`,
+        url: `https://manga.up.fazenda.solutions/reader/${id.value.toLowerCase()}`,
         title: `Read '${title}' now!`,
         description: "Read this and many others mangas at Manga.up!",
         quote: "'A new way to enjoy manga!' - Manga Up Creator",
-        hashtags: `MangaUp,Manga,${title}`,
+        hashtags: `MangaUp,Manga,${title.replace(" ", "")}`,
         twitterUser: "mangaupofficial",
       },
       networks: [

@@ -1,0 +1,15 @@
+export default {
+  details: "Details",
+  volumes: "Volumes",
+  others: "Others",
+  year: "Year",
+  rating: "Rating",
+  status: "Status",
+  tags: "Tags",
+  description: "Description",
+  share: "Share on",
+  sources: "Find out more about it at",
+  select: "Select a volume to read",
+  idiom: "Select an available idiom to read",
+  missingVolume: "No volume linked",
+};
