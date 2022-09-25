@@ -257,12 +257,12 @@ export const relativeIssues = (
   let firstChapter;
 
   for (const [_, searchVolume] of data) {
-    if ("0" !== volume.current.id) {
+    if ("0" !== chapter.current.id) {
       firstChapter = Number(Object.keys(searchVolume.chapters)[0]);
       volume.next.id = searchVolume.chapters[firstChapter].id;
       volume.next.number = searchVolume.volume;
 
-      if ("0" !== chapter.current.id) {
+      if ("0" === chapter.next.id) {
         chapter.next.id = searchVolume.chapters[firstChapter].id;
         chapter.next.number = searchVolume.chapters[firstChapter].chapter;
       }
@@ -280,7 +280,7 @@ export const relativeIssues = (
       if (chapterID === searchChapter.id) {
         chapter.previous = lastChapter;
         chapter.current.id = searchChapter.id;
-        chapter.current.number = searchChapter.id;
+        chapter.current.number = searchChapter.chapter;
 
         continue;
       }

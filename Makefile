@@ -3,7 +3,7 @@ export $(shell sed 's/=.*//' .env)
 REGISTRY_OWNER:=fazenda
 MULTIARCH:=false
 ARCHS:=linux/amd64
-PROJECT_TAG:=volumes-mobile-compatible
+PROJECT_TAG:=fix-navigation
 
 ifeq (true, $(MULTIARCH))
 	ARCHS:=linux/amd64,linux/arm64/v8
