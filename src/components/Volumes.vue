@@ -1,19 +1,18 @@
 <template>
   <v-card>
     <v-card-title>
-      <v-row no-gutters dense>
-        <v-col> {{ $vuetify.locale.getScope().t("info.select") }}: </v-col>
-        <v-col>
-          <v-select
-            v-model="chosenTranslation"
-            :items="translations"
-            :label="$vuetify.locale.getScope().t('info.idiom')"
-            flat
-            solo
-          ></v-select>
-        </v-col>
-      </v-row>
+      {{ $vuetify.locale.getScope().t("info.select") }}:
     </v-card-title>
+
+    <v-card-subtitle>
+      <v-select
+        v-model="chosenTranslation"
+        :items="translations"
+        :label="$vuetify.locale.getScope().t('info.idiom')"
+        flat
+        solo
+      />
+    </v-card-subtitle>
 
     <v-card-text>
       <v-row>
