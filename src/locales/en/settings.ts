@@ -8,4 +8,7 @@ export default {
   settings: {
     title: "Settings options",
   },
+  theme: {
+    title: "Themes options",
+  },
 };

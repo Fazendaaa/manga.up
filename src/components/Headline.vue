@@ -1,5 +1,5 @@
 <template>
-  <v-system-bar>
+  <v-system-bar color="secondary">
     <SelectLanguage />
     <v-icon icon="mdi-connection"></v-icon>
     <span class="caption text-lowercase"> Mangadex status: </span>
@@ -12,7 +12,7 @@
     </Suspense>
   </v-system-bar>
   <nav class="d-flex justify-center">
-    <v-toolbar flat app>
+    <v-toolbar flat app color="secondary">
       <v-toolbar-title class="text-uppercase grey--text">
         <span class="font-weight-light">Manga</span>
         <strong>.</strong>

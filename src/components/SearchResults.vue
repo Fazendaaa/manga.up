@@ -21,7 +21,7 @@
     <v-card-actions>
       <AddToFavorites :id="item.id" />
 
-      <v-spacer></v-spacer>
+      <v-spacer />
 
       <v-btn @click="show[item.id] = !show[item.id]">
         <v-icon

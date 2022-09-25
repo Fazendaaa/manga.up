@@ -2,6 +2,7 @@
   <v-no-ssr>
     <v-app :theme="this.$store.state.theme">
       <v-main>
+        <InstallBanner />
         <Headline />
         <NavBar />
         <v-layout style="z-index: 0">
@@ -29,6 +30,7 @@
 import { defineComponent, ref } from "vue";
 import NavBar from "@/components/NavBar.vue";
 import Headline from "@/components/Headline.vue";
+import InstallBanner from "@/components/InstallBanner.vue";
 
 export default defineComponent({
   name: "App",
@@ -36,6 +38,7 @@ export default defineComponent({
   components: {
     NavBar,
     Headline,
+    InstallBanner,
   },
 
   setup() {

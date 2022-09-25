@@ -28,7 +28,7 @@
             <v-card-actions>
               <RemoveFromFavorites :id="item.id" />
 
-              <v-spacer></v-spacer>
+              <v-spacer />
             </v-card-actions>
           </div>
 

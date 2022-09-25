@@ -5,17 +5,19 @@
     class="caption text-lowercase"
     v-html="$vuetify.locale.getScope().t('selectLanguage.ask')"
   />
-  <v-col align="left">
+  <v-col flex align="left">
     <v-select
       v-model="chosenTranslation"
       :items="translations"
-      style="max-height: 22px; max-width: 100px"
+      flex
+      style="max-height: 19px; max-width: 100px"
       density="compact"
-    ></v-select>
+    />
   </v-col>
 </template>
 
 <script lang="ts">
+import { availableTranslations } from "@/plugins/i18n";
 import { defineComponent, ref, watch } from "vue";
 import { useLocale } from "vuetify/lib/framework.mjs";
 
@@ -23,12 +25,13 @@ export default defineComponent({
   name: "SelectLanguageComponent",
 
   setup() {
-    const chosenTranslation = ref("");
     const { current } = useLocale();
-    const translations: string[] = [current.value, "pt"];
+    const chosenTranslation = ref(current.value);
+    const translations: string[] = availableTranslations;
 
     watch(chosenTranslation, (newTranslation) => {
       current.value = newTranslation;
+      localStorage.setItem("translation", newTranslation);
     });
 
     return {

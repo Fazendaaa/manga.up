@@ -12,6 +12,11 @@ module.exports = defineConfig({
     allowedHosts: "all",
   },
 
+  pwa: {
+    name: "Manga.Up",
+    color: "#FCFFE7",
+  },
+
   pluginOptions: {
     vuetify: {
       // https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vuetify-loader

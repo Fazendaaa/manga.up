@@ -70,6 +70,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 - [Leafplayer](https://github.com/paulschwoerer/leafplayer)
 - [Vue Storefront](https://github.com/vuestorefront/vue-storefront)
+- [colorhunt.co/palette/](https://colorhunt.co/)
 
 ### Tutorials
 
@@ -87,3 +88,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - [How to add Social Media Sharing Links to a Vue Website](https://dev.to/lindaojo/how-to-add-social-media-sharing-links-to-a-vue-website-5d3l)
 - [Suspense – new feature in Vue 3](https://vueschool.io/articles/vuejs-tutorials/suspense-new-feature-in-vue-3/)
 - [Vue Charts: Line Series](https://www.ag-grid.com/vue-charts/line-series/)
+- [Promoting Your Vue.js PWA Installation](https://medium.com/js-dojo/promoting-your-vue-js-pwa-installation-6bd112342c19)

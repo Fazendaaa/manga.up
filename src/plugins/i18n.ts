@@ -8,11 +8,16 @@ const messages = {
   pt,
 };
 
+export const availableTranslations = ["en", "pt"];
+
 export const i18n = createI18n({
-  legacy: false,
-  locale: "en",
-  fallbackLocale: "en",
+  locale:
+    undefined !== localStorage.getItem("translation")
+      ? (localStorage.getItem("translation") as string)
+      : "en",
   messages,
+  legacy: false,
+  fallbackLocale: "en",
 });
 
 export const locale = createVueI18nAdapter({ i18n, useI18n });
