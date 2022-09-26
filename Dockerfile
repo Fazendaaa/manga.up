@@ -48,7 +48,7 @@ COPY --from=TESTS /usr/src/ .
 ARG VUE_APP_CORS_PROXY=${VUE_APP_CORS_PROXY}
 
 RUN [ "npm", "run", "build" ]
-RUN [ "npm", "run", "appendIcons" ]
+# RUN [ "npm", "run", "appendIcons" ]
 
 
 
@@ -61,6 +61,6 @@ COPY --from=BUILD /usr/src/dist/ .
 
 RUN [ "npm", "install", "--global", "serve" ]
 
-ENTRYPOINT [ "serve", "--single", "--listen", "tcp://0.0.0.0:80", "." ]
+ENTRYPOINT [ "serve", "--single", "--listen", "80", "." ]
 
 EXPOSE 80
