@@ -7,9 +7,7 @@
       </v-expansion-panel-title>
       <v-expansion-panel-text>
         <v-avatar size="180" class="grey lighten-2">
-          <v-img
-            src="https://github.com/Fazendaaa/manga.up/blob/master/public/img/icons/android-chrome-pwa-512x512.png?raw=true"
-          />
+          <v-img :src="src" />
         </v-avatar>
       </v-expansion-panel-text>
     </v-expansion-panel>
@@ -17,9 +15,16 @@
 </template>
 
 <script lang="ts">
+import { MISSING_IMAGE } from "@/scripts/mangadex";
 import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "LoginView",
+
+  setup() {
+    return {
+      src: MISSING_IMAGE,
+    };
+  },
 });
 </script>

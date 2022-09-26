@@ -7,6 +7,7 @@ import { loadFonts } from "./plugins/webfontloader";
 import { i18n } from "./plugins/i18n";
 import VueSocialSharing from "vue-social-sharing";
 import Markdown from "vue3-markdown-it";
+import "./registerServiceWorker";
 
 loadFonts();
 

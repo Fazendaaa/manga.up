@@ -45,11 +45,10 @@ FROM node:18.9.0-alpine3.15 AS BUILD
 WORKDIR /usr/src
 COPY --from=TESTS /usr/src/ .
 
-ARG VUE_APP_MD_TOKEN_SESSION=${VUE_APP_MD_TOKEN_SESSION}
-ARG VUE_APP_MD_TOKEN_SESSION=${VUE_APP_MD_TOKEN_SESSION}
 ARG VUE_APP_CORS_PROXY=${VUE_APP_CORS_PROXY}
 
 RUN [ "npm", "run", "build" ]
+RUN [ "npm", "run", "appendIcons" ]
 
 
 

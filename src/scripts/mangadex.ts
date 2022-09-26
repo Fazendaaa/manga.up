@@ -10,6 +10,7 @@ import {
   getMangaStatistics,
 } from "./manga";
 import { status } from "./server";
+import { MISSING_IMAGE } from "./utils";
 import {
   IManga,
   IRelationships,
@@ -34,4 +35,5 @@ export {
   getMangaIssues,
   getChapterImages,
   getMangaStatistics,
+  MISSING_IMAGE,
 };

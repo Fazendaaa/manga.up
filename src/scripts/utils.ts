@@ -14,8 +14,7 @@ export const blobToBase64 = (blob: Blob): Promise<string> => {
 export const base64ToBlob = (base64: string): Promise<Blob> =>
   fetch(base64).then((res) => res.blob());
 
-export const MISSING_IMAGE =
-  "https://github.com/Fazendaaa/manga.up/blob/master/public/img/icons/android-chrome-pwa-512x512.png?raw=true";
+export const MISSING_IMAGE = "img/splash_screens/icon.png";
 
 // https://stackoverflow.com/a/20965997/7092954
 // https://stackoverflow.com/a/4409745/7092954

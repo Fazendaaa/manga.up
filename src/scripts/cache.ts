@@ -115,7 +115,7 @@ export const cacheImage = async (
     .then((response) => readImage(objectStorage, response))
     .then((imageData) => {
       if (null === imageData) {
-        return "https://github.com/Fazendaaa/manga.up/blob/master/public/img/icons/android-chrome-pwa-512x512.png?raw=true";
+        return MISSING_IMAGE;
       }
 
       return imageData;
@@ -123,7 +123,7 @@ export const cacheImage = async (
     .catch((error) => {
       console.error(error);
 
-      return "https://github.com/Fazendaaa/manga.up/blob/master/public/img/icons/android-chrome-pwa-512x512.png?raw=true";
+      return MISSING_IMAGE;
     });
 };
 

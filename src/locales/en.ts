@@ -10,6 +10,7 @@ import settings from "@/locales/en/settings";
 import display from "@/locales/en/display";
 import addToFavorites from "@/locales/en/addToFavorites";
 import info from "@/locales/en/info";
+import install from "@/locales/en/install";
 
 export default {
   intro,
@@ -24,4 +25,5 @@ export default {
   display,
   addToFavorites,
   info,
+  install,
 };

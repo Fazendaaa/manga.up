@@ -56,7 +56,7 @@ export const dark = {
     secondary: "#423F3E",
     "secondary-darken-1": "#E0C097",
     error: "#B00020",
-    info: "#2E0249",
+    info: "#4CAF50",
     success: "#4CAF50",
     warning: "#E0C097",
   },
