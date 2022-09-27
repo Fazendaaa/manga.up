@@ -3,7 +3,7 @@
     <v-expansion-panel>
       <v-expansion-panel-title>Statistics:</v-expansion-panel-title>
       <v-expansion-panel-text>
-        <v-container class="my-5">
+        <v-container :class="{ 'ma-0 pa-0': $vuetify.display.xs }">
           <div>
             <strong>Follows:</strong>
             {{ follows }}

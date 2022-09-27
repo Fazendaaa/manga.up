@@ -16,7 +16,7 @@
             location="right"
           ></v-navigation-drawer>
           <v-main>
-            <div class="ma-4 pa-4">
+            <div :class="{ 'ma-4 pa-4': !$vuetify.display.xs }">
               <router-view :key="$route.path" />
             </div>
           </v-main>
@@ -53,7 +53,7 @@ export default defineComponent({
         this.width = 300;
         return;
       } else {
-        this.width = 465;
+        this.width = 750;
         return;
       }
     },

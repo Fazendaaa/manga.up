@@ -1,10 +1,10 @@
 <template>
   <v-card>
-    <v-card-title>
+    <v-card-title :class="{ 'ma-0 pa-0': $vuetify.display.xs }">
       {{ $vuetify.locale.getScope().t("info.select") }}:
     </v-card-title>
 
-    <v-card-subtitle>
+    <v-card-subtitle :class="{ 'ma-0 pa-0': $vuetify.display.xs }">
       <v-select
         v-model="chosenTranslation"
         :items="translations"
@@ -14,7 +14,7 @@
       />
     </v-card-subtitle>
 
-    <v-card-text>
+    <v-card-text :class="{ 'ma-0 pa-0': $vuetify.display.xs }">
       <v-row>
         <v-container
           v-for="(rows, indexA) in issues"

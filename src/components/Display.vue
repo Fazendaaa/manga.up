@@ -1,5 +1,12 @@
 <template>
-  <h1 class="subheading grey--text">{{ header }}</h1>
+  <h1
+    :class="{
+      // 'ma-9 pa-9': $vuetify.display.xs,
+      'subheading grey--text': !$vuetify.display.xs,
+    }"
+  >
+    {{ header }}
+  </h1>
 
   <v-carousel cycle hide-delimiter-background>
     <v-carousel-item row v-for="(rowSub, index) in subjects" :key="index">

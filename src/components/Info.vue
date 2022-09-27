@@ -1,8 +1,9 @@
 <template>
   <v-card>
+    <v-img class="hidden-lg-and-up" max-height="230" :src="src" cover />
     <v-row>
-      <v-col>
-        <v-card-text>
+      <v-col :class="{ 'ma-0 pa-0': $vuetify.display.xs }">
+        <v-card-text max-width="500">
           <strong>{{ $vuetify.locale.getScope().t("info.rating") }}: </strong>
           {{ manga["attributes"]["contentRating"] }}
           <v-divider class="mx-4 mb-1" />
@@ -25,24 +26,31 @@
           </strong>
           <Markdown :source="manga['attributes']['description']['en']" />
         </v-card-text>
+
+        <AddToFavorites v-if="added" :id="id" />
+        <RemoveFromFavorites v-else :id="id" />
       </v-col>
-      <v-col>
-        <v-img :src="src" cover />
+      <v-col class="hidden-xs" align="right">
+        <v-img :src="src" max-width="300" cover />
       </v-col>
     </v-row>
   </v-card>
 </template>
 
 <script lang="ts">
-import { defineComponent, toRefs } from "vue";
+import { defineComponent, ref, toRefs } from "vue";
 import { getManga, searchMangaCoverPreview } from "@/scripts/mangadex";
 import Markdown from "vue3-markdown-it";
+import AddToFavorites from "./AddToFavorites.vue";
+import RemoveFromFavorites from "./RemoveFromFavorites.vue";
 
 export default defineComponent({
   name: "InfoComponent",
 
   components: {
     Markdown,
+    AddToFavorites,
+    RemoveFromFavorites,
   },
 
   props: {
@@ -60,9 +68,11 @@ export default defineComponent({
       (relationship) => "cover_art" === relationship.type
     )[0];
     const src = await searchMangaCoverPreview(manga["id"], cover["id"]);
+    const added = ref(false);
 
     return {
       src,
+      added,
       manga,
     };
   },
