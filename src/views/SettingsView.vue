@@ -1,8 +1,10 @@
 <template>
-  <User />
-  <Login />
-  <Settings />
-  <Themes />
+  <div :class="{ center: $vuetify.display.xs }">
+    <User />
+    <Login />
+    <Settings />
+    <Themes />
+  </div>
 </template>
 
 <script lang="ts">
@@ -22,3 +24,11 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="scss" scoped>
+.center {
+  position: fixed;
+  top: 35%;
+  width: 100%;
+}
+</style>

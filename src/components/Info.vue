@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <v-img class="hidden-lg-and-up" max-height="230" :src="src" cover />
+    <v-img class="hidden-sm-and-up" max-height="230" :src="src" cover />
     <v-row>
       <v-col :class="{ 'ma-0 pa-0': $vuetify.display.xs }">
         <v-card-text max-width="500">
@@ -24,7 +24,19 @@
           <strong
             >{{ $vuetify.locale.getScope().t("info.description") }}:
           </strong>
-          <Markdown :source="manga['attributes']['description']['en']" />
+          <Markdown
+            :source="
+              manga['attributes']['description']['en'].slice(0, limitCharacters)
+            "
+          />
+          <v-btn
+            variant="outlined"
+            size="x-small"
+            class="ma-0 pa-0 d-flex"
+            @click="showingFullText = !showingFullText"
+          >
+            Read {{ showingFullText ? "Less" : "More" }}
+          </v-btn>
         </v-card-text>
 
         <AddToFavorites v-if="added" :id="id" />
@@ -38,7 +50,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, toRefs } from "vue";
+import { defineComponent, ref, toRefs, watch } from "vue";
 import { getManga, searchMangaCoverPreview } from "@/scripts/mangadex";
 import Markdown from "vue3-markdown-it";
 import AddToFavorites from "./AddToFavorites.vue";
@@ -63,17 +75,27 @@ export default defineComponent({
 
   async setup(props) {
     const { id } = toRefs(props);
+    const added = ref(false);
+    const showingFullText = ref(false);
+    const maxCharacters = 200;
+    const limitCharacters = ref<number | undefined>(maxCharacters);
+
+    watch(showingFullText, (show) => {
+      limitCharacters.value = show ? undefined : maxCharacters;
+    });
+
     const manga = await getManga(id.value);
     const cover = manga["relationships"].filter(
       (relationship) => "cover_art" === relationship.type
     )[0];
     const src = await searchMangaCoverPreview(manga["id"], cover["id"]);
-    const added = ref(false);
 
     return {
       src,
       added,
       manga,
+      showingFullText,
+      limitCharacters,
     };
   },
 });
