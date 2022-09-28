@@ -1,0 +1,33 @@
+{
+  "name": "manga.up",
+  "version": "0.0.0",
+  "description": "The mobile first manga reader web app",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fazendaaa/manga.up.git"
+  },
+  "keywords": [
+    "docker"
+  ],
+  "author": "https://github.com/Fazendaaa/",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/Fazendaaa/manga.up/issues"
+  },
+  "homepage": "https://github.com/Fazendaaa/manga.up#readme",
+  "contributors": [
+    {
+      "name": "Fazendaaa",
+      "url": "https://twitter.com/the_fznd",
+      "img": "https://avatars2.githubusercontent.com/u/12137236?s=460&u=75ec76d6f0c577de2ebfa4eae77cc4c4ad17ec06&v=4"
+    },
+    {
+      "name": "You?",
+      "img": "https://joeschmoe.io/api/v1/random",
+      "url": "https://github.com/andreasbm/web-config/blob/master/CONTRIBUTING.md"
+    }
+  ]
+}

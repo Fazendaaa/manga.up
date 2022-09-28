@@ -1,7 +1,4 @@
-<!-- ⚠️ This README has been generated from the file(s) "docs/README.md" ⚠️-->
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/water.png)](#mangaup)
-
-# ➤ manga.up
+# manga.up
 
 <div align="center">
   <img width="256" src="public/img/icons/android-chrome-pwa-512x512.png">
@@ -33,10 +30,7 @@
     - [Inspirations](#inspirations)
     - [Tutorials](#tutorials)
 
-
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/water.png)](#alternatives)
-
-## ➤ Alternatives
+## Alternatives
 
 - [MangaDex](https://mangadex.org/)
 - [Tachiyomi](https://tachiyomi.org/)
@@ -49,10 +43,7 @@
 - [cubari](https://cubari.moe/)
 - [mangahere](https://www.mangahere.cc/)
 
-
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/water.png)](#screens)
-
-## ➤ Screens
+## Screens
 
 <div align="center">
   <img width="300" src="docs/assets/gif/info.gif">
@@ -65,35 +56,15 @@
   <img width="300" src="docs/assets/gif/tablet.gif">
 </div>
 
-
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/water.png)](#contributing)
-
-## ➤ Contributing
+## Contributing
 
 Check more about this in [CONTRIBUTING.md](CONTRIBUTING.md). Here we have a list of some of our contributors:
 
+{{ template:contributors }}
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/water.png)](#contributors)
+{{ template:license }}
 
-## ➤ Contributors
-	
-
-| [<img alt="Fazendaaa" src="https://avatars2.githubusercontent.com/u/12137236?s=460&u=75ec76d6f0c577de2ebfa4eae77cc4c4ad17ec06&v=4" width="100">](https://twitter.com/the_fznd) | [<img alt="You?" src="https://joeschmoe.io/api/v1/random" width="100">](https://github.com/andreasbm/web-config/blob/master/CONTRIBUTING.md) |
-|:--------------------------------------------------:|:--------------------------------------------------:|
-| [Fazendaaa](https://twitter.com/the_fznd)        | [You?](https://github.com/andreasbm/web-config/blob/master/CONTRIBUTING.md) |
-
-
-
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/water.png)](#license)
-
-## ➤ License
-	
-Licensed under [GPL-2.0](https://opensource.org/licenses/GPL-2.0).
-
-
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/water.png)](#code)
-
-## ➤ Code
+## Code
 
 This is probably the ugliest Vue 3 + Vuetify 3 in existence, but is my first time coding a front-end application; so feel free to judge, yell but have the decency to at least reference a better approach or share some code here showing how to improve it.
 
@@ -137,10 +108,7 @@ npm run lint
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/water.png)](#references)
-
-## ➤ References
+## References
 
 ### Others
 

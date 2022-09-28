@@ -17,7 +17,7 @@ spec:
         application: manga-up
     spec:
       containers:
-        - image: fazenda/manga-up:improved-mobile-centering
+        - image: fazenda/manga-up:fixing-icons-support
           imagePullPolicy: Always
           name: manga-up
           ports:

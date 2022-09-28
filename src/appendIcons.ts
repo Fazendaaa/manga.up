@@ -16,7 +16,6 @@ manifest.icons = [...manifest.icons, ...icons.icons].map((icon) => {
     ...icon,
     src,
     type: "image/png",
-    purpose: "maskable",
   };
 });
 

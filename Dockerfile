@@ -48,7 +48,7 @@ COPY --from=TESTS /usr/src/ .
 ARG VUE_APP_CORS_PROXY=${VUE_APP_CORS_PROXY}
 
 RUN [ "npm", "run", "build" ]
-# RUN [ "npm", "run", "appendIcons" ]
+RUN [ "npm", "run", "appendIcons" ]
 
 
 

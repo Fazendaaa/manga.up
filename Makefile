@@ -3,7 +3,7 @@ export $(shell sed 's/=.*//' .env)
 REGISTRY_OWNER:=fazenda
 MULTIARCH:=false
 ARCHS:=linux/amd64
-PROJECT_TAG:=improved-mobile-centering
+PROJECT_TAG:=fixing-icons-support
 
 ifeq (true, $(MULTIARCH))
 	ARCHS:=linux/amd64,linux/arm64/v8
@@ -77,3 +77,26 @@ update: local
 
 prod:
 	@docker-compose up --build --remove-orphans
+
+build-docs:
+	@docker buildx build \
+		--file docs/Dockerfile \
+		--platform linux/amd64 \
+		--push --tag ${REGISTRY_OWNER}/appnest \
+		docs/
+
+doc:
+	@docker run --rm \
+		--volume ${PWD}:${PWD} \
+		--workdir ${PWD} ${REGISTRY_OWNER}/appnest \
+		--package docs/package.json \
+		--config docs/blueprint.json \
+		--input docs/README.pt.md \
+		--output README.pt.md
+	@docker run --rm \
+		--volume ${PWD}:${PWD} \
+		--workdir ${PWD} ${REGISTRY_OWNER}/appnest \
+		--package docs/package.json \
+		--config docs/blueprint.json \
+		--input docs/README.md \
+		--output README.md
