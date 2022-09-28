@@ -19,6 +19,7 @@
     - [Reader](#reader)
     - [Search](#search)
     - [Themes](#themes)
+    - [Tablet](#tablet)
   - [Code](#code)
     - [Project setup](#project-setup)
       - [Compiles and hot-reloads for development](#compiles-and-hot-reloads-for-development)
@@ -70,6 +71,12 @@
 
 <div align="center">
   <img width="300" src="docs/assets/gif/themes.gif">
+</div>
+
+### Tablet
+
+<div align="center">
+  <img width="300" src="docs/assets/gif/tablet.gif">
 </div>
 
 ## Code
