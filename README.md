@@ -1,6 +1,37 @@
 # manga.up
 
-This is probably the ugliest Vue 3 + Vuetify 3 in existence, but is my first time coding a front-end application; so feel free to judge, yell but have the decency to at least reference a better approach or share some code here showing how to improve it.
+<div align="center">
+  <img width="256" src="public/img/icons/android-chrome-pwa-512x512.png">
+  <p>
+  The mobile first website for a manga reader application!
+
+  </p>
+</div>
+
+<div align="center">
+  <img width="300" src="docs/assets/gif/main.gif">
+</div>
+
+- [manga.up](#mangaup)
+  - [Alternatives](#alternatives)
+  - [Screens](#screens)
+    - [Info](#info)
+    - [Reader](#reader)
+    - [Search](#search)
+    - [Themes](#themes)
+  - [Code](#code)
+    - [Project setup](#project-setup)
+      - [Compiles and hot-reloads for development](#compiles-and-hot-reloads-for-development)
+      - [Compiles and minifies for production](#compiles-and-minifies-for-production)
+      - [Run your unit tests](#run-your-unit-tests)
+      - [Run your end-to-end tests](#run-your-end-to-end-tests)
+      - [Lints and fixes files](#lints-and-fixes-files)
+      - [Customize configuration](#customize-configuration)
+  - [References](#references)
+    - [Others](#others)
+    - [BlogPosts](#blogposts)
+    - [Inspirations](#inspirations)
+    - [Tutorials](#tutorials)
 
 ## Alternatives
 
@@ -15,43 +46,73 @@ This is probably the ugliest Vue 3 + Vuetify 3 in existence, but is my first tim
 - [cubari](https://cubari.moe/)
 - [mangahere](https://www.mangahere.cc/)
 
-## Project setup
+## Screens
+
+### Info
+
+<div align="center">
+  <img width="300" src="docs/assets/gif/info.gif">
+</div>
+
+### Reader
+
+<div align="center">
+  <img width="300" src="docs/assets/gif/reader.gif">
+</div>
+
+### Search
+
+<div align="center">
+  <img width="300" src="docs/assets/gif/search.gif">
+</div>
+
+### Themes
+
+<div align="center">
+  <img width="300" src="docs/assets/gif/themes.gif">
+</div>
+
+## Code
+
+This is probably the ugliest Vue 3 + Vuetify 3 in existence, but is my first time coding a front-end application; so feel free to judge, yell but have the decency to at least reference a better approach or share some code here showing how to improve it.
+
+### Project setup
 
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+#### Compiles and hot-reloads for development
 
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+#### Compiles and minifies for production
 
 ```
 npm run build
 ```
 
-### Run your unit tests
+#### Run your unit tests
 
 ```
 npm run test:unit
 ```
 
-### Run your end-to-end tests
+#### Run your end-to-end tests
 
 ```
 npm run test:e2e
 ```
 
-### Lints and fixes files
+#### Lints and fixes files
 
 ```
 npm run lint
 ```
 
-### Customize configuration
+#### Customize configuration
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
