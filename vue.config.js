@@ -14,7 +14,8 @@ module.exports = defineConfig({
 
   pwa: {
     name: "Manga.Up",
-    color: "#6fbece",
+    themeColor: "#6fbece",
+    msTileColor: "#6fbece",
   },
 
   pluginOptions: {

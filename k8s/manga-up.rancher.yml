@@ -17,7 +17,7 @@ spec:
         application: manga-up
     spec:
       containers:
-        - image: fazenda/manga-up:fixing-icons-support
+        - image: fazenda/manga-up:adding-assetlink
           imagePullPolicy: Always
           name: manga-up
           ports:

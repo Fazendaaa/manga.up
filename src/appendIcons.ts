@@ -5,18 +5,10 @@ const fs = require("fs");
 
 const manifestPath = "dist/manifest.json";
 
-const icons = JSON.parse(fs.readFileSync("public/img/icons.json"));
+const icons = JSON.parse(fs.readFileSync("public/icons.json"));
 const manifest = JSON.parse(fs.readFileSync(manifestPath));
 
 // Update to icons generate by PWA Builder
-manifest.icons = [...manifest.icons, ...icons.icons].map((icon) => {
-  const src = icon.src.includes("./img/") ? icon.src : `./img/${icon.src}`;
-
-  return {
-    ...icon,
-    src,
-    type: "image/png",
-  };
-});
+manifest.icons = [...manifest.icons, ...icons.icons];
 
 fs.writeFileSync(manifestPath, JSON.stringify(manifest));
