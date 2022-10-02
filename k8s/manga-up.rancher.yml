@@ -17,7 +17,7 @@ spec:
         application: manga-up
     spec:
       containers:
-        - image: fazenda/manga-up:adding-assetlink
+        - image: fazenda/manga-up:fixing-missing-img
           imagePullPolicy: Always
           name: manga-up
           ports:
