@@ -43,7 +43,7 @@
             </v-card-text>
           </router-link>
           <v-card-actions class="justify-center align-baseline">
-            <AddToFavorites :id="subject.id" />
+            <Favorites :id="subject.id" />
           </v-card-actions>
         </v-card>
       </v-layout>
@@ -54,7 +54,7 @@
 <script lang="ts">
 import { toRefs, defineComponent, ref, watch } from "vue";
 import { IManga, searchMangaCoverPreview } from "@/scripts/mangadex";
-import AddToFavorites from "./AddToFavorites.vue";
+import Favorites from "./Favorites.vue";
 
 export interface IDisplay {
   id: string;
@@ -133,7 +133,7 @@ export default defineComponent({
   name: "DisplayComponent",
 
   components: {
-    AddToFavorites,
+    Favorites,
   },
 
   props: {

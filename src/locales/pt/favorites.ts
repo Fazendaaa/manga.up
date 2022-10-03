@@ -1,6 +1,7 @@
 export default {
   error: "Erro ao carregar os favoritos",
   buttons: {
+    scan: "Scaneie Lista de Leitura",
     create: "Crie uma Lista de Leitura",
     upload: "Carregue uma Lista de Leitura",
   },
@@ -19,4 +20,7 @@ export default {
     },
   },
   missing: "Procure favoritar alguma coisa da pagina inicial ou da pesquisa",
+  share: "Compartilhe esta lista",
+  export: "Exporte esta lista",
+  seeAll: "Veja toda a lista",
 };

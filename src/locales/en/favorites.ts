@@ -1,6 +1,7 @@
 export default {
   error: "Error while loading favorites",
   buttons: {
+    scan: "Scan a Readlist",
     create: "Create a Readlist",
     upload: "Upload a Readlist",
   },
@@ -19,4 +20,7 @@ export default {
     },
   },
   missing: "Try adding something from the home page or in the search",
+  share: "Share this list",
+  export: "Export this list",
+  seeAll: "See all this list",
 };

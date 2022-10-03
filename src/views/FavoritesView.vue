@@ -9,20 +9,22 @@
         <Collection />
       </template>
       <template #fallback>
-        <v-progress-linear
-          color="orange"
-          indeterminate
-          reverse
-        ></v-progress-linear>
+        <v-progress-linear color="orange" indeterminate reverse />
       </template>
     </Suspense>
     <div>
+      <v-btn :to="{ name: 'Scan' }">
+        <v-icon>mdi-qrcode-scan</v-icon>
+        <span v-html="$vuetify.locale.getScope().t('favorites.buttons.scan')" />
+      </v-btn>
+
       <v-btn to="{ name: 'ReadList' }">
         <v-icon>mdi-format-list-text</v-icon>
         <span
           v-html="$vuetify.locale.getScope().t('favorites.buttons.create')"
         />
       </v-btn>
+
       <v-btn to="{ name: 'ReadList' }">
         <v-icon>mdi-folder-upload-outline</v-icon>
         <span

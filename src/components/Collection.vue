@@ -26,14 +26,23 @@
             ></template>
           </Suspense>
 
-          <v-btn to="{ name: 'ReadList' }">
+          <v-btn :to="{ name: 'Share', params: { name: item.name } }">
             <v-icon>mdi-share-all</v-icon>
-            <span> Share this list </span>
+            <span> {{ $vuetify.locale.getScope().t("favorites.share") }} </span>
           </v-btn>
 
-          <v-btn to="{ name: 'ReadList' }">
+          <v-btn @click="exportList(item)">
             <v-icon>mdi-tray-arrow-down</v-icon>
-            <span> Export this list </span>
+            <span>
+              {{ $vuetify.locale.getScope().t("favorites.export") }}
+            </span>
+          </v-btn>
+
+          <v-btn :to="{ name: 'List', params: { name: item.name } }">
+            <v-icon>mdi-format-list-checks</v-icon>
+            <span>
+              {{ $vuetify.locale.getScope().t("favorites.seeAll") }}
+            </span>
           </v-btn>
         </v-expansion-panel-text>
       </div>
@@ -49,12 +58,16 @@
 <script lang="ts">
 import { getList, IReadlist } from "@/scripts/lists";
 import { defineComponent } from "vue";
+import download from "downloadjs";
 import ListResults from "./ListResults.vue";
 
 interface IList {
   name: string;
   items: IReadlist;
 }
+
+const exportList = (list: IList) =>
+  download(JSON.stringify(list), `${list.name}.json`, "text/plain");
 
 export default defineComponent({
   name: "CollectionComponent",
@@ -80,8 +93,10 @@ export default defineComponent({
         items: {},
       },
     ];
+
     return {
       lists,
+      exportList,
     };
   },
 });

@@ -39,8 +39,7 @@
           </v-btn>
         </v-card-text>
 
-        <AddToFavorites v-if="added" :id="id" />
-        <RemoveFromFavorites v-else :id="id" />
+        <Favorites :id="id" />
       </v-col>
       <v-col class="hidden-xs" align="right">
         <v-img :src="src" max-width="300" cover />
@@ -53,16 +52,14 @@
 import { defineComponent, ref, toRefs, watch } from "vue";
 import { getManga, searchMangaCoverPreview } from "@/scripts/mangadex";
 import Markdown from "vue3-markdown-it";
-import AddToFavorites from "./AddToFavorites.vue";
-import RemoveFromFavorites from "./RemoveFromFavorites.vue";
+import Favorites from "./Favorites.vue";
 
 export default defineComponent({
   name: "InfoComponent",
 
   components: {
     Markdown,
-    AddToFavorites,
-    RemoveFromFavorites,
+    Favorites,
   },
 
   props: {
@@ -75,7 +72,6 @@ export default defineComponent({
 
   async setup(props) {
     const { id } = toRefs(props);
-    const added = ref(false);
     const showingFullText = ref(false);
     const maxCharacters = 200;
     const limitCharacters = ref<number | undefined>(maxCharacters);
@@ -92,7 +88,6 @@ export default defineComponent({
 
     return {
       src,
-      added,
       manga,
       showingFullText,
       limitCharacters,

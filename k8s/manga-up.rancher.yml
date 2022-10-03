@@ -17,7 +17,7 @@ spec:
         application: manga-up
     spec:
       containers:
-        - image: fazenda/manga-up:fixing-missing-img
+        - image: fazenda/manga-up:starting-qr-support
           imagePullPolicy: Always
           name: manga-up
           ports:

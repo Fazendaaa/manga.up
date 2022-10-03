@@ -19,7 +19,7 @@
     </router-link>
 
     <v-card-actions>
-      <AddToFavorites :id="item.id" />
+      <Favorites :id="item.id" />
 
       <v-spacer />
 
@@ -57,7 +57,7 @@ import {
   searchMangaCoverPreview,
 } from "@/scripts/mangadex";
 import { defineComponent, ref, toRefs, watch } from "vue";
-import AddToFavorites from "./AddToFavorites.vue";
+import Favorites from "./Favorites.vue";
 
 interface IShow {
   [id: string]: boolean;
@@ -102,7 +102,7 @@ export default defineComponent({
   },
 
   components: {
-    AddToFavorites,
+    Favorites,
   },
 
   setup(props) {

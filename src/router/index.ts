@@ -55,6 +55,24 @@ const routes: Array<RouteRecordRaw> = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
   },
+  {
+    path: "/list/:name",
+    name: "List",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/ListView.vue"),
+  },
+  {
+    path: "/share/:name",
+    name: "Share",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/ShareListView.vue"),
+  },
+  {
+    path: "/scan/",
+    name: "Scan",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/ScanView.vue"),
+  },
 ];
 
 const router = createRouter({
