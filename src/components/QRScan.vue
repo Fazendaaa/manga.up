@@ -6,6 +6,10 @@
 import { defineComponent } from "vue";
 import { QrcodeStream } from "qrcode-reader-vue3";
 
+const onDecode = (QRCode: string) => {
+  const data = JSON.parse(QRCode);
+};
+
 export default defineComponent({
   name: "QRScanComponent",
 
@@ -14,8 +18,6 @@ export default defineComponent({
   },
 
   setup() {
-    const onDecode = (data: string) => console.log(data);
-
     return {
       onDecode,
     };

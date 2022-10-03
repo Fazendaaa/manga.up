@@ -1,10 +1,19 @@
 <template>
   <QRCodeVue3
-    :width="200"
-    :height="200"
+    :width="size"
+    :height="size"
     :value="list"
-    :qrOptions="{ typeNumber: 0, mode: 'Byte', errorCorrectionLevel: 'H' }"
-    :imageOptions="{ hideBackgroundDots: true, imageSize: 0.4, margin: 0 }"
+    :image="image"
+    :imageOptions="{
+      margin: 0,
+      imageSize: 0.4,
+      hideBackgroundDots: true,
+    }"
+    :qrOptions="{
+      mode: 'Byte',
+      typeNumber: 0,
+      errorCorrectionLevel: 'H',
+    }"
     :dotsOptions="{
       type: 'dots',
       color: '#26249a',
@@ -12,20 +21,37 @@
         type: 'linear',
         rotation: 0,
         colorStops: [
-          { offset: 0, color: '#26249a' },
-          { offset: 1, color: '#26249a' },
+          {
+            offset: 0,
+            color: '#26249a',
+          },
+          {
+            offset: 1,
+            color: '#26249a',
+          },
         ],
       },
     }"
-    :backgroundOptions="{ color: '#ffffff' }"
-    :cornersSquareOptions="{ type: 'dot', color: '#000000' }"
-    :cornersDotOptions="{ type: undefined, color: '#000000' }"
+    :backgroundOptions="{
+      color: '#ffffff',
+    }"
+    :cornersSquareOptions="{
+      type: 'dot',
+      color: '#000000',
+    }"
+    :cornersDotOptions="{
+      type: undefined,
+      color: '#000000',
+    }"
     fileExt="png"
     :download="false"
     myclass="my-qur"
     imgclass="img-qr"
     downloadButton="my-button"
-    :downloadOptions="{ name: 'vqr', extension: 'png' }"
+    :downloadOptions="{
+      name: 'vqr',
+      extension: 'png',
+    }"
   />
 </template>
 
@@ -33,6 +59,7 @@
 import { defineComponent, toRefs } from "vue";
 import { getList } from "@/scripts/lists";
 import QRCodeVue3 from "qrcode-vue3";
+import { imgToBase64 } from "@/scripts/utils";
 
 export default defineComponent({
   name: "QRShareComponent",
@@ -57,9 +84,12 @@ export default defineComponent({
         return {};
       }),
     };
+    const image = await imgToBase64("/img/icons/pwa-192x192.png");
 
     return {
-      list,
+      image,
+      size: 500,
+      list: JSON.stringify(list),
     };
   },
 });

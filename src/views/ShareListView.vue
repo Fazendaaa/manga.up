@@ -25,6 +25,10 @@ import QRShare from "../components/QRShare.vue";
 export default defineComponent({
   name: "ShareListView",
 
+  components: {
+    QRShare,
+  },
+
   setup() {
     const route = useRoute();
     const name = computed(() => {
@@ -43,7 +47,6 @@ export default defineComponent({
       name,
     };
   },
-  components: { QRShare },
 });
 </script>
 

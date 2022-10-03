@@ -1,5 +1,5 @@
 // https://stackoverflow.com/a/61226119/7092954
-export const blobToBase64 = (blob: Blob): Promise<string> => {
+export const blobToBase64 = async (blob: Blob): Promise<string> => {
   const reader = new FileReader();
   reader.readAsDataURL(blob);
 
@@ -13,6 +13,12 @@ export const blobToBase64 = (blob: Blob): Promise<string> => {
 // https://stackoverflow.com/a/36183085/7092954
 export const base64ToBlob = (base64: string): Promise<Blob> =>
   fetch(base64).then((res) => res.blob());
+
+export const imgToBase64 = async (imgPath: string): Promise<string> => {
+  const data = await fetch(imgPath);
+
+  return blobToBase64(await data.blob());
+};
 
 export const MISSING_IMAGE = "splash_screens/icon.png";
 
