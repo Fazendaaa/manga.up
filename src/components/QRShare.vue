@@ -59,7 +59,6 @@
 import { defineComponent, toRefs } from "vue";
 import { getList } from "@/scripts/lists";
 import QRCodeVue3 from "qrcode-vue3";
-import { imgToBase64 } from "@/scripts/utils";
 
 export default defineComponent({
   name: "QRShareComponent",
@@ -84,12 +83,11 @@ export default defineComponent({
         return {};
       }),
     };
-    const image = await imgToBase64("/img/icons/pwa-192x192.png");
 
     return {
-      image,
       size: 500,
       list: JSON.stringify(list),
+      image: "/img/icons/pwa-192x192.png",
     };
   },
 });
