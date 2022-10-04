@@ -1,37 +1,44 @@
-<!-- ⚠️ This README has been generated from the file(s) "docs/README.md" ⚠️-->
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/water.png)](#mangaup)
+<!-- ⚠️ This README has been generated from the file(s) "docs/README.md" ⚠️--><h1 align="center">manga.up</h1>
 
-# ➤ manga.up
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Fazendaaa/manga.up/master/public/img/icons/pwa-512x512.png" alt="Logo" width="150" height="150" />
+</p>
+
+<p align="center">
+		<a href="https://vuejs.org/"><img alt="Made With Vue 3" src="https://img.shields.io/badge/Made%20with-Vue-31f425f.svg?style=flat-square" height="20"/></a>
+<a href="https://vuetifyjs.com/"><img alt="Made With Vuetify" src="https://img.shields.io/badge/Made%20with-Vuetify1f425f.svg?style=flat-square" height="20"/></a>
+<a href="https://www.docker.com"><img alt="Made With Docker" src="https://img.shields.io/badge/Made%20with-Docker-important?style=flat-square" height="20"/></a>
+<a href="https://code.visualstudio.com/"><img alt="Made With VSCode" src="https://img.shields.io/badge/made%20with-vscode-blueviolet?style=flat-square" height="20"/></a>
+	</p>
+
 
 <div align="center">
-  <img width="256" src="public/img/icons/android-chrome-pwa-512x512.png">
   <p>
   The mobile first website for a manga reader application!
-
   </p>
+<a href='https://play.google.com/store/apps/details?id=solutions.fazenda.up.manga.twa&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width='256'/></a>
 </div>
 
 <div align="center">
   <img width="300" src="docs/assets/gif/main.gif">
 </div>
 
-- [manga.up](#mangaup)
-  - [Alternatives](#alternatives)
-  - [Screens](#screens)
-  - [Contributing](#contributing)
-  - [Code](#code)
-    - [Project setup](#project-setup)
-      - [Compiles and hot-reloads for development](#compiles-and-hot-reloads-for-development)
-      - [Compiles and minifies for production](#compiles-and-minifies-for-production)
-      - [Run your unit tests](#run-your-unit-tests)
-      - [Run your end-to-end tests](#run-your-end-to-end-tests)
-      - [Lints and fixes files](#lints-and-fixes-files)
-      - [Customize configuration](#customize-configuration)
-  - [References](#references)
-    - [Others](#others)
-    - [BlogPosts](#blogposts)
-    - [Inspirations](#inspirations)
-    - [Tutorials](#tutorials)
+- [Alternatives](#alternatives)
+- [Screens](#screens)
+- [Contributing](#contributing)
+- [Code](#code)
+  - [Project setup](#project-setup)
+    - [Compiles and hot-reloads for development](#compiles-and-hot-reloads-for-development)
+    - [Compiles and minifies for production](#compiles-and-minifies-for-production)
+    - [Run your unit tests](#run-your-unit-tests)
+    - [Run your end-to-end tests](#run-your-end-to-end-tests)
+    - [Lints and fixes files](#lints-and-fixes-files)
+    - [Customize configuration](#customize-configuration)
+- [References](#references)
+  - [Others](#others)
+  - [BlogPosts](#blogposts)
+  - [Inspirations](#inspirations)
+  - [Tutorials](#tutorials)
 
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/water.png)](#alternatives)

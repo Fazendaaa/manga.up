@@ -1,34 +1,36 @@
-# manga.up
+{{ template:title }}
+
+{{ template:logo }}
+
+{{ template:badges }}
 
 <div align="center">
-  <img width="256" src="public/img/icons/android-chrome-pwa-512x512.png">
   <p>
   The mobile first website for a manga reader application!
-
   </p>
+<a href='https://play.google.com/store/apps/details?id=solutions.fazenda.up.manga.twa&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width='256'/></a>
 </div>
 
 <div align="center">
   <img width="300" src="docs/assets/gif/main.gif">
 </div>
 
-- [manga.up](#mangaup)
-  - [Alternatives](#alternatives)
-  - [Screens](#screens)
-  - [Contributing](#contributing)
-  - [Code](#code)
-    - [Project setup](#project-setup)
-      - [Compiles and hot-reloads for development](#compiles-and-hot-reloads-for-development)
-      - [Compiles and minifies for production](#compiles-and-minifies-for-production)
-      - [Run your unit tests](#run-your-unit-tests)
-      - [Run your end-to-end tests](#run-your-end-to-end-tests)
-      - [Lints and fixes files](#lints-and-fixes-files)
-      - [Customize configuration](#customize-configuration)
-  - [References](#references)
-    - [Others](#others)
-    - [BlogPosts](#blogposts)
-    - [Inspirations](#inspirations)
-    - [Tutorials](#tutorials)
+- [Alternatives](#alternatives)
+- [Screens](#screens)
+- [Contributing](#contributing)
+- [Code](#code)
+  - [Project setup](#project-setup)
+    - [Compiles and hot-reloads for development](#compiles-and-hot-reloads-for-development)
+    - [Compiles and minifies for production](#compiles-and-minifies-for-production)
+    - [Run your unit tests](#run-your-unit-tests)
+    - [Run your end-to-end tests](#run-your-end-to-end-tests)
+    - [Lints and fixes files](#lints-and-fixes-files)
+    - [Customize configuration](#customize-configuration)
+- [References](#references)
+  - [Others](#others)
+  - [BlogPosts](#blogposts)
+  - [Inspirations](#inspirations)
+  - [Tutorials](#tutorials)
 
 ## Alternatives
 

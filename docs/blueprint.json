@@ -1,19 +1,24 @@
 {
   "id": {
-    "github": "Fazendaaa/Succubus"
+    "github": "Fazendaaa/manga.up"
   },
   "checkLinks": true,
   "line": "water",
   "logo": {
-    "src": "https://raw.githubusercontent.com/Fazendaaa/Succubus/master/assets/img/logo.svg",
+    "src": "https://raw.githubusercontent.com/Fazendaaa/manga.up/master/public/img/icons/pwa-512x512.png",
     "height": "150",
     "width": "150"
   },
   "badges": [
     {
-      "alt": "Made With Go",
-      "url": "https://golang.org/",
-      "img": "https://img.shields.io/badge/Made%20with-Go-1f425f.svg?style=flat-square"
+      "alt": "Made With Vue 3",
+      "url": "https://vuejs.org/",
+      "img": "https://img.shields.io/badge/Made%20with-Vue-31f425f.svg?style=flat-square"
+    },
+    {
+      "alt": "Made With Vuetify",
+      "url": "https://vuetifyjs.com/",
+      "img": "https://img.shields.io/badge/Made%20with-Vuetify1f425f.svg?style=flat-square"
     },
     {
       "alt": "Made With Docker",
@@ -24,21 +29,6 @@
       "alt": "Made With VSCode",
       "url": "https://code.visualstudio.com/",
       "img": "https://img.shields.io/badge/made%20with-vscode-blueviolet?style=flat-square"
-    },
-    {
-      "alt": "Maintainability",
-      "img": "https://api.codeclimate.com/v1/badges/f4f7ed3bf34aa8c570b7/maintainability",
-      "url": "https://codeclimate.com/github/Fazendaaa/Succubus/maintainability"
-    },
-    {
-      "alt": "Test Coverage",
-      "img": "https://api.codeclimate.com/v1/badges/f4f7ed3bf34aa8c570b7/test_coverage",
-      "url": "https://codeclimate.com/github/Fazendaaa/Succubus/test_coverage"
-    },
-    {
-      "alt": "Codacy Badge",
-      "img": "https://app.codacy.com/project/badge/Grade/0b27f064a67d411a872719802ab140dc",
-      "url": "https://www.codacy.com/gh/Fazendaaa/Succubus/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Fazendaaa/Succubus&amp;utm_campaign=Badge_Grade"
     }
   ]
 }
