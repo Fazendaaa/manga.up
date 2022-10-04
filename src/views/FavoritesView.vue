@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ center: $vuetify.display.xs }">
+  <div :class="{ center: $vuetify.display.xs && this.$store.state.full }">
     <div
       v-if="error"
       v-html="$vuetify.locale.getScope().t('favorites.error')"
@@ -34,6 +34,7 @@
     </div>
   </div>
 </template>
+
 <script lang="ts">
 import { defineComponent, onErrorCaptured, ref } from "vue";
 import Collection from "@/components/Collection.vue";
@@ -48,17 +49,16 @@ export default defineComponent({
   setup() {
     const error = ref(false);
     const errorMessage = ref("");
-    const cached = false;
 
     onErrorCaptured((e) => {
       errorMessage.value = `${e}`;
       error.value = true;
+
       return true;
     });
 
     return {
       error,
-      cached,
       errorMessage,
     };
   },

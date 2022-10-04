@@ -85,7 +85,7 @@ export default defineComponent({
     };
 
     return {
-      size: 500,
+      size: 400,
       list: JSON.stringify(list),
       image: "/img/icons/pwa-192x192.png",
     };

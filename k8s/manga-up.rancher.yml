@@ -17,7 +17,7 @@ spec:
         application: manga-up
     spec:
       containers:
-        - image: fazenda/manga-up:qr-img-support
+        - image: fazenda/manga-up:favorites-mobile-sizing
           imagePullPolicy: Always
           name: manga-up
           ports:

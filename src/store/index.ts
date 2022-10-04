@@ -6,6 +6,7 @@ export default createStore({
       undefined !== localStorage.getItem("theme")
         ? localStorage.getItem("theme")
         : "dark",
+    full: true,
   },
   getters: {},
   mutations: {
@@ -21,6 +22,11 @@ export default createStore({
       localStorage.setItem("theme", value);
 
       return value;
+    },
+    toggleFull: (state) => {
+      state.full = !state.full;
+
+      return state.full;
     },
   },
   actions: {},

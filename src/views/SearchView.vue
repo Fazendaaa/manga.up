@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ center: $vuetify.display.xs }">
+  <div>
     <Search />
     <!-- <Sources /> -->
   </div>
@@ -19,11 +19,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style lang="scss" scoped>
-.center {
-  position: fixed;
-  top: 40%;
-  width: 100%;
-}
-</style>

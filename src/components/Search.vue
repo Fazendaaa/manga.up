@@ -1,29 +1,31 @@
 <template>
-  <v-card>
-    <v-card-title v-html="$vuetify.locale.getScope().t('search.title')" />
-    <v-card-text v-html="$vuetify.locale.getScope().t('search.subtitle')" />
-    <v-card-text>
-      <v-text-field
-        v-model="search"
-        filled
-        :placeholder="$vuetify.locale.getScope().t('search.placeholder')"
-        prepend-icon="mdi-card-search"
-      ></v-text-field>
-    </v-card-text>
-  </v-card>
+  <div :class="{ center: $vuetify.display.xs && '' === search }">
+    <v-card>
+      <v-card-title v-html="$vuetify.locale.getScope().t('search.title')" />
+      <v-card-text v-html="$vuetify.locale.getScope().t('search.subtitle')" />
+      <v-card-text>
+        <v-text-field
+          v-model="search"
+          filled
+          :placeholder="$vuetify.locale.getScope().t('search.placeholder')"
+          prepend-icon="mdi-card-search"
+        ></v-text-field>
+      </v-card-text>
+    </v-card>
 
-  <v-progress-linear
-    v-if="loading"
-    indeterminate
-    color="cyan"
-  ></v-progress-linear>
+    <v-progress-linear
+      v-if="loading"
+      indeterminate
+      color="cyan"
+    ></v-progress-linear>
 
-  <Suspense v-if="'' !== search">
-    <template #default>
-      <SearchResults :search="search" />
-    </template>
-    <template #fallback></template>
-  </Suspense>
+    <Suspense v-if="'' !== search">
+      <template #default>
+        <SearchResults :search="search" />
+      </template>
+      <template #fallback></template>
+    </Suspense>
+  </div>
 </template>
 
 <script lang="ts">
@@ -54,3 +56,11 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="scss" scoped>
+.center {
+  position: fixed;
+  top: 40%;
+  width: 100%;
+}
+</style>

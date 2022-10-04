@@ -6,6 +6,11 @@ export interface IReadlist {
   };
 }
 
+export interface IList {
+  name: string;
+  items: IReadlist;
+}
+
 const OBJECT_STORE = "user";
 const ID = "readlist";
 

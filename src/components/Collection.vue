@@ -1,6 +1,10 @@
 <template>
-  <v-expansion-panels variant="inset" class="my-4">
-    <v-expansion-panel v-for="item in lists" :key="item.name">
+  <v-expansion-panels variant="inset" :class="{ 'my-4': !$vuetify.display.xs }">
+    <v-expansion-panel
+      @click="this.$store.commit('toggleFull')"
+      v-for="item in lists"
+      :key="item.name"
+    >
       <v-expansion-panel-title>
         <v-icon>{{
           $vuetify.locale.getScope().t(`favorites.items.${item.name}.icon`)
@@ -11,6 +15,7 @@
           }}
         </span>
       </v-expansion-panel-title>
+
       <div v-if="0 !== Object.keys(item.items).length">
         <v-expansion-panel-text>
           <Suspense>
@@ -46,6 +51,7 @@
           </v-btn>
         </v-expansion-panel-text>
       </div>
+
       <div v-else>
         <v-expansion-panel-text>
           {{ $vuetify.locale.getScope().t("favorites.missing") }}
@@ -56,15 +62,10 @@
 </template>
 
 <script lang="ts">
-import { getList, IReadlist } from "@/scripts/lists";
+import { getList, IList } from "@/scripts/lists";
 import { defineComponent } from "vue";
 import download from "downloadjs";
 import ListResults from "./ListResults.vue";
-
-interface IList {
-  name: string;
-  items: IReadlist;
-}
 
 const exportList = (list: IList) =>
   download(JSON.stringify(list), `${list.name}.json`, "text/plain");
