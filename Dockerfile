@@ -23,11 +23,11 @@ FROM node:18.9.0-alpine3.15 AS TESTS
 
 WORKDIR /usr/src
 
-RUN [ "apk", "add", "--no-cache", \
-  "g++", \
-  "make", \
-  "python3" \
-]
+# RUN [ "apk", "add", "--no-cache", \
+#   "g++", \
+#   "make", \
+#   "python3" \
+# ]
 
 
 COPY --from=BASE /usr/src/ .
