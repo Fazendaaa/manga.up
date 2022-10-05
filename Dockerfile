@@ -1,4 +1,4 @@
-FROM node:18.9.0-alpine3.15 AS BASE
+FROM node:18.10.0-alpine3.15 AS BASE
 
 RUN [ "npm", "install", "--global", "@vue/cli" ]
 
@@ -19,7 +19,7 @@ EXPOSE 80
 
 
 
-FROM node:18.9.0-alpine3.15 AS TESTS
+FROM node:18.10.0-alpine3.15 AS TESTS
 
 WORKDIR /usr/src
 
@@ -40,7 +40,7 @@ COPY ./tests/ ./tests/
 
 
 
-FROM node:18.9.0-alpine3.15 AS BUILD
+FROM node:18.10.0-alpine3.15 AS BUILD
 
 WORKDIR /usr/src
 COPY --from=TESTS /usr/src/ .
@@ -52,7 +52,7 @@ RUN [ "npm", "run", "appendIcons" ]
 
 
 
-FROM node:18.9.0-alpine3.15 AS SERVER
+FROM node:18.10.0-alpine3.15 AS SERVER
 LABEL author="fazenda"
 LABEL project="manga-up"
 

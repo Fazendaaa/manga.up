@@ -9,6 +9,7 @@
 <a href="https://vuetifyjs.com/"><img alt="Made With Vuetify" src="https://img.shields.io/badge/Made%20with-Vuetify1f425f.svg?style=flat-square" height="20"/></a>
 <a href="https://www.docker.com"><img alt="Made With Docker" src="https://img.shields.io/badge/Made%20with-Docker-important?style=flat-square" height="20"/></a>
 <a href="https://code.visualstudio.com/"><img alt="Made With VSCode" src="https://img.shields.io/badge/made%20with-vscode-blueviolet?style=flat-square" height="20"/></a>
+<a href="https://fazendaaa.github.io/manga.up/"><img alt="Github Pages" src="https://img.shields.io/badge/github-pages-informational?style=flat-square" height="20"/></a>
 	</p>
 
 
@@ -55,6 +56,7 @@
 - [villain](https://villain.js.org/)
 - [cubari](https://cubari.moe/)
 - [mangahere](https://www.mangahere.cc/)
+- [ComicK](https://comick.fun/)
 
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/water.png)](#screens)
@@ -181,3 +183,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - [Suspense – new feature in Vue 3](https://vueschool.io/articles/vuejs-tutorials/suspense-new-feature-in-vue-3/)
 - [Vue Charts: Line Series](https://www.ag-grid.com/vue-charts/line-series/)
 - [Promoting Your Vue.js PWA Installation](https://medium.com/js-dojo/promoting-your-vue-js-pwa-installation-6bd112342c19)
+- [Welcome to the Google Play badge page](https://play.google.com/intl/en_us/badges/)

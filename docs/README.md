@@ -44,6 +44,7 @@
 - [villain](https://villain.js.org/)
 - [cubari](https://cubari.moe/)
 - [mangahere](https://www.mangahere.cc/)
+- [ComicK](https://comick.fun/)
 
 ## Screens
 
@@ -144,3 +145,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - [Suspense – new feature in Vue 3](https://vueschool.io/articles/vuejs-tutorials/suspense-new-feature-in-vue-3/)
 - [Vue Charts: Line Series](https://www.ag-grid.com/vue-charts/line-series/)
 - [Promoting Your Vue.js PWA Installation](https://medium.com/js-dojo/promoting-your-vue-js-pwa-installation-6bd112342c19)
+- [Welcome to the Google Play badge page](https://play.google.com/intl/en_us/badges/)

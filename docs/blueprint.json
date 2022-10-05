@@ -29,6 +29,11 @@
       "alt": "Made With VSCode",
       "url": "https://code.visualstudio.com/",
       "img": "https://img.shields.io/badge/made%20with-vscode-blueviolet?style=flat-square"
+    },
+    {
+      "alt": "Github Pages",
+      "url": "https://fazendaaa.github.io/manga.up/",
+      "img": "https://img.shields.io/badge/github-pages-informational?style=flat-square"
     }
   ]
 }

@@ -35,8 +35,10 @@ run: build
   ${REGISTRY_OWNER}/manga-up:${PROJECT_TAG}
 
 publish:
+# https://stackoverflow.com/a/72554031
+	@docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
 	@docker buildx build \
-  --platform linux/amd64 \
+  --platform ${ARCHS} \
 	--build-arg VUE_APP_MD_TOKEN_SESSION=${VUE_APP_MD_TOKEN_SESSION} \
 	--build-arg VUE_APP_MD_TOKEN_SESSION=${VUE_APP_MD_TOKEN_SESSION} \
 	--build-arg VUE_APP_CORS_PROXY=${VUE_APP_CORS_PROXY} \
