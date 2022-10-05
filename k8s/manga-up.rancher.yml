@@ -17,7 +17,7 @@ spec:
         application: manga-up
     spec:
       containers:
-        - image: fazenda/manga-up:favorites-mobile-sizing
+        - image: fazenda/manga-up:manifest-upgrade
           imagePullPolicy: Always
           name: manga-up
           ports:
