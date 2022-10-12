@@ -38,4 +38,5 @@ export default {
     </p>
     <br />`,
   about: "Sobre este projeto",
+  contact: "Feedback",
 };

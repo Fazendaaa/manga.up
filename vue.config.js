@@ -20,6 +20,7 @@ module.exports = defineConfig({
     manifestOptions: {
       orientation: "any",
       iarc_rating_id: "ESRB",
+      description: "The mobile first website for a manga reader application!",
 
       related_applications: [
         {
@@ -71,14 +72,17 @@ module.exports = defineConfig({
         {
           name: "Search",
           url: "/search",
+          description: "Search page",
         },
         {
           name: "Favorites",
           url: "/favorites",
+          description: "Favorites page",
         },
         {
           name: "Settings",
           url: "/settings",
+          description: "Settings page",
         },
       ],
     },

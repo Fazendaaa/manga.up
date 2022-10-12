@@ -1,5 +1,7 @@
 export default {
   title: "Contact",
-  github: "Give us a like so we can keep going",
-  twitter: "Follow us on Twitter",
+  message: "You can get in touch with us trough:",
+  github: "Open an issue",
+  twitter: "Send us a Hi",
+  email: "Get in touch",
 };

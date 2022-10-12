@@ -73,6 +73,18 @@ const routes: Array<RouteRecordRaw> = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/ScanView.vue"),
   },
+  {
+    path: "/policy/",
+    name: "Policy",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/PolicyView.vue"),
+  },
+  {
+    path: "/contact/",
+    name: "Contact",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/ContactView.vue"),
+  },
 ];
 
 const router = createRouter({

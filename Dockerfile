@@ -1,4 +1,4 @@
-FROM node:18.10.0-alpine3.15 AS BASE
+FROM node:lts-alpine3.15 AS BASE
 
 RUN [ "npm", "install", "--global", "@vue/cli" ]
 
@@ -8,26 +8,26 @@ COPY package.json .
 
 RUN [ "npm", "install" ]
 
+COPY .browserslistrc .
+COPY .stylelintrc .
 COPY ./public ./public/
-COPY *.js ./
-COPY *.json ./
-COPY .browserslistrc ./
-COPY .eslintrc.js ./
+COPY *.js .
+COPY *.json .
 COPY ./src/ ./src/
 
 EXPOSE 80
 
 
 
-FROM node:18.10.0-alpine3.15 AS TESTS
+FROM node:lts-alpine3.15 AS TESTS
 
-WORKDIR /usr/src
+WORKDIR /usr/src/
 
-# RUN [ "apk", "add", "--no-cache", \
-#   "g++", \
-#   "make", \
-#   "python3" \
-# ]
+RUN [ "apk", "add", "--no-cache", \
+  "g++", \
+  "make", \
+  "python3" \
+]
 
 
 COPY --from=BASE /usr/src/ .
@@ -40,9 +40,10 @@ COPY ./tests/ ./tests/
 
 
 
-FROM node:18.10.0-alpine3.15 AS BUILD
+FROM node:lts-alpine3.15 AS BUILD
 
 WORKDIR /usr/src
+
 COPY --from=TESTS /usr/src/ .
 
 ARG VUE_APP_CORS_PROXY=${VUE_APP_CORS_PROXY}
@@ -52,11 +53,12 @@ RUN [ "npm", "run", "appendIcons" ]
 
 
 
-FROM node:18.10.0-alpine3.15 AS SERVER
+FROM node:lts-alpine3.15 AS SERVER
 LABEL author="fazenda"
 LABEL project="manga-up"
 
-WORKDIR /usr/src
+WORKDIR /usr/src/
+
 COPY --from=BUILD /usr/src/dist/ .
 
 RUN [ "npm", "install", "--global", "serve" ]

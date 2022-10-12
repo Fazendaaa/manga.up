@@ -41,4 +41,5 @@ export default {
     </p>
     <br />`,
   about: "About this project",
+  contact: "Feedback",
 };

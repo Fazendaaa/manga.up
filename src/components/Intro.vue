@@ -29,6 +29,10 @@
         <v-icon>mdi-information-outline</v-icon>
         <span v-html="$vuetify.locale.getScope().t('intro.about')" />
       </v-btn>
+      <v-btn :to="{ name: 'Contact' }">
+        <v-icon>mdi-human-greeting-proximity</v-icon>
+        <span v-html="$vuetify.locale.getScope().t('intro.contact')" />
+      </v-btn>
     </v-card-text>
   </v-card>
 </template>

@@ -17,6 +17,10 @@
       <br />
       <p v-html="$vuetify.locale.getScope().t('about.goals.remaining')" />
     </v-container>
+    <v-btn :to="{ name: 'Policy' }">
+      <v-icon>mdi-text-box-multiple</v-icon>
+      <span> {{ $vuetify.locale.getScope().t("policy.title") }} </span>
+    </v-btn>
     <div v-for="(item, index) in items" v-bind:key="index">
       <h2
         class="subheading grey--text"

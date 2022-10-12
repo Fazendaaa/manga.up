@@ -1,19 +1,16 @@
 <template>
-  <About />
-  <Help />
+  <Contact />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import About from "@/components/About.vue";
-import Help from "@/components/Help.vue";
+import Contact from "@/components/Contact.vue";
 
 export default defineComponent({
-  name: "AboutView",
+  name: "ContactView",
 
   components: {
-    About,
-    Help,
+    Contact,
   },
 });
 </script>

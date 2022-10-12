@@ -1,5 +1,7 @@
 export default {
   title: "Contato",
-  github: "Nos de um like para suportar o projeto",
-  twitter: "Nos siga no Twitter",
+  message: "Entre em contato atraves de:",
+  github: "Abra um chamado",
+  twitter: "Nos de um OI",
+  email: "Entre em contato",
 };

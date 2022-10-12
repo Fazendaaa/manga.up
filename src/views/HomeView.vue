@@ -1,13 +1,13 @@
 <template>
   <Intro />
   <Showcase />
-  <Contact />
+  <Social />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import Intro from "@/components/Intro.vue";
-import Contact from "@/components/Contact.vue";
+import Social from "@/components/Social.vue";
 import Showcase from "@/views/Showcase/Showcase.vue";
 
 export default defineComponent({
@@ -15,7 +15,7 @@ export default defineComponent({
 
   components: {
     Intro,
-    Contact,
+    Social,
     Showcase,
   },
 });

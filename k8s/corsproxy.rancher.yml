@@ -22,7 +22,7 @@ spec:
           name: cors-anywhere
           env:
             - name: CORSANYWHERE_WHITELIST
-              value: https://manga.up.fazenda.solutions,http://192.168.31.230:1024,http://localhost:1024,http://localhost:8080
+              value: https://manga.up.fazenda.solutions,http://192.168.31.230:1024,http://localhost:1024,http://localhost:8080,https://test.manga-up.fazenda.solutions
           ports:
             - containerPort: 8080
               protocol: TCP

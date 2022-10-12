@@ -17,7 +17,39 @@
   <p>
   The mobile first website for a manga reader application!
   </p>
-<a href='https://play.google.com/store/apps/details?id=solutions.fazenda.up.manga.twa&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width='256'/></a>
+</div>
+
+<style>
+/*Three image containers (use 25% for four, and 50% for two, etc)*/
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 5px;
+}
+
+/*Clear floats after image containers*/
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+/*Customize the badge's appearance*/
+ms-store-badge::part(img) {
+  max-height: 80px;
+}
+</style>
+<script type="module" src="https://getbadgecdn.azureedge.net/ms-store-badge.bundled.js"></script>
+
+<div class="row">
+  <div class="column">
+    <a href='https://play.google.com/store/apps/details?id=solutions.fazenda.up.manga.twa&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width='256'/></a>
+  </div>
+  <div class="column">
+    <a href='http://example.com'><img alt='Get it on Amazon AppStore' src='docs/assets/img/amazon-appstore-badge-english-black.svg' width='256'/></a>
+  </div>
+  <div class="column">
+<ms-store-badge productid="9wzdncrfhvjl"></ms-store-badge>
+  </div>
 </div>
 
 <div align="center">
@@ -184,3 +216,5 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - [Vue Charts: Line Series](https://www.ag-grid.com/vue-charts/line-series/)
 - [Promoting Your Vue.js PWA Installation](https://medium.com/js-dojo/promoting-your-vue-js-pwa-installation-6bd112342c19)
 - [Welcome to the Google Play badge page](https://play.google.com/intl/en_us/badges/)
+- [App Store Badge](https://github.com/microsoft/app-store-badge)
+- [Trademark, Brand, and Marketing Guidelines](https://developer.amazon.com/support/legal/tuabg)
