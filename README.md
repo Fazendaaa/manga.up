@@ -20,35 +20,39 @@
 </div>
 
 <style>
-/*Three image containers (use 25% for four, and 50% for two, etc)*/
-.column {
-  float: left;
-  width: 33.33%;
-  padding: 5px;
-}
+  /*Three image containers (use 25% for four, and 50% for two, etc)*/
+  .column {
+    float: left;
+    width: 20.33%;
+    padding: 5px;
+  }
 
-/*Clear floats after image containers*/
-.row::after {
-  content: "";
-  clear: both;
-  display: table;
-}
-/*Customize the badge's appearance*/
-ms-store-badge::part(img) {
-  max-height: 80px;
-}
+  /*Clear floats after image containers*/
+  .row::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
 </style>
-<script type="module" src="https://getbadgecdn.azureedge.net/ms-store-badge.bundled.js"></script>
 
 <div class="row">
+
   <div class="column">
-    <a href='https://play.google.com/store/apps/details?id=solutions.fazenda.up.manga.twa&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width='256'/></a>
+    <a target="_blank" href='https://www.amazon.com/gp/product/B0BGYH6JFN'>
+      <img alt="Get it on Amazon AppStore" src="https://raw.githubusercontent.com/Fazendaaa/manga.up/master/docs/assets/img/amazon-appstore-badge-english-black.svg" width='256' />
+    </a>
   </div>
+
   <div class="column">
-    <a href='https://www.amazon.com/gp/product/B0BGYH6JFN'><img alt='Get it on Amazon AppStore' src='docs/assets/img/amazon-appstore-badge-english-black.svg'/></a>
+    <a target="_blank" href="ms-windows-store://pdp/?ProductId=XPDC2RH70K22MN&mode=mini">
+      <img alt='Get it on Microsoft Store' src="https://getbadgecdn.azureedge.net/images/en-us%20dark.svg" alt="Download Manga.up"  width='220'/>
+    </a>
   </div>
+
   <div class="column">
-<ms-store-badge productid="9wzdncrfhvjl"></ms-store-badge>
+    <a target="_blank" href='https://play.google.com/store/apps/details?id=solutions.fazenda.up.manga.twa&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
+      <img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width='556'/>
+    </a>
   </div>
 </div>
 
