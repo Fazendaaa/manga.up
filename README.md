@@ -45,7 +45,7 @@ ms-store-badge::part(img) {
     <a href='https://play.google.com/store/apps/details?id=solutions.fazenda.up.manga.twa&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width='256'/></a>
   </div>
   <div class="column">
-    <a href='http://example.com'><img alt='Get it on Amazon AppStore' src='docs/assets/img/amazon-appstore-badge-english-black.svg' width='256'/></a>
+    <a href='https://www.amazon.com/gp/product/B0BGYH6JFN'><img alt='Get it on Amazon AppStore' src='docs/assets/img/amazon-appstore-badge-english-black.svg'/></a>
   </div>
   <div class="column">
 <ms-store-badge productid="9wzdncrfhvjl"></ms-store-badge>
@@ -218,3 +218,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - [Welcome to the Google Play badge page](https://play.google.com/intl/en_us/badges/)
 - [App Store Badge](https://github.com/microsoft/app-store-badge)
 - [Trademark, Brand, and Marketing Guidelines](https://developer.amazon.com/support/legal/tuabg)
+- [Sample Privacy Policy Template and Examples](https://www.websitepolicies.com/blog/sample-privacy-policy-template#:~:text=Privacy%20Policy%20Examples%201%20Robinhood%20Commission-free%20trading%20platform,various%20jurisdictions.%20...%203%20Wayfair%20...%20Mais%20itens)
