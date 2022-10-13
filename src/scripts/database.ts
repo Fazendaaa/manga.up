@@ -26,6 +26,7 @@ const handleDBVersions =
         database.createObjectStore("covers", { keyPath: "id" });
         database.createObjectStore("chapters", { keyPath: "id" });
         database.createObjectStore("user", { keyPath: "id" });
+        database.createObjectStore("readingHistory", { keyPath: "id" });
         break;
       case 1:
         break;

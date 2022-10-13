@@ -130,8 +130,7 @@ export const cacheImage = async (
 const saveChapterImages = async (
   chapter: IVolumesImages
 ): Promise<IChapterBlobContent[]> => {
-  const base =
-    "https://cors.proxy.fazenda.solutions/https://uploads.mangadex.org/data/";
+  const base = `${API_PROXY}https://uploads.mangadex.org/data/`;
   const links: string[] = [];
   const thumbDimensions = 150;
 
@@ -141,7 +140,7 @@ const saveChapterImages = async (
 
   return Promise.all(
     links.map((link) =>
-      fetch(API_PROXY.concat(link), {
+      fetch(link, {
         method: "GET",
         referrerPolicy: "no-referrer",
       })

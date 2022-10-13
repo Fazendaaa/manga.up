@@ -27,8 +27,10 @@
                 <v-expansion-panel>
                   <v-expansion-panel-title>
                     <template v-slot:default="{ expanded }">
-                      <v-row no-gutters v-if="!expanded">
-                        {{ item["volume"] }}
+                      <v-row align="center" v-if="!expanded">
+                        <v-icon v-if="item['read']">mdi-radiobox-marked</v-icon>
+                        <v-icon v-else>mdi-radiobox-blank</v-icon>
+                        <span>{{ item["volume"] }}</span>
                       </v-row>
                       <v-col cols="8" class="text-grey">
                         <v-fade-transition leave-absolute>
@@ -44,6 +46,7 @@
                         v-bind:key="indexC"
                         outlined
                         block
+                        :color="chapter['read'] ? 'green' : 'red'"
                         :to="{ name: 'Reader', params: { id: chapter['id'] } }"
                       >
                         {{ chapter["chapter"] }}
@@ -64,19 +67,71 @@
 import { defineComponent, ref, Ref, toRefs, watch } from "vue";
 import { getMangaIssues, getManga, IVolumes } from "@/scripts/mangadex";
 import { useLocale } from "vuetify/lib/framework.mjs";
+import { IReadingHistory, readHistory } from "@/scripts/reading";
+import { IChapters } from "@/scripts/types";
+
+export interface IChaptersChecked extends IChapters {
+  read: boolean;
+}
+
+interface IChaptersAggregateChecked {
+  [issue: string]: IChaptersChecked;
+}
+
+interface IVolumesChecked {
+  read: boolean;
+  volume: string;
+  count: number;
+  chapters: IChaptersAggregateChecked;
+}
+
+const checkStatus = (
+  history: IReadingHistory,
+  volume: IVolumes
+): IVolumesChecked => {
+  const chapters: IChaptersAggregateChecked = {};
+  let volumeRead = true;
+  let chapterRead;
+  let key: string;
+  let item: IChapters;
+
+  for ([key, item] of Object.entries(volume.chapters)) {
+    chapterRead = item.id in history;
+
+    if (false === chapterRead) {
+      volumeRead = false;
+    }
+
+    chapters[key] = {
+      read: chapterRead,
+      ...item,
+    };
+  }
+
+  return {
+    chapters,
+    read: volumeRead,
+    count: volume.count,
+    volume: volume.volume,
+  };
+};
 
 const updateTranslations = async (
   id: string,
   missingVolume: string,
   translations: string[]
-): Promise<IVolumes[][]> => {
+): Promise<IVolumesChecked[][]> => {
   const data = Object.entries(await getMangaIssues(id, translations));
   const numberOfColumns = 3;
-  const issues: IVolumes[][] = [];
+  const issues: IVolumesChecked[][] = [];
+  const history = await readHistory(id);
   let index = 0;
   let position = 0;
+  let checkedVolume;
 
   for (const [key, item] of data) {
+    checkedVolume = checkStatus(history, item);
+
     if ("none" !== key) {
       position = Math.floor(index / numberOfColumns);
 
@@ -84,11 +139,11 @@ const updateTranslations = async (
         issues[position] = [];
       }
 
-      issues[position].push(item);
+      issues[position].push(checkedVolume);
       index += 1;
     } else {
-      item.volume = missingVolume;
-      issues[position] = [item];
+      checkedVolume.volume = missingVolume;
+      issues[position] = [checkedVolume];
     }
   }
 
@@ -111,7 +166,7 @@ export default defineComponent({
     const translator = useLocale();
     const missingVolume = translator.t("info.missingVolume");
     const chosenTranslation = ref("");
-    let issues: Ref<IVolumes[][]> = ref([]);
+    let issues: Ref<IVolumesChecked[][]> = ref([]);
 
     watch(
       chosenTranslation,
