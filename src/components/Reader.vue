@@ -26,6 +26,7 @@ import {
 } from "@/scripts/manga";
 import { defineComponent, ref, toRefs } from "vue";
 import PhotoSwipeLightbox from "photoswipe/lightbox";
+import { addToHistory } from "@/scripts/reading";
 
 interface Image {
   src: string;
@@ -105,10 +106,10 @@ export default defineComponent({
     const translatedLanguage = chapter.attributes.translatedLanguage;
     const mangaID = chapter.relationships.filter(
       (item) => "manga" === item.type
-    );
+    )[0].id;
     const issues = await relativeIssues(
       id.value.toLowerCase(),
-      await getMangaIssues(mangaID[0].id, [translatedLanguage])
+      await getMangaIssues(mangaID, [translatedLanguage])
     );
     const items: Image[] = [];
 
@@ -129,6 +130,7 @@ export default defineComponent({
       lastPage,
       lightbox,
       history,
+      mangaID,
     };
   },
 
@@ -143,6 +145,8 @@ export default defineComponent({
       this.lightbox.on("contentLoad", ({ content }: ILightBoxEvent) => {
         // Move next chapter
         if (2 === content.index && this.history.length > 3) {
+          this.history = [];
+          addToHistory(this.mangaID, this.issues.chapter.current.id);
           this.$router.push({
             name: "Reader",
             params: {
@@ -152,13 +156,14 @@ export default defineComponent({
               open: true,
             },
           });
-          this.history = [];
         }
 
         // Move previous chapter
         const lastItem = this.history.length - 1;
         const lastVisited = this.history[lastItem - 2];
         if (this.lastPage - 3 === content.index && 1 === lastVisited) {
+          this.history = [];
+          addToHistory(this.mangaID, this.issues.chapter.current.id);
           this.$router.push({
             name: "Reader",
             params: {
@@ -169,15 +174,12 @@ export default defineComponent({
               page: "-1",
             },
           });
-          this.history = [];
         }
 
         this.history.push(content.index);
       });
       if (this.open) {
-        console.log(this.page);
         const page = "-1" === this.page ? this.lastPage - 1 : this.page;
-        console.log(page);
         const firstPage = document.getElementById(
           `page-${page}-link`
         ) as HTMLElement;
