@@ -29,7 +29,6 @@ RUN [ "apk", "add", "--no-cache", \
   "python3" \
 ]
 
-
 COPY --from=BASE /usr/src/ .
 
 COPY ./tests/ ./tests/
