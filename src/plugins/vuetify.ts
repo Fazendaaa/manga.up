@@ -8,8 +8,9 @@ import { locale } from "./i18n";
 import { light, coffee, neon, dark } from "./themes";
 
 export default createVuetify({
-  locale,
-  rtl: true,
+  locale: {
+    adapter: locale,
+  },
   theme: {
     defaultTheme: "dark",
     themes: {

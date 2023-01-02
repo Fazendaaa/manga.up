@@ -2,32 +2,32 @@
   <div>
     <h1
       class="subheading grey--text"
-      v-html="$vuetify.locale.getScope().t('about.title')"
+      v-html="$vuetify.locale.t('about.title')"
     />
     <h2
       class="subheading grey--text"
-      v-html="$vuetify.locale.getScope().t('about.goals.title')"
+      v-html="$vuetify.locale.t('about.goals.title')"
     />
     <v-container class="my-5">
-      <p v-html="$vuetify.locale.getScope().t('about.goals.intro')" />
+      <p v-html="$vuetify.locale.t('about.goals.intro')" />
       <br />
-      <li v-html="$vuetify.locale.getScope().t('about.goals.items.first')" />
-      <li v-html="$vuetify.locale.getScope().t('about.goals.items.second')" />
-      <li v-html="$vuetify.locale.getScope().t('about.goals.items.third')" />
+      <li v-html="$vuetify.locale.t('about.goals.items.first')" />
+      <li v-html="$vuetify.locale.t('about.goals.items.second')" />
+      <li v-html="$vuetify.locale.t('about.goals.items.third')" />
       <br />
-      <p v-html="$vuetify.locale.getScope().t('about.goals.remaining')" />
+      <p v-html="$vuetify.locale.t('about.goals.remaining')" />
     </v-container>
     <v-btn :to="{ name: 'Policy' }">
       <v-icon>mdi-text-box-multiple</v-icon>
-      <span> {{ $vuetify.locale.getScope().t("policy.title") }} </span>
+      <span> {{ $vuetify.locale.t("policy.title") }} </span>
     </v-btn>
     <div v-for="(item, index) in items" v-bind:key="index">
       <h2
         class="subheading grey--text"
-        v-html="$vuetify.locale.getScope().t(`about.${item}.title`)"
+        v-html="$vuetify.locale.t(`about.${item}.title`)"
       />
       <v-container class="my-5">
-        <p v-html="$vuetify.locale.getScope().t(`about.${item}.content`)" />
+        <p v-html="$vuetify.locale.t(`about.${item}.content`)" />
       </v-container>
     </div>
   </div>

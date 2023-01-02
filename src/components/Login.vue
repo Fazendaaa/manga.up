@@ -3,7 +3,7 @@
     <v-expansion-panel>
       <v-expansion-panel-title>
         <v-icon>mdi-login</v-icon>
-        <span v-html="$vuetify.locale.getScope().t('settings.logins.title')" />
+        <span v-html="$vuetify.locale.t('settings.logins.title')" />
       </v-expansion-panel-title>
       <v-expansion-panel-text>
         <v-avatar size="180" class="grey lighten-2">

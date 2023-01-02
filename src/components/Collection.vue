@@ -7,12 +7,10 @@
     >
       <v-expansion-panel-title>
         <v-icon>{{
-          $vuetify.locale.getScope().t(`favorites.items.${item.name}.icon`)
+          $vuetify.locale.t(`favorites.items.${item.name}.icon`)
         }}</v-icon>
         <span>
-          {{
-            $vuetify.locale.getScope().t(`favorites.items.${item.name}.name`)
-          }}
+          {{ $vuetify.locale.t(`favorites.items.${item.name}.name`) }}
         </span>
       </v-expansion-panel-title>
 
@@ -33,20 +31,20 @@
 
           <v-btn :to="{ name: 'Share', params: { name: item.name } }">
             <v-icon>mdi-share-all</v-icon>
-            <span> {{ $vuetify.locale.getScope().t("favorites.share") }} </span>
+            <span> {{ $vuetify.locale.t("favorites.share") }} </span>
           </v-btn>
 
           <v-btn @click="exportList(item)">
             <v-icon>mdi-tray-arrow-down</v-icon>
             <span>
-              {{ $vuetify.locale.getScope().t("favorites.export") }}
+              {{ $vuetify.locale.t("favorites.export") }}
             </span>
           </v-btn>
 
           <v-btn :to="{ name: 'List', params: { name: item.name } }">
             <v-icon>mdi-format-list-checks</v-icon>
             <span>
-              {{ $vuetify.locale.getScope().t("favorites.seeAll") }}
+              {{ $vuetify.locale.t("favorites.seeAll") }}
             </span>
           </v-btn>
         </v-expansion-panel-text>
@@ -54,7 +52,7 @@
 
       <div v-else>
         <v-expansion-panel-text>
-          {{ $vuetify.locale.getScope().t("favorites.missing") }}
+          {{ $vuetify.locale.t("favorites.missing") }}
         </v-expansion-panel-text>
       </div>
     </v-expansion-panel>

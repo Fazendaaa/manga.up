@@ -10,14 +10,15 @@ const messages = {
 
 export const availableTranslations = ["en", "pt"];
 
-export const i18n = createI18n({
+// @ts-expect-error: any
+export const i18n = new createI18n({
+  legacy: false,
   locale:
     undefined !== localStorage.getItem("translation")
       ? (localStorage.getItem("translation") as string)
-      : "en",
-  messages,
-  legacy: false,
+      : "pt",
   fallbackLocale: "en",
+  messages,
 });
 
 export const locale = createVueI18nAdapter({ i18n, useI18n });

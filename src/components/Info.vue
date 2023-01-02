@@ -4,13 +4,13 @@
     <v-row>
       <v-col :class="{ 'ma-0 pa-0': $vuetify.display.xs }">
         <v-card-text max-width="500">
-          <strong>{{ $vuetify.locale.getScope().t("info.rating") }}: </strong>
+          <strong>{{ $vuetify.locale.t("info.rating") }}: </strong>
           {{ manga["attributes"]["contentRating"] }}
           <v-divider class="mx-4 mb-1" />
-          <strong>{{ $vuetify.locale.getScope().t("info.status") }}: </strong>
+          <strong>{{ $vuetify.locale.t("info.status") }}: </strong>
           {{ manga["attributes"]["status"] }}
           <v-divider class="mx-4 mb-1" />
-          <strong>{{ $vuetify.locale.getScope().t("info.tags") }}: </strong>
+          <strong>{{ $vuetify.locale.t("info.tags") }}: </strong>
           <span
             v-for="(tag, index) in manga['attributes']['tags']"
             v-bind:key="index"
@@ -18,12 +18,10 @@
             {{ tag["attributes"]["name"]["en"] }},
           </span>
           <v-divider class="mx-4 mb-1" />
-          <strong>{{ $vuetify.locale.getScope().t("info.year") }}: </strong>
+          <strong>{{ $vuetify.locale.t("info.year") }}: </strong>
           {{ manga["attributes"]["year"] }}
           <v-divider class="mx-4 mb-1" />
-          <strong
-            >{{ $vuetify.locale.getScope().t("info.description") }}:
-          </strong>
+          <strong>{{ $vuetify.locale.t("info.description") }}: </strong>
           <Markdown
             :source="
               manga['attributes']['description']['en'].slice(0, limitCharacters)

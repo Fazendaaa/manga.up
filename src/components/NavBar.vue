@@ -2,9 +2,7 @@
   <!-- UPPER -->
   <v-app-bar density="compact" class="hidden-md-and-down">
     <v-btn v-for="item in upperMenuItems" :key="item.title" :to="item.path">
-      <span
-        v-html="$vuetify.locale.getScope().t(`navigationBar.${item.title}`)"
-      />
+      <span v-html="$vuetify.locale.t(`navigationBar.${item.title}`)" />
       <v-icon>{{ item.icon }}</v-icon>
     </v-btn>
   </v-app-bar>
@@ -17,9 +15,7 @@
     color="primary"
   >
     <v-btn v-for="item in lowerMenuItems" :key="item.title" :to="item.path">
-      <span
-        v-html="$vuetify.locale.getScope().t(`navigationBar.${item.title}`)"
-      />
+      <span v-html="$vuetify.locale.t(`navigationBar.${item.title}`)" />
       <v-icon>{{ item.icon }}</v-icon>
     </v-btn>
   </v-bottom-navigation>

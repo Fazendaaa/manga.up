@@ -1,13 +1,13 @@
 <template>
   <v-banner v-if="deferredPrompt" color="info" dark class="text-left">
-    {{ $vuetify.locale.getScope().t("install.message") }}
+    {{ $vuetify.locale.t("install.message") }}
 
     <template v-slot:actions>
       <v-btn text color="green" @click="install">{{
-        $vuetify.locale.getScope().t("install.confirm")
+        $vuetify.locale.t("install.confirm")
       }}</v-btn>
       <v-btn text color="red" @click="dismiss">{{
-        $vuetify.locale.getScope().t("install.dismiss")
+        $vuetify.locale.t("install.dismiss")
       }}</v-btn>
     </template>
   </v-banner>

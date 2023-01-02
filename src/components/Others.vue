@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-card-title :class="{ 'ma-0 pa-0': $vuetify.display.xs }">
-      {{ $vuetify.locale.getScope().t("info.sources") }}:
+      {{ $vuetify.locale.t("info.sources") }}:
     </v-card-title>
     <v-card-text :class="{ 'ma-0 pa-0': $vuetify.display.xs }">
       <div align="center">

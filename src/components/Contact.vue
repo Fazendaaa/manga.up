@@ -2,28 +2,28 @@
   <div>
     <h1
       class="subheading grey--text"
-      v-html="$vuetify.locale.getScope().t('contact.title')"
+      v-html="$vuetify.locale.t('contact.title')"
     />
     <v-container class="my-5">
-      <p v-html="$vuetify.locale.getScope().t('contact.message')" />
+      <p v-html="$vuetify.locale.t('contact.message')" />
       <br />
       <v-btn
         target="_blank"
         href="https://github.com/Fazendaaa/manga.up/issues"
       >
         <v-icon>mdi-github</v-icon>
-        <span v-html="$vuetify.locale.getScope().t('contact.github')" />
+        <span v-html="$vuetify.locale.t('contact.github')" />
       </v-btn>
       <v-btn target="_blank" href="https://twitter.com/mangaupofficial">
         <v-icon>mdi-twitter</v-icon>
-        <span v-html="$vuetify.locale.getScope().t('contact.twitter')" />
+        <span v-html="$vuetify.locale.t('contact.twitter')" />
       </v-btn>
       <v-btn
         target="_blank"
         href="mailto:manga.up.official@gmail.com?subject = Contact&body = Message"
       >
         <v-icon>mdi-email</v-icon>
-        <span v-html="$vuetify.locale.getScope().t('contact.email')" />
+        <span v-html="$vuetify.locale.t('contact.email')" />
       </v-btn>
     </v-container>
   </div>

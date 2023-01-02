@@ -3,9 +3,7 @@
     <v-expansion-panel>
       <v-expansion-panel-title>
         <v-icon>mdi-cog-outline</v-icon>
-        <span
-          v-html="$vuetify.locale.getScope().t('settings.settings.title')"
-        />
+        <span v-html="$vuetify.locale.t('settings.settings.title')" />
       </v-expansion-panel-title>
       <v-expansion-panel-text>
         <ul>

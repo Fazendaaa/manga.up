@@ -1,9 +1,6 @@
 <template>
   <div :class="{ center: $vuetify.display.xs && this.$store.state.full }">
-    <div
-      v-if="error"
-      v-html="$vuetify.locale.getScope().t('favorites.error')"
-    />
+    <div v-if="error" v-html="$vuetify.locale.t('favorites.error')" />
     <Suspense v-else>
       <template #default>
         <Collection />
@@ -15,21 +12,17 @@
     <div>
       <v-btn :to="{ name: 'Scan' }">
         <v-icon>mdi-qrcode-scan</v-icon>
-        <span v-html="$vuetify.locale.getScope().t('favorites.buttons.scan')" />
+        <span v-html="$vuetify.locale.t('favorites.buttons.scan')" />
       </v-btn>
 
       <v-btn to="{ name: 'ReadList' }">
         <v-icon>mdi-format-list-text</v-icon>
-        <span
-          v-html="$vuetify.locale.getScope().t('favorites.buttons.create')"
-        />
+        <span v-html="$vuetify.locale.t('favorites.buttons.create')" />
       </v-btn>
 
       <v-btn to="{ name: 'ReadList' }">
         <v-icon>mdi-folder-upload-outline</v-icon>
-        <span
-          v-html="$vuetify.locale.getScope().t('favorites.buttons.upload')"
-        />
+        <span v-html="$vuetify.locale.t('favorites.buttons.upload')" />
       </v-btn>
     </div>
   </div>

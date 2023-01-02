@@ -3,7 +3,7 @@
     <v-expansion-panel>
       <v-expansion-panel-title>
         <v-icon>mdi-palette-outline</v-icon>
-        <span v-html="$vuetify.locale.getScope().t('settings.theme.title')" />
+        <span v-html="$vuetify.locale.t('settings.theme.title')" />
       </v-expansion-panel-title>
       <v-expansion-panel-text>
         <v-btn

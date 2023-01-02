@@ -1,13 +1,13 @@
 <template>
   <div :class="{ center: $vuetify.display.xs && '' === search }">
     <v-card>
-      <v-card-title v-html="$vuetify.locale.getScope().t('search.title')" />
-      <v-card-text v-html="$vuetify.locale.getScope().t('search.subtitle')" />
+      <v-card-title v-html="$vuetify.locale.t('search.title')" />
+      <v-card-text v-html="$vuetify.locale.t('search.subtitle')" />
       <v-card-text>
         <v-text-field
           v-model="search"
           filled
-          :placeholder="$vuetify.locale.getScope().t('search.placeholder')"
+          :placeholder="$vuetify.locale.t('search.placeholder')"
           prepend-icon="mdi-card-search"
         ></v-text-field>
       </v-card-text>

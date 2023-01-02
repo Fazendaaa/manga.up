@@ -3,7 +3,7 @@
   <span
     variant="plain"
     class="caption text-lowercase"
-    v-html="$vuetify.locale.getScope().t('selectLanguage.ask')"
+    v-html="$vuetify.locale.t('selectLanguage.ask')"
   />
   <v-col flex align="left">
     <v-select

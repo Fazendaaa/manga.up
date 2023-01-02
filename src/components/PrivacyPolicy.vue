@@ -2,9 +2,9 @@
   <div>
     <h1
       class="subheading grey--text"
-      v-html="$vuetify.locale.getScope().t('policy.title')"
+      v-html="$vuetify.locale.t('policy.title')"
     />
-    <div v-html="$vuetify.locale.getScope().t('policy.content')" />
+    <div v-html="$vuetify.locale.t('policy.content')" />
   </div>
 </template>
 

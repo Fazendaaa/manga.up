@@ -1,6 +1,6 @@
 <template>
   <Display
-    :header="$vuetify.locale.getScope().t('display.recommended')"
+    :header="$vuetify.locale.t('display.recommended')"
     :mangas="mangas"
   />
 </template>

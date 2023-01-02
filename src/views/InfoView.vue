@@ -4,13 +4,13 @@
     <v-toolbar>
       <v-tabs v-model="tab" dark background-color="primary" grow>
         <v-tab value="details">
-          {{ $vuetify.locale.getScope().t("info.details") }}
+          {{ $vuetify.locale.t("info.details") }}
         </v-tab>
         <v-tab value="volumes">
-          {{ $vuetify.locale.getScope().t("info.volumes") }}
+          {{ $vuetify.locale.t("info.volumes") }}
         </v-tab>
         <v-tab value="others">
-          {{ $vuetify.locale.getScope().t("info.others") }}
+          {{ $vuetify.locale.t("info.others") }}
         </v-tab>
       </v-tabs>
     </v-toolbar>

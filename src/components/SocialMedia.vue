@@ -1,5 +1,5 @@
 <template>
-  <h3>{{ $vuetify.locale.getScope().t("info.share") }}:</h3>
+  <h3>{{ $vuetify.locale.t("info.share") }}:</h3>
   <ShareNetwork
     v-for="network in networks"
     :network="network.network"

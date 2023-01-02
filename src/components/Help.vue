@@ -2,10 +2,10 @@
   <div>
     <h1
       class="subheading grey--text"
-      v-html="$vuetify.locale.getScope().t('help.title')"
+      v-html="$vuetify.locale.t('help.title')"
     />
     <v-container class="my-5">
-      <p v-html="$vuetify.locale.getScope().t('help.content')" />
+      <p v-html="$vuetify.locale.t('help.content')" />
     </v-container>
     <v-container class="my-5">
       <div v-for="item in items" v-bind:key="item.href">

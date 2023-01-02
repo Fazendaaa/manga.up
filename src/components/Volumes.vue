@@ -1,14 +1,14 @@
 <template>
   <v-card>
     <v-card-title :class="{ 'ma-0 pa-0': $vuetify.display.xs }">
-      {{ $vuetify.locale.getScope().t("info.select") }}:
+      {{ $vuetify.locale.t("info.select") }}:
     </v-card-title>
 
     <v-card-subtitle :class="{ 'ma-0 pa-0': $vuetify.display.xs }">
       <v-select
         v-model="chosenTranslation"
         :items="translations"
-        :label="$vuetify.locale.getScope().t('info.idiom')"
+        :label="$vuetify.locale.t('info.idiom')"
         flat
         solo
       />
