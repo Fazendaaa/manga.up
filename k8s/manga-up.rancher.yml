@@ -17,7 +17,7 @@ spec:
         application: manga-up
     spec:
       containers:
-        - image: fazenda/manga-up:history-added
+        - image: fazenda/manga-up:lastest
           imagePullPolicy: Always
           name: manga-up
           ports:
