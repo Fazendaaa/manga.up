@@ -1,25 +1,28 @@
-FROM node:lts-alpine3.15 AS BASE
-
-RUN [ "npm", "install", "--global", "@vue/cli" ]
+FROM node:lts-alpine3.17 AS BASE
 
 WORKDIR /usr/src/
 
-COPY package.json .
+RUN [ "npm", "install", "--global", "npm@9" ]
+RUN [ "npm", "install", "--global", "@vue/cli" ]
 
-RUN [ "npm", "install" ]
+COPY package.json .
+COPY package-lock.json .
+
+RUN [ "npm", "install", "--force" ]
+RUN [ "npm", "ci", "--force" ]
 
 COPY .browserslistrc .
 COPY .stylelintrc .
 COPY ./public ./public/
-COPY *.js .
-COPY *.json .
+COPY *.js ./
+COPY *.json ./
 COPY ./src/ ./src/
 
 EXPOSE 80
 
 
 
-FROM node:lts-alpine3.15 AS TESTS
+FROM node:lts-alpine3.17 AS TESTS
 
 WORKDIR /usr/src/
 
@@ -39,7 +42,7 @@ COPY ./tests/ ./tests/
 
 
 
-FROM node:lts-alpine3.15 AS BUILD
+FROM node:lts-alpine3.17 AS BUILD
 
 WORKDIR /usr/src
 
@@ -52,7 +55,7 @@ RUN [ "npm", "run", "appendIcons" ]
 
 
 
-FROM node:lts-alpine3.15 AS SERVER
+FROM node:lts-alpine3.17 AS SERVER
 LABEL author="fazenda"
 LABEL project="manga-up"
 
